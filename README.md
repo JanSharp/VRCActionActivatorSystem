@@ -58,3 +58,7 @@ The initial state of the map should always be "everything is off". The system wi
 # Syncing
 
 The only synced scripts are [interactive activators](#user-interactive-activators) and [stateful actions](#stateful-actions), although the stateful actions do not sync their active state since that is handled through activators already. Which means they only sync extra data, such as the current time in the loop. That also means that any stateful actions without any additional state besides their on off state do not require any syncing.
+
+# Dependencies
+
+- `OnBuildUtil`. Currently not publicly available anywhere and not included in this repo. Requires the version introducing the `order` parameter.
