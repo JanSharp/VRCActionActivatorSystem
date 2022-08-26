@@ -58,7 +58,7 @@ namespace JanSharp
 
             if (targetAction.audioSources != null
                 && targetAction.audioSources.Any(a => a == null)
-                && GUILayout.Button(new GUIContent("Remove null audio sources")))
+                && GUILayout.Button(new GUIContent("Remove null Audio Sources")))
             {
                 targetAction.audioSources = targetAction.audioSources.Where(p => p != null).ToArray();
                 targetAction.ApplyProxyModifications();
@@ -72,6 +72,17 @@ namespace JanSharp
                 foreach (var audioSource in targetAction.audioSources.Where(a => a.playOnAwake))
                 {
                     audioSource.playOnAwake = false;
+                    EditorUtility.SetDirty(audioSource);
+                }
+            }
+
+            if (targetAction.audioSources != null
+                && targetAction.audioSources.Any(a => a != null && a.loop)
+                && GUILayout.Button(new GUIContent("Make Audio Sources not loop")))
+            {
+                foreach (var audioSource in targetAction.audioSources.Where(a => a.loop))
+                {
+                    audioSource.loop = false;
                     EditorUtility.SetDirty(audioSource);
                 }
             }

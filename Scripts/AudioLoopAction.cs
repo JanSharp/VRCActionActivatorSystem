@@ -70,6 +70,14 @@ namespace JanSharp
                 targetAction.audioSource.playOnAwake = false;
                 EditorUtility.SetDirty(targetAction.audioSource);
             }
+
+            if (targetAction.audioSource != null
+                && !targetAction.audioSource.loop
+                && GUILayout.Button(new GUIContent("Make Audio Source loop")))
+            {
+                targetAction.audioSource.loop = true;
+                EditorUtility.SetDirty(targetAction.audioSource);
+            }
         }
     }
     #endif
