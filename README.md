@@ -32,7 +32,7 @@ Actions can listen to and trigger on any of the activator's events.
 
 Stateless actions simply trigger on an event. Stateless actions are meant to be very short, like a few seconds.
 
-- [ ] animation (no idea how to even go about this one. what is it even supposed to do, what is it used for?)
+- [x] TriggerAnimationAction (animation with a trigger parameter. Spear wall traps might use this, though they might instead use `ToggleAnimationAction`)
 - [x] AudioAction
 - [x] ParticleAction
 - [ ] move an object with the position sync script on it x units along some axis
