@@ -69,7 +69,7 @@ namespace JanSharp
                 && targetAction.audioSources.Any(a => a != null && a.playOnAwake)
                 && GUILayout.Button(new GUIContent("Disable PlayOnAwake")))
             {
-                foreach (var audioSource in targetAction.audioSources.Where(a => a.playOnAwake))
+                foreach (var audioSource in targetAction.audioSources.Where(a => a != null && a.playOnAwake))
                 {
                     audioSource.playOnAwake = false;
                     EditorUtility.SetDirty(audioSource);
@@ -80,7 +80,7 @@ namespace JanSharp
                 && targetAction.audioSources.Any(a => a != null && a.loop)
                 && GUILayout.Button(new GUIContent("Make Audio Sources not loop")))
             {
-                foreach (var audioSource in targetAction.audioSources.Where(a => a.loop))
+                foreach (var audioSource in targetAction.audioSources.Where(a => a != null && a.loop))
                 {
                     audioSource.loop = false;
                     EditorUtility.SetDirty(audioSource);
