@@ -9,7 +9,7 @@ using UdonSharpEditor;
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class ToggleActivator : UdonSharpBehaviour
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
         , IOnBuildCallback
@@ -22,6 +22,8 @@ namespace JanSharp
         [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
         [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
 
+        [UdonSynced]
+        [FieldChangeCallback(nameof(State))]
         private bool state;
         private bool State
         {
@@ -48,13 +50,15 @@ namespace JanSharp
         public override void Interact()
         {
             State = !State;
+            Networking.SetOwner(Networking.LocalPlayer, this.gameObject);
+            RequestSerialization();
         }
 
         #if UNITY_EDITOR && !COMPILER_UDONSHARP
         [InitializeOnLoad]
         public static class OnBuildRegister
         {
-            static OnBuildRegister() => JanSharp.OnBuildUtil.RegisterType<ToggleActivator>(order: 0);
+            static OnBuildRegister() => OnBuildUtil.RegisterType<ToggleActivator>(order: 0);
         }
         bool IOnBuildCallback.OnBuild()
         {

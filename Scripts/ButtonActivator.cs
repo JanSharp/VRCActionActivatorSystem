@@ -2,6 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
+using VRC.Udon.Common.Interfaces;
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
@@ -9,7 +10,7 @@ using UdonSharpEditor;
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class ButtonActivator : UdonSharpBehaviour
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
         , IOnBuildCallback
@@ -47,6 +48,11 @@ namespace JanSharp
 
         public override void Interact()
         {
+            SendCustomNetworkEvent(NetworkEventTarget.All, nameof(PressButton));
+        }
+
+        public void PressButton()
+        {
             State = true;
             State = false;
         }
@@ -55,7 +61,7 @@ namespace JanSharp
         [InitializeOnLoad]
         public static class OnBuildRegister
         {
-            static OnBuildRegister() => JanSharp.OnBuildUtil.RegisterType<ButtonActivator>(order: 0);
+            static OnBuildRegister() => OnBuildUtil.RegisterType<ButtonActivator>(order: 0);
         }
         bool IOnBuildCallback.OnBuild()
         {

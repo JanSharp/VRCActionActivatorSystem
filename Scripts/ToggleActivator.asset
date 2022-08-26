@@ -17,7 +17,7 @@ MonoBehaviour:
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 2efdbad635a670794914a466b4bc578a, type: 3}
-  behaviourSyncMode: 1
+  behaviourSyncMode: 4
   behaviourIDHeapVarName: __refl_const_intnl_udonTypeID
   compileErrors: []
   hasInteractEvent: 1
@@ -496,7 +496,7 @@ MonoBehaviour:
       Data: 2
     - Name: syncMode
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: symbolResolvedTypeName
       Entry: 1
       Data: SystemBoolean
@@ -517,7 +517,19 @@ MonoBehaviour:
       Data: 37|System.Collections.Generic.List`1[[System.Attribute, mscorlib]], mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 38|UdonSharp.UdonSyncedAttribute, UdonSharp.Runtime
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 39|UdonSharp.FieldChangeCallbackAttribute, UdonSharp.Runtime
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
