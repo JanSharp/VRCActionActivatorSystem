@@ -62,3 +62,7 @@ The only synced scripts are [interactive activators](#user-interactive-activator
 # Dependencies
 
 - `OnBuildUtil`. Currently not publicly available anywhere and not included in this repo. Requires the version introducing the `order` parameter.
+
+# Internals
+
+Due to UdonSharp (`0.20.3`) limitations activators consist of a lot of copy pasted code. I can't think of anything we can do about that, we simply can't use base classes. Not being able to use base classes or interfaces also causes almost all inter script interactions to use reflection which increases the chance of error. It's all not great but we work with what we got. At least the majority of the editor code can be deduplicated.
