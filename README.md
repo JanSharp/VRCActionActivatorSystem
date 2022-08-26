@@ -45,6 +45,7 @@ Stateful actions reflect the state of a referenced activator, which means they c
 - [x] (animation loop) (can be done using ToggleAnimationAction)
 - [x] AudioLoopAction
 - [x] ParticleLoopAction
+- [x] ToggleGameObjectAction (doesn't actually directly reflect the state, simply toggles game objects's active state whenever the activator's state changes. technically could be done using animations but this is much simpler)
 
 # Other Scripts
 
