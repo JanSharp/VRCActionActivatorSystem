@@ -47,7 +47,10 @@ namespace JanSharp
                 // the chance of everyone having the same state regardless of order of events
                 // we're syncing the state based on the owner's state just a bit delayed
                 if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+                {
+                    delayedSerializationCount++;
                     SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), 1f);
+                }
             }
         }
 
@@ -59,6 +62,8 @@ namespace JanSharp
 
         public UdonSharpBehaviour activateActivator;
         public UdonSharpBehaviour resetActivator;
+        // to prevent spamming from causing scuff
+        private int delayedSerializationCount;
         private const float LateJoinerSyncDelay = 10f;
 
         public void OnActivateEvent()
@@ -81,18 +86,26 @@ namespace JanSharp
         public override void OnPlayerJoined(VRCPlayerApi player)
         {
             if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+            {
+                delayedSerializationCount++;
                 SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), LateJoinerSyncDelay);
+            }
         }
 
         // for good measure, in case the current owner leaves just after a player joined
         public override void OnOwnershipTransferred(VRCPlayerApi player)
         {
             if (player.isLocal)
+            {
+                delayedSerializationCount++;
                 SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), LateJoinerSyncDelay);
+            }
         }
 
         public void RequestSerializationDelayed()
         {
+            if ((--delayedSerializationCount) != 0)
+                return;
             RequestSerialization();
         }
 
