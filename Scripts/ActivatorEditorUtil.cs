@@ -18,28 +18,39 @@ namespace JanSharp
                 return false;
             }
             FieldInfo listenersField;
+            FieldInfo eventNamesField;
             switch (action.ListenerType)
             {
                 case 0:
                     listenersField = action.Activator.GetType().GetField("onActivateListeners", BindingFlags.NonPublic | BindingFlags.Instance);
+                    eventNamesField = action.Activator.GetType().GetField("onActivateListenerEventNames", BindingFlags.NonPublic | BindingFlags.Instance);
                     break;
                 case 1:
                     listenersField = action.Activator.GetType().GetField("onDeactivateListeners", BindingFlags.NonPublic | BindingFlags.Instance);
+                    eventNamesField = action.Activator.GetType().GetField("onDeactivateListenerEventNames", BindingFlags.NonPublic | BindingFlags.Instance);
                     break;
                 case 2:
                     listenersField = action.Activator.GetType().GetField("onStateChangedListeners", BindingFlags.NonPublic | BindingFlags.Instance);
+                    eventNamesField = action.Activator.GetType().GetField("onStateChangedListenerEventNames", BindingFlags.NonPublic | BindingFlags.Instance);
                     break;
                 default:
                     Debug.LogError($"Impossible listener type {action.ListenerType}.", UdonSharpEditorUtility.GetBackingUdonBehaviour(action));
                     return false;
             }
-            UdonSharpBehaviour[] listeners = listenersField.GetValue(action.Activator) as UdonSharpBehaviour[];
-            UdonSharpBehaviour[] newListeners = new UdonSharpBehaviour[listeners.Length + 1];
-            listeners.CopyTo(newListeners, 0);
-            newListeners[newListeners.Length - 1] = action;
-            listenersField.SetValue(action.Activator, newListeners);
+            // must explicitly define generic type parameter because `action` itself is a different type
+            GrowArray<UdonSharpBehaviour>(action.Activator, listenersField, action);
+            GrowArray(action.Activator, eventNamesField, "OnEvent");
             action.Activator.ApplyProxyModifications();
             return true;
+        }
+
+        private static void GrowArray<T>(object instance, FieldInfo field, T newValue)
+        {
+            T[] listeners = field.GetValue(instance) as T[];
+            T[] newListeners = new T[listeners.Length + 1];
+            listeners.CopyTo(newListeners, 0);
+            newListeners[newListeners.Length - 1] = newValue;
+            field.SetValue(instance, newListeners);
         }
     }
 

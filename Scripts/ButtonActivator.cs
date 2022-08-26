@@ -18,6 +18,9 @@ namespace JanSharp
         [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
         [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
         [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
+        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
+        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
+        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
 
         private bool state;
         private bool State
@@ -29,17 +32,17 @@ namespace JanSharp
                     return;
                 state = value;
                 if (value)
-                    Send(onActivateListeners);
+                    Send(onActivateListeners, onActivateListenerEventNames);
                 else
-                    Send(onDeactivateListeners);
-                Send(onStateChangedListeners);
+                    Send(onDeactivateListeners, onDeactivateListenerEventNames);
+                Send(onStateChangedListeners, onStateChangedListenerEventNames);
             }
         }
 
-        private void Send(UdonSharpBehaviour[] listeners)
+        private void Send(UdonSharpBehaviour[] listeners, string[] listenerEventNames)
         {
-            foreach (var listener in listeners)
-                listener.SendCustomEvent("OnEvent");
+            for (int i = 0; i < listeners.Length; i++)
+                listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
 
         public override void Interact()
@@ -59,6 +62,9 @@ namespace JanSharp
             onActivateListeners = new UdonSharpBehaviour[0];
             onDeactivateListeners = new UdonSharpBehaviour[0];
             onStateChangedListeners = new UdonSharpBehaviour[0];
+            onActivateListenerEventNames = new string[0];
+            onDeactivateListenerEventNames = new string[0];
+            onStateChangedListenerEventNames = new string[0];
             this.ApplyProxyModifications();
             return true;
         }
