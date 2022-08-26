@@ -48,6 +48,11 @@ namespace JanSharp
 
         public UdonSharpBehaviour inputActivator;
 
+        private void Start()
+        {
+            OnEvent();
+        }
+
         public void OnEvent()
         {
             State = !(bool)inputActivator.GetProgramVariable("state");

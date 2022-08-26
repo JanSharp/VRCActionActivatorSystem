@@ -57,7 +57,8 @@ Stateful actions reflect the state of a referenced activator, which means they c
 # Initial state
 
 The initial state of the map should always be "everything is off". The system will then evaluate states on Start.
-TODO: think about on Start. The only activator that can possibly do something right on start is NOT.
+
+The only activator that can possibly do something right on Start is LogicalNOTActivator. Those all run Start and initialize their state which subsequently triggers any activators and actions listening to their events.
 
 # Syncing
 
