@@ -5,19 +5,18 @@ All activators have 2 states: on and off.
 
 ## User Interactive Activators
 
-- pressure plates
-- levers (2 states, no timers. Just flip on interact)
-- proximity (powered by trip wire and or magic)
-- item placement (powered by magic)
-- buttons (effectively the same thing as levers except they almost instantly turn off again)
+- [x] ToggleActivator (levers)
+- [x] ButtonActivator (DM buttons, maybe something else)
+- [x] PlayerTriggerActivator (pressure plates, trip wire and proximity triggers)
+- [x] ItemTriggerActivator (item slots)
 
-## Internal Activators
+## Logical Activators
 
-- logical AND activator (active when **all** activators in its group are active)
-- logical OR activator (active when **any** activator in its group is active)
-- logical XOR activator (active when **one one** activator in its group is active)
-- logical NOT activator (inverts the state of the referenced activator)
-- memory activator (The memory activator will reference 2 activators. An enable and a reset activator. When the enable activator activates the memory activator also activates. The enable activator deactivating gets ignored so the memory activator stays on. Then when the reset activator activates the memory activator deactivates and stays inactive.)
+- [x] LogicalANDActivator (active when **all** input activators are active)
+- [x] LogicalORActivator (active when **any** input activator is active)
+- [x] LogicalXORActivator (active when **only one** input activator is active)
+- [x] LogicalNOTActivator (inverts the state of the referenced activator)
+- [x] MemoryActivator (The memory activator will reference 2 activators. An enable and a reset activator. When the enable activator activates the memory activator also activates. The enable activator deactivating gets ignored so the memory activator stays on. Then when the reset activator activates the memory activator deactivates and stays inactive.)
 
 ## Activator Events
 
@@ -33,31 +32,39 @@ Actions can listen to and trigger on any of the activator's events.
 
 Stateless actions simply trigger on an event. Stateless actions are meant to be very short, like a few seconds.
 
-- animation
-- sound
-- particle
-- move an object with the position sync script on it x units along some axis
+- [ ] animation (no idea how to even go about this one. what is it even supposed to do, what is it used for?)
+- [x] AudioAction
+- [x] ParticleAction
+- [ ] move an object with the position sync script on it x units along some axis
 
 ## Stateful Actions
 
 Stateful actions reflect the state of a referenced activator, which means they can only ever have 2 states.
 
-- animation with 2 states
-- animation loop
-- sound loop
-- particle loop
+- [x] ToggleAnimationAction (animation with a bool parameter - the state. For levers, trap doors)
+- [x] (animation loop) (can be done using ToggleAnimationAction)
+- [x] AudioLoopAction
+- [x] ParticleLoopAction
 
 # Other Scripts
 
-- Object position sync
+- [ ] Object position sync
+- [ ] DM Toggle to show/hide DM only activators
 
 # Initial state
 
 The initial state of the map should always be "everything is off". The system will then evaluate states on Start.
+TODO: think about on Start. The only activator that can possibly do something right on start is NOT.
 
 # Syncing
 
-The only synced scripts are [interactive activators](#user-interactive-activators) and [stateful actions](#stateful-actions), although the stateful actions do not sync their active state since that is handled through activators already. Which means they only sync extra data, such as the current time in the loop. That also means that any stateful actions without any additional state besides their on off state do not require any syncing.
+Synced scripts are
+
+- ToggleActivator
+- ButtonActivator
+- MemoryActivator
+
+PlayerTriggerActivator and ItemTriggerActivator are synced through the position of the object entering the trigger zone. It might cause scuff but trying to work around it is like stupid difficult. And the rest is simply evaluated by every client locally.
 
 # Dependencies
 
