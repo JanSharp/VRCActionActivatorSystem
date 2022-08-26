@@ -34,7 +34,7 @@ namespace JanSharp
         {
             static OnBuildRegister() => OnBuildUtil.RegisterType<ParticleAction>(order: 1);
         }
-        bool IOnBuildCallback.OnBuild() => ActivatorEditorUtil.ActionOnBuild(this);
+        bool IOnBuildCallback.OnBuild() => ActivatorEditorUtil.BasicActionOnBuild(this);
         #endif
     }
 
