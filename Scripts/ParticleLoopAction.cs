@@ -76,10 +76,22 @@ namespace JanSharp
                 && targetAction.particles.Any(p => p != null && p.main.playOnAwake)
                 && GUILayout.Button(new GUIContent("Disable PlayOnAwake")))
             {
-                foreach (var particle in targetAction.particles.Where(p => p.main.playOnAwake))
+                foreach (var particle in targetAction.particles.Where(p => p != null && p.main.playOnAwake))
                 {
                     var main = particle.main;
                     main.playOnAwake = false;
+                    EditorUtility.SetDirty(particle);
+                }
+            }
+
+            if (targetAction.particles != null
+                && targetAction.particles.Any(p => p != null && !p.main.loop)
+                && GUILayout.Button(new GUIContent("Make all Particle Systems loop")))
+            {
+                foreach (var particle in targetAction.particles.Where(p => p != null && !p.main.loop))
+                {
+                    var main = particle.main;
+                    main.loop = true;
                     EditorUtility.SetDirty(particle);
                 }
             }
