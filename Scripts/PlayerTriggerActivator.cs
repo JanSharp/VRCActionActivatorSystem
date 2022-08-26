@@ -10,7 +10,7 @@ using UdonSharpEditor;
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class PlayerTriggerActivator : UdonSharpBehaviour
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
         , IOnBuildCallback
@@ -39,9 +39,6 @@ namespace JanSharp
                 else
                     Send(onDeactivateListeners, onDeactivateListenerEventNames);
                 Send(onStateChangedListeners, onStateChangedListenerEventNames);
-                
-                if (currentlyInteractingPlayer != null && currentlyInteractingPlayer.isLocal)
-                    Sync();
             }
         }
 
@@ -51,10 +48,6 @@ namespace JanSharp
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
 
-        // an ugly way of passing a "parameter" to a property setter. I hate it but I also
-        // don't want to deviate from the copy pasted code too much
-        private VRCPlayerApi currentlyInteractingPlayer;
-        private bool localPlayerIsInTrigger;
         private int playerCount;
         private int PlayerCount
         {
@@ -68,35 +61,12 @@ namespace JanSharp
 
         public override void OnPlayerTriggerEnter(VRCPlayerApi player)
         {
-            if (player.isLocal)
-                localPlayerIsInTrigger = true;
-            currentlyInteractingPlayer = player;
             PlayerCount++;
-            currentlyInteractingPlayer = null;
         }
 
         public override void OnPlayerTriggerExit(VRCPlayerApi player)
         {
-            if (player.isLocal)
-                localPlayerIsInTrigger = false;
-            currentlyInteractingPlayer = player;
             PlayerCount--;
-            currentlyInteractingPlayer = null;
-        }
-
-        public override void OnDeserialization()
-        {
-            if (!State && localPlayerIsInTrigger)
-            {
-                State = true;
-                SendCustomEventDelayedFrames(nameof(Sync), 1);
-            }
-        }
-
-        public void Sync()
-        {
-            Networking.SetOwner(Networking.LocalPlayer, this.gameObject);
-            RequestSerialization();
         }
 
         #if UNITY_EDITOR && !COMPILER_UDONSHARP
