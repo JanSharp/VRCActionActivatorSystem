@@ -17,11 +17,12 @@ namespace JanSharp
     #endif
     {
         [SerializeField] private Animator animator;
+        [SerializeField] private string boolParameterName = "state";
         [SerializeField] private UdonSharpBehaviour activator;
 
         public void OnEvent()
         {
-            animator.SetBool("state", (bool)activator.GetProgramVariable("state"));
+            animator.SetBool(boolParameterName, (bool)activator.GetProgramVariable("state"));
         }
 
         #if UNITY_EDITOR && !COMPILER_UDONSHARP
