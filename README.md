@@ -61,7 +61,7 @@ The only synced scripts are [interactive activators](#user-interactive-activator
 
 # Dependencies
 
-- `OnBuildUtil`. Currently not publicly available anywhere and not included in this repo. Requires the version introducing `IOnBuildCallbackV2`.
+- `OnBuildUtil`. Since the file should not be in this folder it is not a `.cs` file in here - it is a `.txt`. Simply copy the contents of [](OnBuildUtil.txt) to `Assets/JanSharp/Common/OnBuildUtil.cs`.
 
 # Internals
 
