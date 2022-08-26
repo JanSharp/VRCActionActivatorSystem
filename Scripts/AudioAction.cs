@@ -49,7 +49,7 @@ namespace JanSharp
             AudioAction targetAction = this.target as AudioAction;
             base.OnInspectorGUI();
 
-            if (GUILayout.Button(new GUIContent("Find all child audio sources")))
+            if (GUILayout.Button(new GUIContent("Find Audio Sources", "Searches on this component and its children. Overwrites anything previously set.")))
             {
                 targetAction.audioSources = targetAction.GetComponentsInChildren<AudioSource>();
                 targetAction.ApplyProxyModifications();

@@ -48,19 +48,26 @@ namespace JanSharp
         {
             ParticleAction targetAction = this.target as ParticleAction;
             base.OnInspectorGUI();
-            if (GUILayout.Button(new GUIContent("Find all child particle systems")))
+
+            if (GUILayout.Button(new GUIContent("Find Particle Systems", "Searches on this component and its children. Overwrites anything previously set.")))
             {
                 targetAction.particles = targetAction.GetComponentsInChildren<ParticleSystem>();
                 targetAction.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetAction);
             }
-            if (targetAction.particles.Any(p => p == null) && GUILayout.Button(new GUIContent("Remove null particles")))
+
+            if (targetAction.particles != null
+                && targetAction.particles.Any(p => p == null)
+                && GUILayout.Button(new GUIContent("Remove null particles")))
             {
                 targetAction.particles = targetAction.particles.Where(p => p != null).ToArray();
                 targetAction.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetAction);
             }
-            if (targetAction.particles.Any(p => p != null && p.main.playOnAwake) && GUILayout.Button(new GUIContent("Disable PlayOnAwake")))
+
+            if (targetAction.particles != null
+                && targetAction.particles.Any(p => p != null && p.main.playOnAwake)
+                && GUILayout.Button(new GUIContent("Disable PlayOnAwake")))
             {
                 foreach (var particle in targetAction.particles.Where(p => p.main.playOnAwake))
                 {
