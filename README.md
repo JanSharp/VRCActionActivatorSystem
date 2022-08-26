@@ -50,7 +50,9 @@ Stateful actions reflect the state of a referenced activator, which means they c
 # Other Scripts
 
 - [ ] Object position sync
-- [ ] DM Toggle to show/hide DM only activators
+- [x] DM Toggle to show/hide DM only activators
+  - `ToggleActivator` and `ButtonActivator` - use an `InteractProxy` to pass the Interact event from a locally togged object to the actual activator which must always be active
+  - `PlayerTriggerActivator` and `ItemTriggerActivator` - cannot be made DM only because it breaks syncing, since that's based on local positions and trigger events
 
 # Initial state
 
