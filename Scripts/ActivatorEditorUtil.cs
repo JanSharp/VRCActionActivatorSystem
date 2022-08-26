@@ -19,17 +19,17 @@ namespace JanSharp
 
         public static bool BasicActionOnBuild<T>(T action) where T : UdonSharpBehaviour, IAction
         {
-            if (action.Activator == null)
-            {
-                Debug.LogError("Missing Activator.", UdonSharpEditorUtility.GetBackingUdonBehaviour(action));
-                return false;
-            }
             AddActivatorToListeners(action.Activator, (ListenerEventType)action.ListenerType, action);
             return true;
         }
 
         public static void AddActivatorToListeners(UdonSharpBehaviour activator, ListenerEventType listenerType, UdonSharpBehaviour listener, string listenerEventName = "OnEvent")
         {
+            if (activator == null)
+            {
+                Debug.LogWarning($"Missing/null Activator for {listener.name}.", listener);
+                return;
+            }
             FieldInfo listenersField;
             FieldInfo eventNamesField;
             switch (listenerType)
