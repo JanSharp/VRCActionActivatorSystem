@@ -35,7 +35,7 @@ Stateless actions simply trigger on an event. Stateless actions are meant to be 
 - [x] TriggerAnimationAction (animation with a trigger parameter. Spear wall traps might use this, though they might instead use `ToggleAnimationAction`)
 - [x] AudioAction
 - [x] ParticleAction
-- [ ] move an object with the position sync script on it x units along some axis
+- [x] MovementAction (move an object with the position sync script on it x units along some axis)
 - [x] DropItemAction (drop one specific VRC_Pickup)
 
 ## Stateful Actions
@@ -50,7 +50,7 @@ Stateful actions reflect the state of a referenced activator, which means they c
 
 # Other Scripts
 
-- [ ] Object position sync
+- [x] ObjectPositionSync
 - [x] DM Toggle to show/hide DM only activators
   - `ToggleActivator` and `ButtonActivator` - use an `InteractProxy` to pass the Interact event from a locally togged object to the actual activator which must always be active
   - `PlayerTriggerActivator` and `ItemTriggerActivator` - cannot be made DM only because it breaks syncing, since that's based on local positions and trigger events
