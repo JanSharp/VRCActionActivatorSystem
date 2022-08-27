@@ -68,7 +68,7 @@ namespace JanSharp
 
         public void OnActivateEvent()
         {
-            if (!(bool)resetActivator.GetProgramVariable("state"))
+            if (resetActivator == null || !(bool)resetActivator.GetProgramVariable("state"))
                 State = true;
         }
 
@@ -134,8 +134,11 @@ namespace JanSharp
             else
             {
                 ActivatorEditorUtil.AddActivatorToListeners(activateActivator, ActivatorEditorUtil.ListenerEventType.OnActivate, this, nameof(OnActivateEvent));
-                ActivatorEditorUtil.AddActivatorToListeners(resetActivator, ActivatorEditorUtil.ListenerEventType.OnActivate, this, nameof(OnResetActivateEvent));
-                ActivatorEditorUtil.AddActivatorToListeners(resetActivator, ActivatorEditorUtil.ListenerEventType.OnDeactivate, this, nameof(OnResetDeactivateEvent));
+                if (resetActivator != null)
+                {
+                    ActivatorEditorUtil.AddActivatorToListeners(resetActivator, ActivatorEditorUtil.ListenerEventType.OnActivate, this, nameof(OnResetActivateEvent));
+                    ActivatorEditorUtil.AddActivatorToListeners(resetActivator, ActivatorEditorUtil.ListenerEventType.OnDeactivate, this, nameof(OnResetDeactivateEvent));
+                }
             }
             return true;
         }
