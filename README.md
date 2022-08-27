@@ -36,6 +36,7 @@ Stateless actions simply trigger on an event. Stateless actions are meant to be 
 - [x] AudioAction
 - [x] ParticleAction
 - [ ] move an object with the position sync script on it x units along some axis
+- [x] DropItemAction (drop one specific VRC_Pickup)
 
 ## Stateful Actions
 
