@@ -46,7 +46,7 @@ namespace JanSharp
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
 
-        public UdonSharpBehaviour[] inputActivators;
+        [SerializeField] private UdonSharpBehaviour[] inputActivators;
 
         public void OnEvent()
         {

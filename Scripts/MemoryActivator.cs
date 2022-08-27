@@ -60,8 +60,8 @@ namespace JanSharp
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
 
-        public UdonSharpBehaviour activateActivator;
-        public UdonSharpBehaviour resetActivator;
+        [SerializeField] private UdonSharpBehaviour activateActivator;
+        [SerializeField] private UdonSharpBehaviour resetActivator;
         // to prevent spamming from causing scuff
         private int delayedSerializationCount;
         private const float LateJoinerSyncDelay = 10f;
