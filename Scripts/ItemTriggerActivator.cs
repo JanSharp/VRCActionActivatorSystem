@@ -86,7 +86,6 @@ namespace JanSharp
             onActivateListenerEventNames = new string[0];
             onDeactivateListenerEventNames = new string[0];
             onStateChangedListenerEventNames = new string[0];
-            containedItemName = containedItemName;
             this.ApplyProxyModifications();
             return true;
         }
