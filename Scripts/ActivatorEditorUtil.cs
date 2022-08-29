@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +28,7 @@ namespace JanSharp
         {
             if (activator == null)
             {
-                Debug.LogError($"Missing/null Activator for {listener.name}.", listener);
+                Debug.LogError($"Missing/null Activator for {listener.name}.", UdonSharpEditorUtility.GetBackingUdonBehaviour(listener));
                 return;
             }
             FieldInfo listenersField;
