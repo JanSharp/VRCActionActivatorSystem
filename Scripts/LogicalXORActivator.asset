@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: LogicalXORActivator
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 89d462e0687bbe690b9f31d1dd51142c,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: eae02e5489b4bdf43ba96d4b0b4ff746,
     type: 2}
   udonAssembly: 
   assemblyError: 

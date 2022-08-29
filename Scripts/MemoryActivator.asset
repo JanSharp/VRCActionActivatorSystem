@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: MemoryActivator
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 5cc0c705bd222142da99f88ffba84699,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 97410970fbd8d89449943f52a3ab9847,
     type: 2}
   udonAssembly: 
   assemblyError: 

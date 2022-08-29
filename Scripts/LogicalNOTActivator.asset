@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: LogicalNOTActivator
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: b94fd8854067261d9b06ed7a37b3411c,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: d5c2924b52484fc4ca823665b39aa651,
     type: 2}
   udonAssembly: 
   assemblyError: 

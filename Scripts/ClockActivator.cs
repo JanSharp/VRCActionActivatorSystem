@@ -24,10 +24,10 @@ namespace JanSharp
         [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
 
         [SerializeField] [HideInInspector] private UpdateManager updateManager;
-        // for UpdateManager
-        private int customUpdateInternalIndex;
         [SerializeField] private UdonSharpBehaviour inputActivator;
         [SerializeField] private float secondsBetweenTicks = 1f;
+        // for UpdateManager
+        private int customUpdateInternalIndex;
         [UdonSynced] private float syncedElapsedTime;
         private const float SyncLatencyCompensation = 0.1f; // just a guess. Will never be accurate
         private float elapsedTime;

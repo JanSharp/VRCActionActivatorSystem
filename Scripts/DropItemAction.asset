@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: DropItemAction
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: fd6282aa359583dce909320a599d4f8b,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 2aef8e4406174ae4b90b5b130ebd4c5d,
     type: 2}
   udonAssembly: 
   assemblyError: 

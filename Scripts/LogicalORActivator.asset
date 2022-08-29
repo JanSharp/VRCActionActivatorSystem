@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: LogicalORActivator
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 3347c9184199e98059cc8bf527706fed,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: a47a15bab968ca747b73e19a17acfaa4,
     type: 2}
   udonAssembly: 
   assemblyError: 
