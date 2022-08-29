@@ -23,6 +23,17 @@ namespace JanSharp
         [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
         [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
 
+        private int playerCount;
+        private int PlayerCount
+        {
+            get => playerCount;
+            set
+            {
+                playerCount = value;
+                State = value != 0;
+            }
+        }
+
         [UdonSynced]
         [FieldChangeCallback(nameof(State))]
         private bool state;
@@ -46,17 +57,6 @@ namespace JanSharp
         {
             for (int i = 0; i < listeners.Length; i++)
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
-        }
-
-        private int playerCount;
-        private int PlayerCount
-        {
-            get => playerCount;
-            set
-            {
-                playerCount = value;
-                State = value != 0;
-            }
         }
 
         public override void OnPlayerTriggerEnter(VRCPlayerApi player)

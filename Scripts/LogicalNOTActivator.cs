@@ -23,6 +23,8 @@ namespace JanSharp
         [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
         [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
 
+        [SerializeField] private UdonSharpBehaviour inputActivator;
+
         private bool state;
         private bool State
         {
@@ -45,8 +47,6 @@ namespace JanSharp
             for (int i = 0; i < listeners.Length; i++)
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
-
-        [SerializeField] private UdonSharpBehaviour inputActivator;
 
         private void Start()
         {

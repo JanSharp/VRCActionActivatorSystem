@@ -23,6 +23,16 @@ namespace JanSharp
         [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
         [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
 
+        [SerializeField] [HideInInspector] private UpdateManager updateManager;
+        // for UpdateManager
+        private int customUpdateInternalIndex;
+        [SerializeField] private UdonSharpBehaviour inputActivator;
+        [SerializeField] private float secondsBetweenTicks = 1f;
+        [UdonSynced] private float syncedElapsedTime;
+        private const float SyncLatencyCompensation = 0.1f; // just a guess. Will never be accurate
+        private float elapsedTime;
+        private bool initialized;
+
         private bool state;
         private bool State
         {
@@ -45,16 +55,6 @@ namespace JanSharp
             for (int i = 0; i < listeners.Length; i++)
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
-
-        [SerializeField] [HideInInspector] private UpdateManager updateManager;
-        // for UpdateManager
-        private int customUpdateInternalIndex;
-        [SerializeField] private UdonSharpBehaviour inputActivator;
-        [SerializeField] private float secondsBetweenTicks = 1f;
-        [UdonSynced] private float syncedElapsedTime;
-        private const float SyncLatencyCompensation = 0.1f; // just a guess. Will never be accurate
-        private float elapsedTime;
-        private bool initialized;
 
         public void OnEvent()
         {

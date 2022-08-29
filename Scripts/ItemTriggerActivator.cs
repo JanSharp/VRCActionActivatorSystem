@@ -23,6 +23,18 @@ namespace JanSharp
         [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
         [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
 
+        [SerializeField] private string containedItemName;
+        private int itemCount;
+        private int ItemCount
+        {
+            get => itemCount;
+            set
+            {
+                itemCount = value;
+                State = value != 0;
+            }
+        }
+
         [UdonSynced]
         [FieldChangeCallback(nameof(State))]
         private bool state;
@@ -46,18 +58,6 @@ namespace JanSharp
         {
             for (int i = 0; i < listeners.Length; i++)
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
-        }
-
-        [SerializeField] private string containedItemName;
-        private int itemCount;
-        private int ItemCount
-        {
-            get => itemCount;
-            set
-            {
-                itemCount = value;
-                State = value != 0;
-            }
         }
 
         private void OnTriggerEnter(Collider other)

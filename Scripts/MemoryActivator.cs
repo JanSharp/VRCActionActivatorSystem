@@ -23,6 +23,12 @@ namespace JanSharp
         [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
         [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
 
+        [SerializeField] private UdonSharpBehaviour activateActivator;
+        [SerializeField] private UdonSharpBehaviour resetActivator;
+        // to prevent spamming from causing scuff
+        private int delayedSerializationCount;
+        private const float LateJoinerSyncDelay = 10f;
+
         [UdonSynced]
         [FieldChangeCallback(nameof(State))]
         private bool state;
@@ -59,12 +65,6 @@ namespace JanSharp
             for (int i = 0; i < listeners.Length; i++)
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
-
-        [SerializeField] private UdonSharpBehaviour activateActivator;
-        [SerializeField] private UdonSharpBehaviour resetActivator;
-        // to prevent spamming from causing scuff
-        private int delayedSerializationCount;
-        private const float LateJoinerSyncDelay = 10f;
 
         public void OnActivateEvent()
         {
