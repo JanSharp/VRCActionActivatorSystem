@@ -13,34 +13,32 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ToggleAnimationAction : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback
-    #endif
     {
         public Animator animator;
         public string boolParameterName = "state";
-        [SerializeField] private UdonSharpBehaviour activator;
+        public UdonSharpBehaviour activator;
 
         public void OnEvent()
         {
             animator.SetBool(boolParameterName, (bool)activator.GetProgramVariable("state"));
         }
-
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
-        {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<ToggleAnimationAction>(order: 1);
-        }
-        bool IOnBuildCallback.OnBuild()
-        {
-            ActivatorEditorUtil.AddActivatorToListeners(activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, this);
-            return true;
-        }
-        #endif
     }
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
+
+    [InitializeOnLoad]
+    public static class ToggleAnimationActionOnBuild
+    {
+        static ToggleAnimationActionOnBuild() => OnBuildUtil.RegisterType<ToggleAnimationAction>(OnBuild, order: 1);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour)
+        {
+            ToggleAnimationAction toggleAnimationAction = (ToggleAnimationAction)behaviour;
+            ActivatorEditorUtil.AddActivatorToListeners(toggleAnimationAction.activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, toggleAnimationAction);
+            return true;
+        }
+    }
+
     [CustomEditor(typeof(ToggleAnimationAction))]
     public class ToggleAnimationActionEditor : Editor
     {

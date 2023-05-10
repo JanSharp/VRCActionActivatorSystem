@@ -10,18 +10,15 @@ using UdonSharpEditor;
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class ItemTriggerActivator : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback
-    #endif
     {
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
-        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
+        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
+        [HideInInspector] public string[] onActivateListenerEventNames;
+        [HideInInspector] public string[] onDeactivateListenerEventNames;
+        [HideInInspector] public string[] onStateChangedListenerEventNames;
 
         [SerializeField] private string containedItemName;
         private int itemCount;
@@ -71,24 +68,26 @@ namespace JanSharp
             if (other.name.Contains(containedItemName))
                 ItemCount--;
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class OnBuildRegister
+    {
+        static OnBuildRegister() => OnBuildUtil.RegisterType<ItemTriggerActivator>(OnBuild, order: 0);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<ItemTriggerActivator>(order: 0);
-        }
-        bool IOnBuildCallback.OnBuild()
-        {
-            onActivateListeners = new UdonSharpBehaviour[0];
-            onDeactivateListeners = new UdonSharpBehaviour[0];
-            onStateChangedListeners = new UdonSharpBehaviour[0];
-            onActivateListenerEventNames = new string[0];
-            onDeactivateListenerEventNames = new string[0];
-            onStateChangedListenerEventNames = new string[0];
-            this.ApplyProxyModifications();
+            ItemTriggerActivator itemTriggerActivator = (ItemTriggerActivator)behaviour;
+            itemTriggerActivator.onActivateListeners = new UdonSharpBehaviour[0];
+            itemTriggerActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            itemTriggerActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            itemTriggerActivator.onActivateListenerEventNames = new string[0];
+            itemTriggerActivator.onDeactivateListenerEventNames = new string[0];
+            itemTriggerActivator.onStateChangedListenerEventNames = new string[0];
+            itemTriggerActivator.ApplyProxyModifications();
             return true;
         }
-        #endif
     }
+    #endif
 }

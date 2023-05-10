@@ -13,30 +13,29 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ToggleGameObjectAction : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback
-    #endif
     {
         [SerializeField] private GameObject[] gameObjects;
-        [SerializeField] private UdonSharpBehaviour activator;
+        public UdonSharpBehaviour activator;
 
         public void OnEvent()
         {
             foreach (var obj in gameObjects)
                 obj.SetActive(!obj.activeSelf);
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class ToggleGameObjectActionOnBuild
+    {
+        static ToggleGameObjectActionOnBuild() => OnBuildUtil.RegisterType<ToggleGameObjectAction>(OnBuild, order: 1);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<ToggleGameObjectAction>(order: 1);
-        }
-        bool IOnBuildCallback.OnBuild()
-        {
-            ActivatorEditorUtil.AddActivatorToListeners(activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, this);
+            ToggleGameObjectAction toggleGameObjectAction = (ToggleGameObjectAction)behaviour;
+            ActivatorEditorUtil.AddActivatorToListeners(toggleGameObjectAction.activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, toggleGameObjectAction);
             return true;
         }
-        #endif
     }
+    #endif
 }

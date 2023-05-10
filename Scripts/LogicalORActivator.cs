@@ -12,18 +12,15 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class LogicalORActivator : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallbackV2
-    #endif
     {
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
-        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
+        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
+        [HideInInspector] public string[] onActivateListenerEventNames;
+        [HideInInspector] public string[] onDeactivateListenerEventNames;
+        [HideInInspector] public string[] onStateChangedListenerEventNames;
 
-        [SerializeField] private UdonSharpBehaviour[] inputActivators;
+        public UdonSharpBehaviour[] inputActivators;
 
         private bool state;
         private bool State
@@ -60,36 +57,38 @@ namespace JanSharp
             }
             State = false;
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class LogicalORActivatorOnBuild
+    {
+        static LogicalORActivatorOnBuild()
         {
-            static OnBuildRegister()
-            {
-                OnBuildUtil.RegisterTypeV2<LogicalORActivator>(order: 0);
-                OnBuildUtil.RegisterTypeV2<LogicalORActivator>(order: 1);
-            }
+            OnBuildUtil.RegisterType<LogicalORActivator>(FirstOnBuild, order: 0);
+            OnBuildUtil.RegisterType<LogicalORActivator>(SecondOnBuild, order: 1);
         }
-        bool IOnBuildCallbackV2.OnBuild(int order)
+
+        private static bool FirstOnBuild(UdonSharpBehaviour behaviour)
         {
-            if (order == 0)
-            {
-                onActivateListeners = new UdonSharpBehaviour[0];
-                onDeactivateListeners = new UdonSharpBehaviour[0];
-                onStateChangedListeners = new UdonSharpBehaviour[0];
-                onActivateListenerEventNames = new string[0];
-                onDeactivateListenerEventNames = new string[0];
-                onStateChangedListenerEventNames = new string[0];
-                this.ApplyProxyModifications();
-            }
-            else
-            {
-                foreach (var activator in inputActivators)
-                    ActivatorEditorUtil.AddActivatorToListeners(activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, this);
-            }
+            LogicalORActivator logicalORActivator = (LogicalORActivator)behaviour;
+            logicalORActivator.onActivateListeners = new UdonSharpBehaviour[0];
+            logicalORActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            logicalORActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            logicalORActivator.onActivateListenerEventNames = new string[0];
+            logicalORActivator.onDeactivateListenerEventNames = new string[0];
+            logicalORActivator.onStateChangedListenerEventNames = new string[0];
+            logicalORActivator.ApplyProxyModifications();
             return true;
         }
-        #endif
+
+        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        {
+            LogicalORActivator logicalORActivator = (LogicalORActivator)behaviour;
+            foreach (var activator in logicalORActivator.inputActivators)
+                ActivatorEditorUtil.AddActivatorToListeners(activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, logicalORActivator);
+            return true;
+        }
     }
+    #endif
 }

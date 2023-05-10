@@ -13,12 +13,9 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ParticleLoopAction : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback
-    #endif
     {
         public ParticleSystem[] particles;
-        [SerializeField] private UdonSharpBehaviour activator;
+        public UdonSharpBehaviour activator;
 
         public void OnEvent()
         {
@@ -29,22 +26,23 @@ namespace JanSharp
                 foreach (var particle in particles)
                     particle.Stop();
         }
-
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
-        {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<ParticleLoopAction>(order: 1);
-        }
-        bool IOnBuildCallback.OnBuild()
-        {
-            ActivatorEditorUtil.AddActivatorToListeners(activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, this);
-            return true;
-        }
-        #endif
     }
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
+
+    [InitializeOnLoad]
+    public static class ParticleLoopActionOnBuild
+    {
+        static ParticleLoopActionOnBuild() => OnBuildUtil.RegisterType<ParticleLoopAction>(OnBuild, order: 1);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour)
+        {
+            ParticleLoopAction particleLoopAction = (ParticleLoopAction)behaviour;
+            ActivatorEditorUtil.AddActivatorToListeners(particleLoopAction.activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, particleLoopAction);
+            return true;
+        }
+    }
+
     [CustomEditor(typeof(ParticleLoopAction))]
     public class ParticleLoopActionEditor : Editor
     {

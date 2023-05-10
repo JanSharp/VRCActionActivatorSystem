@@ -13,12 +13,9 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class AudioLoopAction : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback
-    #endif
     {
         public AudioSource audioSource;
-        [SerializeField] private UdonSharpBehaviour activator;
+        public UdonSharpBehaviour activator;
 
         public void OnEvent()
         {
@@ -27,22 +24,25 @@ namespace JanSharp
             else
                 audioSource.Stop();
         }
-
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
-        {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<AudioLoopAction>(order: 1);
-        }
-        bool IOnBuildCallback.OnBuild()
-        {
-            ActivatorEditorUtil.AddActivatorToListeners(activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, this);
-            return true;
-        }
-        #endif
     }
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
+
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class AudioLoopActionOnBuild
+    {
+        static AudioLoopActionOnBuild() => OnBuildUtil.RegisterType<AudioLoopAction>(OnBuild, order: 1);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour)
+        {
+            AudioLoopAction audioLoopAction = (AudioLoopAction)behaviour;
+            ActivatorEditorUtil.AddActivatorToListeners(audioLoopAction.activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, audioLoopAction);
+            return true;
+        }
+    }
+    #endif
+
     [CustomEditor(typeof(AudioLoopAction))]
     public class AudioLoopActionEditor : Editor
     {

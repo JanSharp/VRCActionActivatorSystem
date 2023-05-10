@@ -12,23 +12,20 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ClockActivator : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallbackV2
-    #endif
     {
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
-        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
+        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
+        [HideInInspector] public string[] onActivateListenerEventNames;
+        [HideInInspector] public string[] onDeactivateListenerEventNames;
+        [HideInInspector] public string[] onStateChangedListenerEventNames;
 
-        [SerializeField] [HideInInspector] private UpdateManager updateManager;
-        [SerializeField] private UdonSharpBehaviour inputActivator;
+        [HideInInspector] public UpdateManager updateManager;
+        public UdonSharpBehaviour inputActivator;
         [SerializeField] private float secondsBetweenTicks = 1f;
         // for UpdateManager
         private int customUpdateInternalIndex;
-        [UdonSynced] private float syncedElapsedTime;
+        /*[UdonSynced]*/ private float syncedElapsedTime;
         private const float SyncLatencyCompensation = 0.1f; // just a guess. Will never be accurate
         private float elapsedTime;
         private bool initialized;
@@ -88,43 +85,45 @@ namespace JanSharp
                 elapsedTime = syncedElapsedTime + Mathf.Min(SyncLatencyCompensation, secondsBetweenTicks * 0.8f);
             }
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class ClockActivatorOnBuild
+    {
+        static ClockActivatorOnBuild()
         {
-            static OnBuildRegister()
-            {
-                OnBuildUtil.RegisterTypeV2<ClockActivator>(order: 0);
-                OnBuildUtil.RegisterTypeV2<ClockActivator>(order: 1);
-            }
+            OnBuildUtil.RegisterType<ClockActivator>(FirstOnBuild, order: 0);
+            OnBuildUtil.RegisterType<ClockActivator>(SecondOnBuild, order: 1);
         }
-        bool IOnBuildCallbackV2.OnBuild(int order)
+
+        private static bool FirstOnBuild(UdonSharpBehaviour behaviour)
         {
-            if (order == 0)
+            ClockActivator clockActivator = (ClockActivator)behaviour;
+            clockActivator.updateManager = GameObject.Find("/UpdateManager")?.GetUdonSharpComponent<UpdateManager>();
+            if (clockActivator.updateManager == null)
             {
-                updateManager = GameObject.Find("/UpdateManager")?.GetUdonSharpComponent<UpdateManager>();
-                if (updateManager == null)
-                {
-                    Debug.LogError("ClockActivator requires a GameObject that must be at the root of the scene "
-                            + "with the exact name 'UpdateManager' which has the 'UpdateManager' UdonBehaviour.",
-                        UdonSharpEditorUtility.GetBackingUdonBehaviour(this));
-                    return false;
-                }
-                onActivateListeners = new UdonSharpBehaviour[0];
-                onDeactivateListeners = new UdonSharpBehaviour[0];
-                onStateChangedListeners = new UdonSharpBehaviour[0];
-                onActivateListenerEventNames = new string[0];
-                onDeactivateListenerEventNames = new string[0];
-                onStateChangedListenerEventNames = new string[0];
-                this.ApplyProxyModifications();
+                Debug.LogError("ClockActivator requires a GameObject that must be at the root of the scene "
+                        + "with the exact name 'UpdateManager' which has the 'UpdateManager' UdonBehaviour.",
+                    UdonSharpEditorUtility.GetBackingUdonBehaviour(clockActivator));
+                return false;
             }
-            else
-            {
-                ActivatorEditorUtil.AddActivatorToListeners(inputActivator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, this);
-            }
+            clockActivator.onActivateListeners = new UdonSharpBehaviour[0];
+            clockActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            clockActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            clockActivator.onActivateListenerEventNames = new string[0];
+            clockActivator.onDeactivateListenerEventNames = new string[0];
+            clockActivator.onStateChangedListenerEventNames = new string[0];
+            clockActivator.ApplyProxyModifications();
             return true;
         }
-        #endif
+
+        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        {
+            ClockActivator clockActivator = (ClockActivator)behaviour;
+            ActivatorEditorUtil.AddActivatorToListeners(clockActivator.inputActivator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, clockActivator);
+            return true;
+        }
     }
+    #endif
 }

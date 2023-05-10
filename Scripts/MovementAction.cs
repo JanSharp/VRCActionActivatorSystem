@@ -14,7 +14,7 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class MovementAction : UdonSharpBehaviour
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback, IAction
+        , IAction
     #endif
     {
         [SerializeField] private ObjectPositionSync targetObject;
@@ -30,17 +30,18 @@ namespace JanSharp
         #if UNITY_EDITOR && !COMPILER_UDONSHARP
         UdonSharpBehaviour IAction.Activator => activator;
         int IAction.ListenerType { get => listenerType; set => listenerType = value; }
-
-        [InitializeOnLoad]
-        public static class OnBuildRegister
-        {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<MovementAction>(order: 1);
-        }
-        bool IOnBuildCallback.OnBuild() => ActivatorEditorUtil.BasicActionOnBuild(this);
         #endif
     }
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class MovementActionOnBuild
+    {
+        static MovementActionOnBuild() => OnBuildUtil.RegisterType<MovementAction>(OnBuild, order: 1);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((MovementAction)behaviour);
+    }
+
     [CustomEditor(typeof(MovementAction))]
     public class MovementActionEditor : ActionEditorBase { }
     #endif

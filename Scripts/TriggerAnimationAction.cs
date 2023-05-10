@@ -14,7 +14,7 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class TriggerAnimationAction : UdonSharpBehaviour
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback, IAction
+        , IAction
     #endif
     {
         public Animator animator;
@@ -30,17 +30,18 @@ namespace JanSharp
         #if UNITY_EDITOR && !COMPILER_UDONSHARP
         UdonSharpBehaviour IAction.Activator => activator;
         int IAction.ListenerType { get => listenerType; set => listenerType = value; }
-
-        [InitializeOnLoad]
-        public static class OnBuildRegister
-        {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<TriggerAnimationAction>(order: 1);
-        }
-        bool IOnBuildCallback.OnBuild() => ActivatorEditorUtil.BasicActionOnBuild(this);
         #endif
     }
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class TriggerAnimationActionOnBuild
+    {
+        static TriggerAnimationActionOnBuild() => OnBuildUtil.RegisterType<TriggerAnimationAction>(OnBuild, order: 1);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((TriggerAnimationAction)behaviour);
+    }
+
     [CustomEditor(typeof(TriggerAnimationAction))]
     public class TriggerAnimationActionEditor : ActionEditorBase
     {

@@ -14,7 +14,7 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ParticleAction : UdonSharpBehaviour
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback, IAction
+        , IAction
     #endif
     {
         public ParticleSystem[] particles;
@@ -30,17 +30,18 @@ namespace JanSharp
         #if UNITY_EDITOR && !COMPILER_UDONSHARP
         UdonSharpBehaviour IAction.Activator => activator;
         int IAction.ListenerType { get => listenerType; set => listenerType = value; }
-
-        [InitializeOnLoad]
-        public static class OnBuildRegister
-        {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<ParticleAction>(order: 1);
-        }
-        bool IOnBuildCallback.OnBuild() => ActivatorEditorUtil.BasicActionOnBuild(this);
         #endif
     }
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class ParticleActionOnBuild
+    {
+        static ParticleActionOnBuild() => OnBuildUtil.RegisterType<ParticleAction>(OnBuild, order: 1);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((ParticleAction)behaviour);
+    }
+
     [CustomEditor(typeof(ParticleAction))]
     public class ParticleActionEditor : ActionEditorBase
     {

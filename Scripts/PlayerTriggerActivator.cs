@@ -10,18 +10,15 @@ using UdonSharpEditor;
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class PlayerTriggerActivator : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback
-    #endif
     {
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
-        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
+        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
+        [HideInInspector] public string[] onActivateListenerEventNames;
+        [HideInInspector] public string[] onDeactivateListenerEventNames;
+        [HideInInspector] public string[] onStateChangedListenerEventNames;
 
         private int playerCount;
         private int PlayerCount
@@ -68,24 +65,26 @@ namespace JanSharp
         {
             PlayerCount--;
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class PlayerTriggerActivatorOnBuild
+    {
+        static PlayerTriggerActivatorOnBuild() => OnBuildUtil.RegisterType<PlayerTriggerActivator>(OnBuild, order: 0);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<PlayerTriggerActivator>(order: 0);
-        }
-        bool IOnBuildCallback.OnBuild()
-        {
-            onActivateListeners = new UdonSharpBehaviour[0];
-            onDeactivateListeners = new UdonSharpBehaviour[0];
-            onStateChangedListeners = new UdonSharpBehaviour[0];
-            onActivateListenerEventNames = new string[0];
-            onDeactivateListenerEventNames = new string[0];
-            onStateChangedListenerEventNames = new string[0];
-            this.ApplyProxyModifications();
+            PlayerTriggerActivator playerTriggerActivator = (PlayerTriggerActivator)behaviour;
+            playerTriggerActivator.onActivateListeners = new UdonSharpBehaviour[0];
+            playerTriggerActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            playerTriggerActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            playerTriggerActivator.onActivateListenerEventNames = new string[0];
+            playerTriggerActivator.onDeactivateListenerEventNames = new string[0];
+            playerTriggerActivator.onStateChangedListenerEventNames = new string[0];
+            playerTriggerActivator.ApplyProxyModifications();
             return true;
         }
-        #endif
     }
+    #endif
 }

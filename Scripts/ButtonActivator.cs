@@ -12,16 +12,13 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class ButtonActivator : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback
-    #endif
     {
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
-        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
+        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
+        [HideInInspector] public string[] onActivateListenerEventNames;
+        [HideInInspector] public string[] onDeactivateListenerEventNames;
+        [HideInInspector] public string[] onStateChangedListenerEventNames;
 
         private bool state;
         private bool State
@@ -56,24 +53,26 @@ namespace JanSharp
             State = true;
             State = false;
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class ButtonActivatorOnBuild
+    {
+        static ButtonActivatorOnBuild() => OnBuildUtil.RegisterType<ButtonActivator>(OnBuild, order: 0);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<ButtonActivator>(order: 0);
-        }
-        bool IOnBuildCallback.OnBuild()
-        {
-            onActivateListeners = new UdonSharpBehaviour[0];
-            onDeactivateListeners = new UdonSharpBehaviour[0];
-            onStateChangedListeners = new UdonSharpBehaviour[0];
-            onActivateListenerEventNames = new string[0];
-            onDeactivateListenerEventNames = new string[0];
-            onStateChangedListenerEventNames = new string[0];
-            this.ApplyProxyModifications();
+            ButtonActivator buttonActivator = (ButtonActivator)behaviour;
+            buttonActivator.onActivateListeners = new UdonSharpBehaviour[0];
+            buttonActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            buttonActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            buttonActivator.onActivateListenerEventNames = new string[0];
+            buttonActivator.onDeactivateListenerEventNames = new string[0];
+            buttonActivator.onStateChangedListenerEventNames = new string[0];
+            buttonActivator.ApplyProxyModifications();
             return true;
         }
-        #endif
     }
+    #endif
 }

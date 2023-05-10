@@ -14,7 +14,7 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class DropItemAction : UdonSharpBehaviour
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback, IAction
+        , IAction
     #endif
     {
         [SerializeField] private VRC_Pickup pickup;
@@ -30,17 +30,18 @@ namespace JanSharp
         #if UNITY_EDITOR && !COMPILER_UDONSHARP
         UdonSharpBehaviour IAction.Activator => activator;
         int IAction.ListenerType { get => listenerType; set => listenerType = value; }
-
-        [InitializeOnLoad]
-        public static class OnBuildRegister
-        {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<DropItemAction>(order: 1);
-        }
-        bool IOnBuildCallback.OnBuild() => ActivatorEditorUtil.BasicActionOnBuild(this);
         #endif
     }
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class DropItemActionOnBuild
+    {
+        static DropItemActionOnBuild() => OnBuildUtil.RegisterType<DropItemAction>(OnBuild, order: 1);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((DropItemAction)behaviour);
+    }
+
     [CustomEditor(typeof(DropItemAction))]
     public class DropItemActionEditor : ActionEditorBase { }
     #endif

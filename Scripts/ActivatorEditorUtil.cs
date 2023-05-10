@@ -36,16 +36,16 @@ namespace JanSharp
             switch (listenerType)
             {
                 case ListenerEventType.OnActivate:
-                    listenersField = activator.GetType().GetField("onActivateListeners", BindingFlags.NonPublic | BindingFlags.Instance);
-                    eventNamesField = activator.GetType().GetField("onActivateListenerEventNames", BindingFlags.NonPublic | BindingFlags.Instance);
+                    listenersField = activator.GetType().GetField("onActivateListeners");
+                    eventNamesField = activator.GetType().GetField("onActivateListenerEventNames");
                     break;
                 case ListenerEventType.OnDeactivate:
-                    listenersField = activator.GetType().GetField("onDeactivateListeners", BindingFlags.NonPublic | BindingFlags.Instance);
-                    eventNamesField = activator.GetType().GetField("onDeactivateListenerEventNames", BindingFlags.NonPublic | BindingFlags.Instance);
+                    listenersField = activator.GetType().GetField("onDeactivateListeners");
+                    eventNamesField = activator.GetType().GetField("onDeactivateListenerEventNames");
                     break;
                 case ListenerEventType.OnStateChanged:
-                    listenersField = activator.GetType().GetField("onStateChangedListeners", BindingFlags.NonPublic | BindingFlags.Instance);
-                    eventNamesField = activator.GetType().GetField("onStateChangedListenerEventNames", BindingFlags.NonPublic | BindingFlags.Instance);
+                    listenersField = activator.GetType().GetField("onStateChangedListeners");
+                    eventNamesField = activator.GetType().GetField("onStateChangedListenerEventNames");
                     break;
                 default:
                     Debug.LogError($"Impossible listener type {listenerType}.", UdonSharpEditorUtility.GetBackingUdonBehaviour(listener));

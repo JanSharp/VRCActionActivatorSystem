@@ -12,19 +12,16 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class MemoryActivator : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallbackV2
-    #endif
     {
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
-        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
+        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
+        [HideInInspector] public string[] onActivateListenerEventNames;
+        [HideInInspector] public string[] onDeactivateListenerEventNames;
+        [HideInInspector] public string[] onStateChangedListenerEventNames;
 
-        [SerializeField] private UdonSharpBehaviour activateActivator;
-        [SerializeField] private UdonSharpBehaviour resetActivator;
+        public UdonSharpBehaviour activateActivator;
+        public UdonSharpBehaviour resetActivator;
         // to prevent spamming from causing scuff
         private int delayedSerializationCount;
         private const float LateJoinerSyncDelay = 10f;
@@ -108,40 +105,57 @@ namespace JanSharp
                 return;
             RequestSerialization();
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class MemoryActivatorOnBuild
+    {
+        static MemoryActivatorOnBuild()
         {
-            static OnBuildRegister()
-            {
-                OnBuildUtil.RegisterTypeV2<MemoryActivator>(order: 0);
-                OnBuildUtil.RegisterTypeV2<MemoryActivator>(order: 1);
-            }
+            OnBuildUtil.RegisterType<MemoryActivator>(FirstOnBuild, order: 0);
+            OnBuildUtil.RegisterType<MemoryActivator>(SecondOnBuild, order: 1);
         }
-        bool IOnBuildCallbackV2.OnBuild(int order)
+
+        private static bool FirstOnBuild(UdonSharpBehaviour behaviour)
         {
-            if (order == 0)
+            MemoryActivator memoryActivator = (MemoryActivator)behaviour;
+            memoryActivator.onActivateListeners = new UdonSharpBehaviour[0];
+            memoryActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            memoryActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            memoryActivator.onActivateListenerEventNames = new string[0];
+            memoryActivator.onDeactivateListenerEventNames = new string[0];
+            memoryActivator.onStateChangedListenerEventNames = new string[0];
+            memoryActivator.ApplyProxyModifications();
+            return true;
+        }
+
+        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        {
+            MemoryActivator memoryActivator = (MemoryActivator)behaviour;
+            ActivatorEditorUtil.AddActivatorToListeners(
+                memoryActivator.activateActivator,
+                ActivatorEditorUtil.ListenerEventType.OnActivate,
+                memoryActivator,
+                nameof(MemoryActivator.OnActivateEvent)
+            );
+            if (memoryActivator.resetActivator != null)
             {
-                onActivateListeners = new UdonSharpBehaviour[0];
-                onDeactivateListeners = new UdonSharpBehaviour[0];
-                onStateChangedListeners = new UdonSharpBehaviour[0];
-                onActivateListenerEventNames = new string[0];
-                onDeactivateListenerEventNames = new string[0];
-                onStateChangedListenerEventNames = new string[0];
-                this.ApplyProxyModifications();
-            }
-            else
-            {
-                ActivatorEditorUtil.AddActivatorToListeners(activateActivator, ActivatorEditorUtil.ListenerEventType.OnActivate, this, nameof(OnActivateEvent));
-                if (resetActivator != null)
-                {
-                    ActivatorEditorUtil.AddActivatorToListeners(resetActivator, ActivatorEditorUtil.ListenerEventType.OnActivate, this, nameof(OnResetActivateEvent));
-                    ActivatorEditorUtil.AddActivatorToListeners(resetActivator, ActivatorEditorUtil.ListenerEventType.OnDeactivate, this, nameof(OnResetDeactivateEvent));
-                }
+                ActivatorEditorUtil.AddActivatorToListeners(
+                    memoryActivator.resetActivator,
+                    ActivatorEditorUtil.ListenerEventType.OnActivate,
+                    memoryActivator,
+                    nameof(MemoryActivator.OnResetActivateEvent)
+                );
+                ActivatorEditorUtil.AddActivatorToListeners(
+                    memoryActivator.resetActivator,
+                    ActivatorEditorUtil.ListenerEventType.OnDeactivate,
+                    memoryActivator,
+                    nameof(MemoryActivator.OnResetDeactivateEvent)
+                );
             }
             return true;
         }
-        #endif
     }
+    #endif
 }

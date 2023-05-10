@@ -12,18 +12,15 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class LogicalNOTActivator : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallbackV2
-    #endif
     {
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
-        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
+        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
+        [HideInInspector] public string[] onActivateListenerEventNames;
+        [HideInInspector] public string[] onDeactivateListenerEventNames;
+        [HideInInspector] public string[] onStateChangedListenerEventNames;
 
-        [SerializeField] private UdonSharpBehaviour inputActivator;
+        public UdonSharpBehaviour inputActivator;
 
         private bool state;
         private bool State
@@ -57,35 +54,37 @@ namespace JanSharp
         {
             State = !(bool)inputActivator.GetProgramVariable("state");
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class LogicalNOTActivatorOnBuild
+    {
+        static LogicalNOTActivatorOnBuild()
         {
-            static OnBuildRegister()
-            {
-                OnBuildUtil.RegisterTypeV2<LogicalNOTActivator>(order: 0);
-                OnBuildUtil.RegisterTypeV2<LogicalNOTActivator>(order: 1);
-            }
+            OnBuildUtil.RegisterType<LogicalNOTActivator>(FirstOnBuild, order: 0);
+            OnBuildUtil.RegisterType<LogicalNOTActivator>(SecondOnBuild, order: 1);
         }
-        bool IOnBuildCallbackV2.OnBuild(int order)
+
+        private static bool FirstOnBuild(UdonSharpBehaviour behaviour)
         {
-            if (order == 0)
-            {
-                onActivateListeners = new UdonSharpBehaviour[0];
-                onDeactivateListeners = new UdonSharpBehaviour[0];
-                onStateChangedListeners = new UdonSharpBehaviour[0];
-                onActivateListenerEventNames = new string[0];
-                onDeactivateListenerEventNames = new string[0];
-                onStateChangedListenerEventNames = new string[0];
-                this.ApplyProxyModifications();
-            }
-            else
-            {
-                ActivatorEditorUtil.AddActivatorToListeners(inputActivator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, this);
-            }
+            LogicalNOTActivator logicalNOTActivator = (LogicalNOTActivator)behaviour;
+            logicalNOTActivator.onActivateListeners = new UdonSharpBehaviour[0];
+            logicalNOTActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            logicalNOTActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            logicalNOTActivator.onActivateListenerEventNames = new string[0];
+            logicalNOTActivator.onDeactivateListenerEventNames = new string[0];
+            logicalNOTActivator.onStateChangedListenerEventNames = new string[0];
+            logicalNOTActivator.ApplyProxyModifications();
             return true;
         }
-        #endif
+
+        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        {
+            LogicalNOTActivator logicalNOTActivator = (LogicalNOTActivator)behaviour;
+            ActivatorEditorUtil.AddActivatorToListeners(logicalNOTActivator.inputActivator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, logicalNOTActivator);
+            return true;
+        }
     }
+    #endif
 }

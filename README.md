@@ -79,3 +79,16 @@ PlayerTriggerActivator and ItemTriggerActivator are synced through the position 
 # Internals
 
 Due to UdonSharp (`0.20.3`) limitations activators consist of a lot of copy pasted code. I can't think of anything we can do about that, we simply can't use base classes. Not being able to use base classes or interfaces also causes almost all inter script interactions to use reflection which increases the chance of error. It's all not great but we work with what we got. At least the majority of the editor code can be deduplicated.
+
+# Stuff
+
+- [x] fix floor scale
+- [x] underwater pp
+- [x] stick obj sync
+- [x] can't get out of water
+- [ ] item spawn chest instantly de spawns the items again
+- [ ] trap sound
+- [ ] teapot null ref when opening: UnityEngineGameObject.__get_activeSelf__SystemBoolean
+- [ ] DMGun buttons are moved back making them un-clickable. Probably because of the "prefab which isn't a prefab (EffectButton)"'s position
+- [ ] swimming menu is visible and cut off at spawn
+- [ ] music area toggle is global (I know why)

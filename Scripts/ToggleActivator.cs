@@ -11,16 +11,13 @@ namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class ToggleActivator : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IOnBuildCallback
-    #endif
     {
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onActivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onDeactivateListeners;
-        [SerializeField] [HideInInspector] private UdonSharpBehaviour[] onStateChangedListeners;
-        [SerializeField] [HideInInspector] private string[] onActivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onDeactivateListenerEventNames;
-        [SerializeField] [HideInInspector] private string[] onStateChangedListenerEventNames;
+        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
+        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
+        [HideInInspector] public string[] onActivateListenerEventNames;
+        [HideInInspector] public string[] onDeactivateListenerEventNames;
+        [HideInInspector] public string[] onStateChangedListenerEventNames;
 
         [UdonSynced]
         [FieldChangeCallback(nameof(State))]
@@ -53,24 +50,26 @@ namespace JanSharp
             Networking.SetOwner(Networking.LocalPlayer, this.gameObject);
             RequestSerialization();
         }
+    }
 
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        [InitializeOnLoad]
-        public static class OnBuildRegister
+    #if UNITY_EDITOR && !COMPILER_UDONSHARP
+    [InitializeOnLoad]
+    public static class ToggleActivatorOnBuild
+    {
+        static ToggleActivatorOnBuild() => OnBuildUtil.RegisterType<ToggleActivator>(OnBuild, order: 0);
+
+        private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
-            static OnBuildRegister() => OnBuildUtil.RegisterType<ToggleActivator>(order: 0);
-        }
-        bool IOnBuildCallback.OnBuild()
-        {
-            onActivateListeners = new UdonSharpBehaviour[0];
-            onDeactivateListeners = new UdonSharpBehaviour[0];
-            onStateChangedListeners = new UdonSharpBehaviour[0];
-            onActivateListenerEventNames = new string[0];
-            onDeactivateListenerEventNames = new string[0];
-            onStateChangedListenerEventNames = new string[0];
-            this.ApplyProxyModifications();
+            ToggleActivator toggleActivator = (ToggleActivator)behaviour;
+            toggleActivator.onActivateListeners = new UdonSharpBehaviour[0];
+            toggleActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            toggleActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            toggleActivator.onActivateListenerEventNames = new string[0];
+            toggleActivator.onDeactivateListenerEventNames = new string[0];
+            toggleActivator.onStateChangedListenerEventNames = new string[0];
+            toggleActivator.ApplyProxyModifications();
             return true;
         }
-        #endif
     }
+    #endif
 }
