@@ -71,7 +71,6 @@ namespace JanSharp
                 return false;
             }
             objectPositionSync.targetPosition = objectPositionSync.transform.localPosition;
-            objectPositionSync.ApplyProxyModifications();
             return true;
         }
     }

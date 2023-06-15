@@ -78,7 +78,6 @@ namespace JanSharp
             logicalORActivator.onActivateListenerEventNames = new string[0];
             logicalORActivator.onDeactivateListenerEventNames = new string[0];
             logicalORActivator.onStateChangedListenerEventNames = new string[0];
-            logicalORActivator.ApplyProxyModifications();
             return true;
         }
 

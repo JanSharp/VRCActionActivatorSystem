@@ -59,7 +59,6 @@ namespace JanSharp
                 && GUILayout.Button(new GUIContent("Set Audio Source to this")))
             {
                 targetAction.audioSource = targetAction.GetComponent<AudioSource>();
-                targetAction.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetAction);
             }
 

@@ -70,7 +70,6 @@ namespace JanSharp
             buttonActivator.onActivateListenerEventNames = new string[0];
             buttonActivator.onDeactivateListenerEventNames = new string[0];
             buttonActivator.onStateChangedListenerEventNames = new string[0];
-            buttonActivator.ApplyProxyModifications();
             return true;
         }
     }

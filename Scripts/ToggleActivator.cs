@@ -67,7 +67,6 @@ namespace JanSharp
             toggleActivator.onActivateListenerEventNames = new string[0];
             toggleActivator.onDeactivateListenerEventNames = new string[0];
             toggleActivator.onStateChangedListenerEventNames = new string[0];
-            toggleActivator.ApplyProxyModifications();
             return true;
         }
     }

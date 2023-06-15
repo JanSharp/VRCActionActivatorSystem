@@ -53,7 +53,6 @@ namespace JanSharp
             }
             GrowArray(activator, listenersField, listener);
             GrowArray(activator, eventNamesField, listenerEventName);
-            activator.ApplyProxyModifications();
         }
 
         private static void GrowArray<T>(object instance, FieldInfo field, T newValue)
@@ -98,7 +97,6 @@ namespace JanSharp
             if (newListenerType != targetAction.ListenerType)
             {
                 targetAction.ListenerType = newListenerType;
-                targetBehaviour.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetBehaviour);
             }
         }

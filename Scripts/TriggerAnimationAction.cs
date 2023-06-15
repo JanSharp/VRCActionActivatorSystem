@@ -55,7 +55,6 @@ namespace JanSharp
                 && GUILayout.Button(new GUIContent("Set Animator to this")))
             {
                 targetAction.animator = targetAction.GetComponent<Animator>();
-                targetAction.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetAction);
             }
 

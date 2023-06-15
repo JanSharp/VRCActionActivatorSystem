@@ -53,7 +53,6 @@ namespace JanSharp
             if (GUILayout.Button(new GUIContent("Find Particle Systems", "Searches on this component and its children. Overwrites anything previously set.")))
             {
                 targetAction.particles = targetAction.GetComponentsInChildren<ParticleSystem>();
-                targetAction.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetAction);
             }
 
@@ -62,7 +61,6 @@ namespace JanSharp
                 && GUILayout.Button(new GUIContent("Remove null particles")))
             {
                 targetAction.particles = targetAction.particles.Where(p => p != null).ToArray();
-                targetAction.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetAction);
             }
 

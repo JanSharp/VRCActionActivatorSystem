@@ -82,7 +82,6 @@ namespace JanSharp
             playerTriggerActivator.onActivateListenerEventNames = new string[0];
             playerTriggerActivator.onDeactivateListenerEventNames = new string[0];
             playerTriggerActivator.onStateChangedListenerEventNames = new string[0];
-            playerTriggerActivator.ApplyProxyModifications();
             return true;
         }
     }

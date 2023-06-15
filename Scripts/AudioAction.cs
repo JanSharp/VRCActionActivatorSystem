@@ -1,4 +1,4 @@
-﻿using UdonSharp;
+using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -53,7 +53,6 @@ namespace JanSharp
             if (GUILayout.Button(new GUIContent("Find Audio Sources", "Searches on this component and its children. Overwrites anything previously set.")))
             {
                 targetAction.audioSources = targetAction.GetComponentsInChildren<AudioSource>();
-                targetAction.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetAction);
             }
 
@@ -62,7 +61,6 @@ namespace JanSharp
                 && GUILayout.Button(new GUIContent("Remove null Audio Sources")))
             {
                 targetAction.audioSources = targetAction.audioSources.Where(p => p != null).ToArray();
-                targetAction.ApplyProxyModifications();
                 EditorUtility.SetDirty(targetAction);
             }
 

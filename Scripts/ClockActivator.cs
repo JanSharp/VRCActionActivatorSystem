@@ -114,7 +114,6 @@ namespace JanSharp
             clockActivator.onActivateListenerEventNames = new string[0];
             clockActivator.onDeactivateListenerEventNames = new string[0];
             clockActivator.onStateChangedListenerEventNames = new string[0];
-            clockActivator.ApplyProxyModifications();
             return true;
         }
 
