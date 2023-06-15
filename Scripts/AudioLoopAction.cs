@@ -60,6 +60,8 @@ namespace JanSharp
             {
                 targetAction.audioSource = targetAction.GetComponent<AudioSource>();
                 EditorUtility.SetDirty(targetAction);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
             }
 
             if (targetAction.audioSource != null
@@ -68,6 +70,8 @@ namespace JanSharp
             {
                 targetAction.audioSource.playOnAwake = false;
                 EditorUtility.SetDirty(targetAction.audioSource);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetAction.audioSource))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction.audioSource);
             }
 
             if (targetAction.audioSource != null
@@ -76,6 +80,8 @@ namespace JanSharp
             {
                 targetAction.audioSource.loop = true;
                 EditorUtility.SetDirty(targetAction.audioSource);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetAction.audioSource))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction.audioSource);
             }
         }
     }

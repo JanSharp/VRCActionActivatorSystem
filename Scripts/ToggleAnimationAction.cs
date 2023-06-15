@@ -56,6 +56,8 @@ namespace JanSharp
             {
                 targetAction.animator = targetAction.GetComponent<Animator>();
                 EditorUtility.SetDirty(targetAction);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
             }
 
             // an attempt at validating the animator's parameters. This now says it doesn't find the parameter even though it exists. Weird.

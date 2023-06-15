@@ -71,6 +71,8 @@ namespace JanSharp
                 return false;
             }
             objectPositionSync.targetPosition = objectPositionSync.transform.localPosition;
+            if (PrefabUtility.IsPartOfPrefabInstance(objectPositionSync))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(objectPositionSync);
             return true;
         }
     }

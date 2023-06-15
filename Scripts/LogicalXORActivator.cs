@@ -83,6 +83,8 @@ namespace JanSharp
             logicalXORActivator.onActivateListenerEventNames = new string[0];
             logicalXORActivator.onDeactivateListenerEventNames = new string[0];
             logicalXORActivator.onStateChangedListenerEventNames = new string[0];
+            if (PrefabUtility.IsPartOfPrefabInstance(logicalXORActivator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(logicalXORActivator);
             return true;
         }
 

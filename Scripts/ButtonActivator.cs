@@ -70,6 +70,8 @@ namespace JanSharp
             buttonActivator.onActivateListenerEventNames = new string[0];
             buttonActivator.onDeactivateListenerEventNames = new string[0];
             buttonActivator.onStateChangedListenerEventNames = new string[0];
+            if (PrefabUtility.IsPartOfPrefabInstance(buttonActivator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(buttonActivator);
             return true;
         }
     }

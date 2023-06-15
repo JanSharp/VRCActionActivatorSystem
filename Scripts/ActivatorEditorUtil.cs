@@ -53,6 +53,8 @@ namespace JanSharp
             }
             GrowArray(activator, listenersField, listener);
             GrowArray(activator, eventNamesField, listenerEventName);
+            if (PrefabUtility.IsPartOfPrefabInstance(activator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(activator);
         }
 
         private static void GrowArray<T>(object instance, FieldInfo field, T newValue)
@@ -98,6 +100,8 @@ namespace JanSharp
             {
                 targetAction.ListenerType = newListenerType;
                 EditorUtility.SetDirty(targetBehaviour);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetBehaviour))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetBehaviour);
             }
         }
     }

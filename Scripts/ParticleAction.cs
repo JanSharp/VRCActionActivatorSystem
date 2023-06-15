@@ -54,6 +54,8 @@ namespace JanSharp
             {
                 targetAction.particles = targetAction.GetComponentsInChildren<ParticleSystem>();
                 EditorUtility.SetDirty(targetAction);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
             }
 
             if (targetAction.particles != null
@@ -62,6 +64,8 @@ namespace JanSharp
             {
                 targetAction.particles = targetAction.particles.Where(p => p != null).ToArray();
                 EditorUtility.SetDirty(targetAction);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
             }
 
             if (targetAction.particles != null
@@ -73,6 +77,8 @@ namespace JanSharp
                     var main = particle.main;
                     main.playOnAwake = false;
                     EditorUtility.SetDirty(particle);
+                    if (PrefabUtility.IsPartOfPrefabInstance(particle))
+                        PrefabUtility.RecordPrefabInstancePropertyModifications(particle);
                 }
             }
 
@@ -85,6 +91,8 @@ namespace JanSharp
                     var main = particle.main;
                     main.loop = false;
                     EditorUtility.SetDirty(particle);
+                    if (PrefabUtility.IsPartOfPrefabInstance(particle))
+                        PrefabUtility.RecordPrefabInstancePropertyModifications(particle);
                 }
             }
         }

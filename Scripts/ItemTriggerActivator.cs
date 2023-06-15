@@ -85,6 +85,8 @@ namespace JanSharp
             itemTriggerActivator.onActivateListenerEventNames = new string[0];
             itemTriggerActivator.onDeactivateListenerEventNames = new string[0];
             itemTriggerActivator.onStateChangedListenerEventNames = new string[0];
+            if (PrefabUtility.IsPartOfPrefabInstance(itemTriggerActivator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(itemTriggerActivator);
             return true;
         }
     }

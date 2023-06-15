@@ -67,6 +67,8 @@ namespace JanSharp
             toggleActivator.onActivateListenerEventNames = new string[0];
             toggleActivator.onDeactivateListenerEventNames = new string[0];
             toggleActivator.onStateChangedListenerEventNames = new string[0];
+            if (PrefabUtility.IsPartOfPrefabInstance(toggleActivator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(toggleActivator);
             return true;
         }
     }

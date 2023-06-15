@@ -1,4 +1,4 @@
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -54,6 +54,8 @@ namespace JanSharp
             {
                 targetAction.audioSources = targetAction.GetComponentsInChildren<AudioSource>();
                 EditorUtility.SetDirty(targetAction);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
             }
 
             if (targetAction.audioSources != null
@@ -62,6 +64,8 @@ namespace JanSharp
             {
                 targetAction.audioSources = targetAction.audioSources.Where(p => p != null).ToArray();
                 EditorUtility.SetDirty(targetAction);
+                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
             }
 
             if (targetAction.audioSources != null
@@ -72,6 +76,8 @@ namespace JanSharp
                 {
                     audioSource.playOnAwake = false;
                     EditorUtility.SetDirty(audioSource);
+                    if (PrefabUtility.IsPartOfPrefabInstance(audioSource))
+                        PrefabUtility.RecordPrefabInstancePropertyModifications(audioSource);
                 }
             }
 
@@ -83,6 +89,8 @@ namespace JanSharp
                 {
                     audioSource.loop = false;
                     EditorUtility.SetDirty(audioSource);
+                    if (PrefabUtility.IsPartOfPrefabInstance(audioSource))
+                        PrefabUtility.RecordPrefabInstancePropertyModifications(audioSource);
                 }
             }
         }

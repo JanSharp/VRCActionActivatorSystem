@@ -126,6 +126,8 @@ namespace JanSharp
             memoryActivator.onActivateListenerEventNames = new string[0];
             memoryActivator.onDeactivateListenerEventNames = new string[0];
             memoryActivator.onStateChangedListenerEventNames = new string[0];
+            if (PrefabUtility.IsPartOfPrefabInstance(memoryActivator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(memoryActivator);
             return true;
         }
 

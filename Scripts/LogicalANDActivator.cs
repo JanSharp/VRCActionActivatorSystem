@@ -78,6 +78,8 @@ namespace JanSharp
             logicalANDActivator.onActivateListenerEventNames = new string[0];
             logicalANDActivator.onDeactivateListenerEventNames = new string[0];
             logicalANDActivator.onStateChangedListenerEventNames = new string[0];
+            if (PrefabUtility.IsPartOfPrefabInstance(logicalANDActivator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(logicalANDActivator);
             return true;
         }
 

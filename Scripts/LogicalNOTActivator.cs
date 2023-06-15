@@ -75,6 +75,8 @@ namespace JanSharp
             logicalNOTActivator.onActivateListenerEventNames = new string[0];
             logicalNOTActivator.onDeactivateListenerEventNames = new string[0];
             logicalNOTActivator.onStateChangedListenerEventNames = new string[0];
+            if (PrefabUtility.IsPartOfPrefabInstance(logicalNOTActivator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(logicalNOTActivator);
             return true;
         }
 
