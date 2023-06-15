@@ -23,7 +23,8 @@ namespace JanSharp
         public UdonSharpBehaviour activateActivator;
         public UdonSharpBehaviour resetActivator;
         // to prevent spamming from causing scuff
-        private int delayedSerializationCount;
+        private int requestSerializationCount = 0;
+        private bool waitingForOwnerToSendData = false;
         private const float LateJoinerSyncDelay = 10f;
 
         [UdonSynced]
@@ -51,7 +52,7 @@ namespace JanSharp
                 // we're syncing the state based on the owner's state just a bit delayed
                 if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
                 {
-                    delayedSerializationCount++;
+                    requestSerializationCount++;
                     SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), 1f);
                 }
             }
@@ -82,28 +83,36 @@ namespace JanSharp
 
         public override void OnPlayerJoined(VRCPlayerApi player)
         {
-            if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+            if (Networking.IsOwner(this.gameObject))
             {
-                delayedSerializationCount++;
+                requestSerializationCount++;
                 SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), LateJoinerSyncDelay);
+            }
+            else
+            {
+                waitingForOwnerToSendData = true;
             }
         }
 
         // for good measure, in case the current owner leaves just after a player joined
         public override void OnOwnershipTransferred(VRCPlayerApi player)
         {
-            if (player.isLocal)
+            if (waitingForOwnerToSendData && Networking.IsOwner(this.gameObject))
             {
-                delayedSerializationCount++;
+                requestSerializationCount++;
                 SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), LateJoinerSyncDelay);
             }
         }
 
         public void RequestSerializationDelayed()
         {
-            if ((--delayedSerializationCount) != 0)
-                return;
-            RequestSerialization();
+            if ((--requestSerializationCount) == 0)
+                RequestSerialization();
+        }
+
+        public override void OnDeserialization()
+        {
+            waitingForOwnerToSendData = false;
         }
     }
 

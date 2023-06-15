@@ -34,7 +34,10 @@ namespace JanSharp
                 lerpStartPosition = this.transform.localPosition;
                 lerpStartTime = Time.time;
                 if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
-                    RequestSerialization();
+                {
+                    requestSerializationCount++;
+                    SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), 2f);
+                }
             }
         }
         private Vector3 lerpStartPosition;
@@ -50,6 +53,43 @@ namespace JanSharp
                 return;
             }
             this.transform.localPosition = Vector3.Lerp(lerpStartPosition, targetPosition, percent);
+        }
+
+        private int requestSerializationCount = 0;
+        private bool waitingForOwnerToSendData = false;
+        private const float LateJoinerSyncDelay = 8f;
+
+        public override void OnPlayerJoined(VRCPlayerApi player)
+        {
+            if (Networking.IsOwner(this.gameObject))
+            {
+                requestSerializationCount++;
+                SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), LateJoinerSyncDelay);
+            }
+            else
+            {
+                waitingForOwnerToSendData = true;
+            }
+        }
+
+        public override void OnOwnershipTransferred(VRCPlayerApi player)
+        {
+            if (waitingForOwnerToSendData && Networking.IsOwner(this.gameObject))
+            {
+                requestSerializationCount++;
+                SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), LateJoinerSyncDelay);
+            }
+        }
+
+        public void RequestSerializationDelayed()
+        {
+            if ((--requestSerializationCount) == 0)
+                RequestSerialization();
+        }
+
+        public override void OnDeserialization()
+        {
+            waitingForOwnerToSendData = false;
         }
     }
 

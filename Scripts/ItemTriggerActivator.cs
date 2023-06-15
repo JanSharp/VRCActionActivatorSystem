@@ -10,7 +10,7 @@ using UdonSharpEditor;
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ItemTriggerActivator : UdonSharpBehaviour
     {
         [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
@@ -32,8 +32,12 @@ namespace JanSharp
             }
         }
 
-        [UdonSynced]
-        [FieldChangeCallback(nameof(State))]
+        // Syncing this does not makes sense because it relies on items being inside the trigger zone
+        // which should already be the case due to items being synced.
+        // If items aren't synced perfectly, then this will be desynced too, and there's no way for
+        // this script to accommodate for that. Like even syncing the current state of the boolean
+        // whenever someone joins does not guarantee it will stay in sync once items start moving.
+
         private bool state;
         private bool State
         {
