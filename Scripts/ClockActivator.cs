@@ -100,7 +100,7 @@ namespace JanSharp
         private static bool FirstOnBuild(UdonSharpBehaviour behaviour)
         {
             ClockActivator clockActivator = (ClockActivator)behaviour;
-            clockActivator.updateManager = GameObject.Find("/UpdateManager")?.GetUdonSharpComponent<UpdateManager>();
+            clockActivator.updateManager = GameObject.Find("/UpdateManager")?.GetComponent<UpdateManager>();
             if (clockActivator.updateManager == null)
             {
                 Debug.LogError("ClockActivator requires a GameObject that must be at the root of the scene "

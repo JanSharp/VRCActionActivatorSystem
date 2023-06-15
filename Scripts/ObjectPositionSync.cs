@@ -62,7 +62,7 @@ namespace JanSharp
         private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
             ObjectPositionSync objectPositionSync = (ObjectPositionSync)behaviour;
-            objectPositionSync.updateManager = GameObject.Find("/UpdateManager")?.GetUdonSharpComponent<UpdateManager>();
+            objectPositionSync.updateManager = GameObject.Find("/UpdateManager")?.GetComponent<UpdateManager>();
             if (objectPositionSync.updateManager == null)
             {
                 Debug.LogError("ObjectPositionSync requires a GameObject that must be at the root of the scene "
