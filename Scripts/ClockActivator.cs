@@ -11,15 +11,8 @@ using UdonSharpEditor;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ClockActivator : UdonSharpBehaviour
+    public class ClockActivator : ActivatorBase
     {
-        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
-        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
-        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
-        [HideInInspector] public string[] onActivateListenerEventNames;
-        [HideInInspector] public string[] onDeactivateListenerEventNames;
-        [HideInInspector] public string[] onStateChangedListenerEventNames;
-
         [HideInInspector] public UpdateManager updateManager;
         public UdonSharpBehaviour inputActivator;
         [SerializeField] private float secondsBetweenTicks = 1f;
@@ -29,29 +22,6 @@ namespace JanSharp
         private const float SyncLatencyCompensation = 0.1f; // just a guess. Will never be accurate
         private float elapsedTime;
         private bool initialized;
-
-        private bool state;
-        private bool State
-        {
-            get => state;
-            set
-            {
-                if (value == state)
-                    return;
-                state = value;
-                if (value)
-                    Send(onActivateListeners, onActivateListenerEventNames);
-                else
-                    Send(onDeactivateListeners, onDeactivateListenerEventNames);
-                Send(onStateChangedListeners, onStateChangedListenerEventNames);
-            }
-        }
-
-        private void Send(UdonSharpBehaviour[] listeners, string[] listenerEventNames)
-        {
-            for (int i = 0; i < listeners.Length; i++)
-                listeners[i].SendCustomEvent(listenerEventNames[i]);
-        }
 
         public void OnEvent()
         {
@@ -108,15 +78,7 @@ namespace JanSharp
                     UdonSharpEditorUtility.GetBackingUdonBehaviour(clockActivator));
                 return false;
             }
-            clockActivator.onActivateListeners = new UdonSharpBehaviour[0];
-            clockActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
-            clockActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
-            clockActivator.onActivateListenerEventNames = new string[0];
-            clockActivator.onDeactivateListenerEventNames = new string[0];
-            clockActivator.onStateChangedListenerEventNames = new string[0];
-            if (PrefabUtility.IsPartOfPrefabInstance(clockActivator))
-                PrefabUtility.RecordPrefabInstancePropertyModifications(clockActivator);
-            return true;
+            return ActivatorEditorUtil.ActivatorOnBuildBase(behaviour);
         }
 
         private static bool SecondOnBuild(UdonSharpBehaviour behaviour)

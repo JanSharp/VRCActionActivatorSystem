@@ -11,15 +11,8 @@ using UdonSharpEditor;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class MemoryActivator : UdonSharpBehaviour
+    public class MemoryActivator : ActivatorBase
     {
-        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
-        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
-        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
-        [HideInInspector] public string[] onActivateListenerEventNames;
-        [HideInInspector] public string[] onDeactivateListenerEventNames;
-        [HideInInspector] public string[] onStateChangedListenerEventNames;
-
         public UdonSharpBehaviour activateActivator;
         public UdonSharpBehaviour resetActivator;
         // to prevent spamming from causing scuff
@@ -28,21 +21,18 @@ namespace JanSharp
         private const float LateJoinerSyncDelay = 10f;
 
         [UdonSynced]
-        [FieldChangeCallback(nameof(State))]
-        private bool state;
-        private bool State
+        [FieldChangeCallback(nameof(SyncedState))]
+        private bool syncedState;
+        private bool SyncedState
         {
-            get => state;
+            get => syncedState;
             set
             {
-                if (value == state)
+                // Set the state that's on the base class, raising activator events.
+                State = value;
+
+                if (value == syncedState)
                     return;
-                state = value;
-                if (value)
-                    Send(onActivateListeners, onActivateListenerEventNames);
-                else
-                    Send(onDeactivateListeners, onDeactivateListenerEventNames);
-                Send(onStateChangedListeners, onStateChangedListenerEventNames);
 
                 // syncing the state of this even though the state should already be
                 // evaluated by every other client based on inputs.
@@ -58,27 +48,21 @@ namespace JanSharp
             }
         }
 
-        private void Send(UdonSharpBehaviour[] listeners, string[] listenerEventNames)
-        {
-            for (int i = 0; i < listeners.Length; i++)
-                listeners[i].SendCustomEvent(listenerEventNames[i]);
-        }
-
         public void OnActivateEvent()
         {
             if (resetActivator == null || !(bool)resetActivator.GetProgramVariable("state"))
-                State = true;
+                SyncedState = true;
         }
 
         public void OnResetActivateEvent()
         {
-            State = false;
+            SyncedState = false;
         }
 
         public void OnResetDeactivateEvent()
         {
             if ((bool)activateActivator.GetProgramVariable("state"))
-                State = true;
+                SyncedState = true;
         }
 
         public override void OnPlayerJoined(VRCPlayerApi player)
@@ -122,22 +106,8 @@ namespace JanSharp
     {
         static MemoryActivatorOnBuild()
         {
-            OnBuildUtil.RegisterType<MemoryActivator>(FirstOnBuild, order: 0);
+            OnBuildUtil.RegisterType<MemoryActivator>(ActivatorEditorUtil.ActivatorOnBuildBase, order: 0);
             OnBuildUtil.RegisterType<MemoryActivator>(SecondOnBuild, order: 1);
-        }
-
-        private static bool FirstOnBuild(UdonSharpBehaviour behaviour)
-        {
-            MemoryActivator memoryActivator = (MemoryActivator)behaviour;
-            memoryActivator.onActivateListeners = new UdonSharpBehaviour[0];
-            memoryActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
-            memoryActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
-            memoryActivator.onActivateListenerEventNames = new string[0];
-            memoryActivator.onDeactivateListenerEventNames = new string[0];
-            memoryActivator.onStateChangedListenerEventNames = new string[0];
-            if (PrefabUtility.IsPartOfPrefabInstance(memoryActivator))
-                PrefabUtility.RecordPrefabInstancePropertyModifications(memoryActivator);
-            return true;
         }
 
         private static bool SecondOnBuild(UdonSharpBehaviour behaviour)

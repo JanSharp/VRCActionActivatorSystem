@@ -11,39 +11,9 @@ using UdonSharpEditor;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class LogicalXORActivator : UdonSharpBehaviour
+    public class LogicalXORActivator : ActivatorBase
     {
-        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
-        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
-        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
-        [HideInInspector] public string[] onActivateListenerEventNames;
-        [HideInInspector] public string[] onDeactivateListenerEventNames;
-        [HideInInspector] public string[] onStateChangedListenerEventNames;
-
         public UdonSharpBehaviour[] inputActivators;
-
-        private bool state;
-        private bool State
-        {
-            get => state;
-            set
-            {
-                if (value == state)
-                    return;
-                state = value;
-                if (value)
-                    Send(onActivateListeners, onActivateListenerEventNames);
-                else
-                    Send(onDeactivateListeners, onDeactivateListenerEventNames);
-                Send(onStateChangedListeners, onStateChangedListenerEventNames);
-            }
-        }
-
-        private void Send(UdonSharpBehaviour[] listeners, string[] listenerEventNames)
-        {
-            for (int i = 0; i < listeners.Length; i++)
-                listeners[i].SendCustomEvent(listenerEventNames[i]);
-        }
 
         public void OnEvent()
         {
@@ -70,22 +40,8 @@ namespace JanSharp
     {
         static LogicalXORActivatorOnBuild()
         {
-            OnBuildUtil.RegisterType<LogicalXORActivator>(FirstOnBuild, order: 0);
+            OnBuildUtil.RegisterType<LogicalXORActivator>(ActivatorEditorUtil.ActivatorOnBuildBase, order: 0);
             OnBuildUtil.RegisterType<LogicalXORActivator>(SecondOnBuild, order: 1);
-        }
-
-        private static bool FirstOnBuild(UdonSharpBehaviour behaviour)
-        {
-            LogicalXORActivator logicalXORActivator = (LogicalXORActivator)behaviour;
-            logicalXORActivator.onActivateListeners = new UdonSharpBehaviour[0];
-            logicalXORActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
-            logicalXORActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
-            logicalXORActivator.onActivateListenerEventNames = new string[0];
-            logicalXORActivator.onDeactivateListenerEventNames = new string[0];
-            logicalXORActivator.onStateChangedListenerEventNames = new string[0];
-            if (PrefabUtility.IsPartOfPrefabInstance(logicalXORActivator))
-                PrefabUtility.RecordPrefabInstancePropertyModifications(logicalXORActivator);
-            return true;
         }
 
         private static bool SecondOnBuild(UdonSharpBehaviour behaviour)

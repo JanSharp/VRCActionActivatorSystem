@@ -65,6 +65,20 @@ namespace JanSharp
             newListeners[newListeners.Length - 1] = newValue;
             field.SetValue(instance, newListeners);
         }
+
+        public static bool ActivatorOnBuildBase(UdonSharpBehaviour behaviour)
+        {
+            ActivatorBase activator = (ActivatorBase)behaviour;
+            activator.onActivateListeners = new UdonSharpBehaviour[0];
+            activator.onDeactivateListeners = new UdonSharpBehaviour[0];
+            activator.onStateChangedListeners = new UdonSharpBehaviour[0];
+            activator.onActivateListenerEventNames = new string[0];
+            activator.onDeactivateListenerEventNames = new string[0];
+            activator.onStateChangedListenerEventNames = new string[0];
+            if (PrefabUtility.IsPartOfPrefabInstance(activator))
+                PrefabUtility.RecordPrefabInstancePropertyModifications(activator);
+            return true;
+        }
     }
 
     public interface IAction

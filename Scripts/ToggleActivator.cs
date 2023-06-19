@@ -10,43 +10,24 @@ using UdonSharpEditor;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class ToggleActivator : UdonSharpBehaviour
+    public class ToggleActivator : ActivatorBase
     {
-        [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
-        [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;
-        [HideInInspector] public UdonSharpBehaviour[] onStateChangedListeners;
-        [HideInInspector] public string[] onActivateListenerEventNames;
-        [HideInInspector] public string[] onDeactivateListenerEventNames;
-        [HideInInspector] public string[] onStateChangedListenerEventNames;
-
         [UdonSynced]
-        [FieldChangeCallback(nameof(State))]
-        private bool state;
-        private bool State
+        [FieldChangeCallback(nameof(SyncedState))]
+        private bool syncedState;
+        private bool SyncedState
         {
-            get => state;
+            get => syncedState;
             set
             {
-                if (value == state)
-                    return;
-                state = value;
-                if (value)
-                    Send(onActivateListeners, onActivateListenerEventNames);
-                else
-                    Send(onDeactivateListeners, onDeactivateListenerEventNames);
-                Send(onStateChangedListeners, onStateChangedListenerEventNames);
+                State = value;
+                syncedState = value;
             }
-        }
-
-        private void Send(UdonSharpBehaviour[] listeners, string[] listenerEventNames)
-        {
-            for (int i = 0; i < listeners.Length; i++)
-                listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
 
         public override void Interact()
         {
-            State = !State;
+            SyncedState = !SyncedState;
             Networking.SetOwner(Networking.LocalPlayer, this.gameObject);
             RequestSerialization();
         }
@@ -56,21 +37,7 @@ namespace JanSharp
     [InitializeOnLoad]
     public static class ToggleActivatorOnBuild
     {
-        static ToggleActivatorOnBuild() => OnBuildUtil.RegisterType<ToggleActivator>(OnBuild, order: 0);
-
-        private static bool OnBuild(UdonSharpBehaviour behaviour)
-        {
-            ToggleActivator toggleActivator = (ToggleActivator)behaviour;
-            toggleActivator.onActivateListeners = new UdonSharpBehaviour[0];
-            toggleActivator.onDeactivateListeners = new UdonSharpBehaviour[0];
-            toggleActivator.onStateChangedListeners = new UdonSharpBehaviour[0];
-            toggleActivator.onActivateListenerEventNames = new string[0];
-            toggleActivator.onDeactivateListenerEventNames = new string[0];
-            toggleActivator.onStateChangedListenerEventNames = new string[0];
-            if (PrefabUtility.IsPartOfPrefabInstance(toggleActivator))
-                PrefabUtility.RecordPrefabInstancePropertyModifications(toggleActivator);
-            return true;
-        }
+        static ToggleActivatorOnBuild() => OnBuildUtil.RegisterType<ToggleActivator>(ActivatorEditorUtil.ActivatorOnBuildBase, order: 0);
     }
     #endif
 }
