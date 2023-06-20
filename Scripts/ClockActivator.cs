@@ -69,13 +69,19 @@ namespace JanSharp
 
         private static bool FirstOnBuild(ClockActivator clockActivator)
         {
-            clockActivator.updateManager = GameObject.Find("/UpdateManager")?.GetComponent<UpdateManager>();
-            if (clockActivator.updateManager == null)
+            UpdateManager updateManager = GameObject.Find("/UpdateManager")?.GetComponent<UpdateManager>();
+            if (updateManager == null)
             {
                 Debug.LogError("ClockActivator requires a GameObject that must be at the root of the scene "
                         + "with the exact name 'UpdateManager' which has the 'UpdateManager' UdonBehaviour.",
                     clockActivator);
                 return false;
+            }
+            if (clockActivator.updateManager != updateManager)
+            {
+                SerializedObject activatorProxy = new SerializedObject(clockActivator);
+                activatorProxy.FindProperty(nameof(ClockActivator.updateManager)).objectReferenceValue = updateManager;
+                activatorProxy.ApplyModifiedProperties();
             }
             return ActivatorEditorUtil.ActivatorOnBuildBase(clockActivator);
         }
