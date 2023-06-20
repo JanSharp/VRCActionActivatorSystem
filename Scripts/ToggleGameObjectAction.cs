@@ -5,7 +5,6 @@ using VRC.Udon;
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
-using System.Reflection;
 using System.Linq;
 #endif
 
@@ -33,7 +32,7 @@ namespace JanSharp
         private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
             ToggleGameObjectAction toggleGameObjectAction = (ToggleGameObjectAction)behaviour;
-            ActivatorEditorUtil.AddActivatorToListeners(toggleGameObjectAction.activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, toggleGameObjectAction);
+            ActivatorEditorUtil.AddActivatorToListeners(toggleGameObjectAction.activator, ListenerType.OnStateChanged, toggleGameObjectAction);
             return true;
         }
     }

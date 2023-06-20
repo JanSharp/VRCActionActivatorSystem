@@ -5081,10 +5081,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 65151937}
-  particles:
-  - {fileID: 65151938}
   activator: {fileID: 1549095250}
   listenerType: 2
+  particles:
+  - {fileID: 65151938}
 --- !u!1 &80487733
 GameObject:
   m_ObjectHideFlags: 0
@@ -9888,10 +9888,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 80487737}
-  particles:
-  - {fileID: 80487736}
   activator: {fileID: 1034012555}
   listenerType: 0
+  particles:
+  - {fileID: 80487736}
 --- !u!1 &84976571
 GameObject:
   m_ObjectHideFlags: 0
@@ -10376,7 +10376,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &293753640
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -10550,10 +10550,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 293753640}
-  audioSources:
-  - {fileID: 293753643}
   activator: {fileID: 338488218}
   listenerType: 0
+  audioSources:
+  - {fileID: 293753643}
 --- !u!1 &338488212
 GameObject:
   m_ObjectHideFlags: 0
@@ -15615,10 +15615,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 350428702}
-  particles:
-  - {fileID: 350428701}
   activator: {fileID: 1324403179}
   listenerType: 1
+  particles:
+  - {fileID: 350428701}
 --- !u!1 &362257823
 GameObject:
   m_ObjectHideFlags: 0
@@ -20422,10 +20422,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 362257827}
-  particles:
-  - {fileID: 362257826}
   activator: {fileID: 341725671}
   listenerType: 0
+  particles:
+  - {fileID: 362257826}
 --- !u!1 &363678368
 GameObject:
   m_ObjectHideFlags: 0
@@ -25229,10 +25229,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 363678371}
-  particles:
-  - {fileID: 363678370}
   activator: {fileID: 1659564323}
   listenerType: 1
+  particles:
+  - {fileID: 363678370}
 --- !u!1 &376992549
 GameObject:
   m_ObjectHideFlags: 0
@@ -30138,10 +30138,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 428278921}
-  particles:
-  - {fileID: 428278920}
   activator: {fileID: 376992552}
   listenerType: 2
+  particles:
+  - {fileID: 428278920}
 --- !u!1 &432778640
 GameObject:
   m_ObjectHideFlags: 0
@@ -34945,10 +34945,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 432778644}
-  particles:
-  - {fileID: 432778643}
   activator: {fileID: 519803816}
   listenerType: 1
+  particles:
+  - {fileID: 432778643}
 --- !u!1 &473932729
 GameObject:
   m_ObjectHideFlags: 0
@@ -39752,10 +39752,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 473932733}
-  particles:
-  - {fileID: 473932732}
   activator: {fileID: 341725671}
   listenerType: 2
+  particles:
+  - {fileID: 473932732}
 --- !u!1 &477734046
 GameObject:
   m_ObjectHideFlags: 0
@@ -44559,10 +44559,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 477734049}
-  particles:
-  - {fileID: 477734048}
   activator: {fileID: 1659564323}
   listenerType: 2
+  particles:
+  - {fileID: 477734048}
 --- !u!1 &495434242
 GameObject:
   m_ObjectHideFlags: 0
@@ -49517,10 +49517,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 507645235}
-  particles:
-  - {fileID: 507645234}
   activator: {fileID: 519803816}
   listenerType: 2
+  particles:
+  - {fileID: 507645234}
 --- !u!1 &519803813
 GameObject:
   m_ObjectHideFlags: 0
@@ -54361,7 +54361,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!114 &533460964
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -54421,10 +54421,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 533460964}
-  particles:
-  - {fileID: 533460963}
   activator: {fileID: 338488218}
   listenerType: 0
+  particles:
+  - {fileID: 533460963}
 --- !u!1 &592514743
 GameObject:
   m_ObjectHideFlags: 0
@@ -59259,10 +59259,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 697004214}
-  particles:
-  - {fileID: 697004213}
   activator: {fileID: 1996263738}
   listenerType: 1
+  particles:
+  - {fileID: 697004213}
 --- !u!1 &709759929
 GameObject:
   m_ObjectHideFlags: 0
@@ -64223,10 +64223,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 722846274}
-  particles:
-  - {fileID: 722846273}
   activator: {fileID: 1267871893}
   listenerType: 0
+  particles:
+  - {fileID: 722846273}
 --- !u!1 &761481646
 GameObject:
   m_ObjectHideFlags: 0
@@ -68984,7 +68984,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!114 &761481650
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -69030,10 +69030,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 761481650}
-  particles:
-  - {fileID: 761481649}
   activator: {fileID: 1324403179}
   listenerType: 0
+  particles:
+  - {fileID: 761481649}
 --- !u!1 &792298292
 GameObject:
   m_ObjectHideFlags: 0
@@ -69355,10 +69355,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 834377775}
-  animator: {fileID: 834377770}
-  triggerParameterName: activate
   activator: {fileID: 495434248}
   listenerType: 0
+  animator: {fileID: 834377770}
+  triggerParameterName: activate
 --- !u!1 &905096701
 GameObject:
   m_ObjectHideFlags: 0
@@ -74162,10 +74162,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 905096705}
-  particles:
-  - {fileID: 905096704}
   activator: {fileID: 1324403179}
   listenerType: 2
+  particles:
+  - {fileID: 905096704}
 --- !u!1 &912699671
 GameObject:
   m_ObjectHideFlags: 0
@@ -79462,10 +79462,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1074239543}
-  particles:
-  - {fileID: 1074239542}
   activator: {fileID: 1034012555}
   listenerType: 2
+  particles:
+  - {fileID: 1074239542}
 --- !u!1 &1117342992
 GameObject:
   m_ObjectHideFlags: 0
@@ -84269,10 +84269,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1117342996}
-  particles:
-  - {fileID: 1117342995}
   activator: {fileID: 376992552}
   listenerType: 1
+  particles:
+  - {fileID: 1117342995}
 --- !u!1001 &1143897595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85268,9 +85268,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1211859960}
-  pickup: {fileID: 709759932}
   activator: {fileID: 1549095250}
   listenerType: 0
+  pickup: {fileID: 709759932}
 --- !u!1 &1267871890
 GameObject:
   m_ObjectHideFlags: 0
@@ -90697,10 +90697,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1316655779}
-  particles:
-  - {fileID: 1316655778}
   activator: {fileID: 1996263738}
   listenerType: 2
+  particles:
+  - {fileID: 1316655778}
 --- !u!1 &1324403176
 GameObject:
   m_ObjectHideFlags: 0
@@ -95602,10 +95602,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1408613675}
-  particles:
-  - {fileID: 1408613674}
   activator: {fileID: 376992552}
   listenerType: 0
+  particles:
+  - {fileID: 1408613674}
 --- !u!1 &1461525914
 GameObject:
   m_ObjectHideFlags: 0
@@ -105215,10 +105215,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1514395887}
-  particles:
-  - {fileID: 1514395888}
   activator: {fileID: 1549095250}
   listenerType: 1
+  particles:
+  - {fileID: 1514395888}
 --- !u!1 &1535157604
 GameObject:
   m_ObjectHideFlags: 0
@@ -105355,7 +105355,7 @@ AudioSource:
     m_RotationOrder: 4
 --- !u!114 &1535157607
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -110389,10 +110389,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1551383215}
-  particles:
-  - {fileID: 1551383214}
   activator: {fileID: 519803816}
   listenerType: 0
+  particles:
+  - {fileID: 1551383214}
 --- !u!1 &1582841385
 GameObject:
   m_ObjectHideFlags: 0
@@ -110417,7 +110417,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &1582841386
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -110457,7 +110457,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1582841388
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -110483,7 +110483,7 @@ MonoBehaviour:
   publicVariablesSerializationDataFormat: 0
 --- !u!114 &1582841389
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -110529,10 +110529,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1582841389}
-  targetObject: {fileID: 1151730400}
-  movementOnEvent: {x: 0, y: 0.2, z: 0}
   activator: {fileID: 1267871893}
   listenerType: 0
+  targetObject: {fileID: 1151730400}
+  movementOnEvent: {x: 0, y: 0.2, z: 0}
 --- !u!114 &1582841391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110555,10 +110555,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1582841388}
-  targetObject: {fileID: 1031524259}
-  movementOnEvent: {x: 0, y: -5, z: 0}
   activator: {fileID: 1549095250}
   listenerType: 0
+  targetObject: {fileID: 1031524259}
+  movementOnEvent: {x: 0, y: -5, z: 0}
 --- !u!114 &1582841392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110581,10 +110581,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1582841386}
-  targetObject: {fileID: 1031524259}
-  movementOnEvent: {x: 0, y: 2, z: 0}
   activator: {fileID: 338488218}
   listenerType: 0
+  targetObject: {fileID: 1031524259}
+  movementOnEvent: {x: 0, y: 2, z: 0}
 --- !u!1001 &1627663750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -110819,6 +110819,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1659564318}
   onActivateListeners:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 1034012555}
   - {fileID: 1663986381}
   onDeactivateListeners:
@@ -110833,6 +110835,8 @@ MonoBehaviour:
   - {fileID: 1461525919}
   - {fileID: 1312060715}
   onActivateListenerEventNames:
+  - OnEvent
+  - OnEvent
   - OnResetActivateEvent
   - OnEvent
   onDeactivateListenerEventNames:
@@ -115649,10 +115653,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1663986379}
-  particles:
-  - {fileID: 1663986378}
   activator: {fileID: 1659564323}
   listenerType: 0
+  particles:
+  - {fileID: 1663986378}
 --- !u!1 &1702912122
 GameObject:
   m_ObjectHideFlags: 0
@@ -120706,10 +120710,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1766796068}
-  particles:
-  - {fileID: 1766796067}
   activator: {fileID: 341725671}
   listenerType: 1
+  particles:
+  - {fileID: 1766796067}
 --- !u!1 &1811863932
 GameObject:
   m_ObjectHideFlags: 0
@@ -125699,10 +125703,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1866887278}
-  particles:
-  - {fileID: 1866887277}
   activator: {fileID: 1034012555}
   listenerType: 1
+  particles:
+  - {fileID: 1866887277}
 --- !u!1 &1898684058
 GameObject:
   m_ObjectHideFlags: 0
@@ -130693,10 +130697,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1952875809}
-  particles:
-  - {fileID: 1952875808}
   activator: {fileID: 1996263738}
   listenerType: 0
+  particles:
+  - {fileID: 1952875808}
 --- !u!1 &1996263732
 GameObject:
   m_ObjectHideFlags: 0
@@ -135666,7 +135670,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2028362979}
-  particles:
-  - {fileID: 2028362980}
   activator: {fileID: 1549095250}
   listenerType: 0
+  particles:
+  - {fileID: 2028362980}

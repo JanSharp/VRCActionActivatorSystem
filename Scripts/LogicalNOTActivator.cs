@@ -39,7 +39,7 @@ namespace JanSharp
         private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
         {
             LogicalNOTActivator logicalNOTActivator = (LogicalNOTActivator)behaviour;
-            ActivatorEditorUtil.AddActivatorToListeners(logicalNOTActivator.inputActivator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, logicalNOTActivator);
+            ActivatorEditorUtil.AddActivatorToListeners(logicalNOTActivator.inputActivator, ListenerType.OnStateChanged, logicalNOTActivator);
             return true;
         }
     }

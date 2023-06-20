@@ -84,7 +84,7 @@ namespace JanSharp
         private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
         {
             ClockActivator clockActivator = (ClockActivator)behaviour;
-            ActivatorEditorUtil.AddActivatorToListeners(clockActivator.inputActivator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, clockActivator);
+            ActivatorEditorUtil.AddActivatorToListeners(clockActivator.inputActivator, ListenerType.OnStateChanged, clockActivator);
             return true;
         }
     }

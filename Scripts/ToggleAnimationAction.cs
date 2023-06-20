@@ -5,8 +5,8 @@ using VRC.Udon;
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
-using System.Reflection;
 using System.Linq;
+using System.Collections.Generic;
 #endif
 
 namespace JanSharp
@@ -34,31 +34,35 @@ namespace JanSharp
         private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
             ToggleAnimationAction toggleAnimationAction = (ToggleAnimationAction)behaviour;
-            ActivatorEditorUtil.AddActivatorToListeners(toggleAnimationAction.activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, toggleAnimationAction);
+            ActivatorEditorUtil.AddActivatorToListeners(toggleAnimationAction.activator, ListenerType.OnStateChanged, toggleAnimationAction);
             return true;
         }
     }
 
+    [CanEditMultipleObjects]
     [CustomEditor(typeof(ToggleAnimationAction))]
     public class ToggleAnimationActionEditor : Editor
     {
+        private static void SetAnimatorToThis(IEnumerable<ToggleAnimationAction> actions)
+        {
+            foreach (var action in actions)
+            {
+                SerializedObject actionProxy = new SerializedObject(action);
+                actionProxy.FindProperty(nameof(ToggleAnimationAction.animator)).objectReferenceValue = action.GetComponent<Animator>();
+                actionProxy.ApplyModifiedProperties();
+            }
+        }
+
         public override void OnInspectorGUI()
         {
-            ToggleAnimationAction targetAction = this.target as ToggleAnimationAction;
-            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(targetAction))
+            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(targets))
                 return;
             EditorGUILayout.Space();
             base.OnInspectorGUI(); // draws public/serializable fields
 
-            if (targetAction.animator == null
-                && targetAction.GetComponent<Animator>() != null
-                && GUILayout.Button(new GUIContent("Set Animator to this")))
-            {
-                targetAction.animator = targetAction.GetComponent<Animator>();
-                EditorUtility.SetDirty(targetAction);
-                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
-            }
+            ActionEditorUtil.ConditionalButton(new GUIContent("Set Animator to this"),
+                targets.Cast<ToggleAnimationAction>().Where(a => a.animator == null && a.GetComponent<Animator>() != null),
+                SetAnimatorToThis);
 
             // an attempt at validating the animator's parameters. This now says it doesn't find the parameter even though it exists. Weird.
             // if (targetAction.animator != null)

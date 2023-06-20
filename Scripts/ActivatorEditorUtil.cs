@@ -5,118 +5,93 @@ using UnityEngine;
 using UnityEditor;
 using UdonSharp;
 using UdonSharpEditor;
-using System.Reflection;
+using System.Linq;
 
 namespace JanSharp
 {
     public static class ActivatorEditorUtil
     {
-        public enum ListenerEventType
+        public static bool BasicActionOnBuild<T>(T action) where T : ActionBase
         {
-            OnActivate = 0,
-            OnDeactivate = 1,
-            OnStateChanged = 2,
-        }
-
-        public static bool BasicActionOnBuild<T>(T action) where T : UdonSharpBehaviour, IAction
-        {
-            AddActivatorToListeners(action.Activator, (ListenerEventType)action.ListenerType, action);
+            AddActivatorToListeners(action.activator, action.listenerType, action);
             return true;
         }
 
-        public static void AddActivatorToListeners(UdonSharpBehaviour activator, ListenerEventType listenerType, UdonSharpBehaviour listener, string listenerEventName = "OnEvent")
+        public static void AddActivatorToListeners(UdonSharpBehaviour activator, ListenerType listenerType, UdonSharpBehaviour listener, string listenerEventName = "OnEvent")
         {
             if (activator == null)
             {
                 Debug.LogError($"Missing/null Activator for {listener.name}.", UdonSharpEditorUtility.GetBackingUdonBehaviour(listener));
                 return;
             }
-            FieldInfo listenersField;
-            FieldInfo eventNamesField;
+            SerializedObject activatorProxy = new SerializedObject(activator);
+            SerializedProperty listenersField;
+            SerializedProperty eventNamesField;
             switch (listenerType)
             {
-                case ListenerEventType.OnActivate:
-                    listenersField = activator.GetType().GetField("onActivateListeners");
-                    eventNamesField = activator.GetType().GetField("onActivateListenerEventNames");
+                case ListenerType.OnActivate:
+                    listenersField = activatorProxy.FindProperty(nameof(ActivatorBase.onActivateListeners));
+                    eventNamesField = activatorProxy.FindProperty(nameof(ActivatorBase.onActivateListenerEventNames));
                     break;
-                case ListenerEventType.OnDeactivate:
-                    listenersField = activator.GetType().GetField("onDeactivateListeners");
-                    eventNamesField = activator.GetType().GetField("onDeactivateListenerEventNames");
+                case ListenerType.OnDeactivate:
+                    listenersField = activatorProxy.FindProperty(nameof(ActivatorBase.onDeactivateListeners));
+                    eventNamesField = activatorProxy.FindProperty(nameof(ActivatorBase.onDeactivateListenerEventNames));
                     break;
-                case ListenerEventType.OnStateChanged:
-                    listenersField = activator.GetType().GetField("onStateChangedListeners");
-                    eventNamesField = activator.GetType().GetField("onStateChangedListenerEventNames");
+                case ListenerType.OnStateChanged:
+                    listenersField = activatorProxy.FindProperty(nameof(ActivatorBase.onStateChangedListeners));
+                    eventNamesField = activatorProxy.FindProperty(nameof(ActivatorBase.onStateChangedListenerEventNames));
                     break;
                 default:
                     Debug.LogError($"Impossible listener type {listenerType}.", UdonSharpEditorUtility.GetBackingUdonBehaviour(listener));
                     return;
             }
-            GrowArray(activator, listenersField, listener);
-            GrowArray(activator, eventNamesField, listenerEventName);
-            if (PrefabUtility.IsPartOfPrefabInstance(activator))
-                PrefabUtility.RecordPrefabInstancePropertyModifications(activator);
+            Append(listenersField, p => p.objectReferenceValue = listener);
+            Append(eventNamesField, p => p.stringValue = listenerEventName);
+            activatorProxy.ApplyModifiedProperties();
         }
 
-        private static void GrowArray<T>(object instance, FieldInfo field, T newValue)
+        private static void Append(SerializedProperty property, System.Action<SerializedProperty> setNewValue)
         {
-            T[] listeners = field.GetValue(instance) as T[];
-            T[] newListeners = new T[listeners.Length + 1];
-            listeners.CopyTo(newListeners, 0);
-            newListeners[newListeners.Length - 1] = newValue;
-            field.SetValue(instance, newListeners);
+            property.InsertArrayElementAtIndex(property.arraySize);
+            setNewValue(property.GetArrayElementAtIndex(property.arraySize - 1));
         }
 
         public static bool ActivatorOnBuildBase(UdonSharpBehaviour behaviour)
         {
-            ActivatorBase activator = (ActivatorBase)behaviour;
-            activator.onActivateListeners = new UdonSharpBehaviour[0];
-            activator.onDeactivateListeners = new UdonSharpBehaviour[0];
-            activator.onStateChangedListeners = new UdonSharpBehaviour[0];
-            activator.onActivateListenerEventNames = new string[0];
-            activator.onDeactivateListenerEventNames = new string[0];
-            activator.onStateChangedListenerEventNames = new string[0];
-            if (PrefabUtility.IsPartOfPrefabInstance(activator))
-                PrefabUtility.RecordPrefabInstancePropertyModifications(activator);
+            SerializedObject activatorProxy = new SerializedObject(behaviour);
+            activatorProxy.FindProperty(nameof(ActivatorBase.onActivateListeners)).ClearArray();
+            activatorProxy.FindProperty(nameof(ActivatorBase.onDeactivateListeners)).ClearArray();
+            activatorProxy.FindProperty(nameof(ActivatorBase.onStateChangedListeners)).ClearArray();
+            activatorProxy.FindProperty(nameof(ActivatorBase.onActivateListenerEventNames)).ClearArray();
+            activatorProxy.FindProperty(nameof(ActivatorBase.onDeactivateListenerEventNames)).ClearArray();
+            activatorProxy.FindProperty(nameof(ActivatorBase.onStateChangedListenerEventNames)).ClearArray();
+            activatorProxy.ApplyModifiedProperties();
             return true;
         }
     }
 
-    public interface IAction
+    public static class ActionEditorUtil
     {
-        UdonSharpBehaviour Activator { get; }
-        int ListenerType { get; set; }
-    }
-
-    public abstract class ActionEditorBase : Editor
-    {
-        private static string[] ListenerTypes = new string[]
+        public static void SetArrayProperty<T>(SerializedProperty property, ICollection<T> newValues, System.Action<SerializedProperty, T> setValue)
         {
-            "On Activate",
-            "On Deactivate",
-            "On State Changed",
-        };
+            property.ClearArray();
+            property.arraySize = newValues.Count;
+            int i = 0;
+            foreach (T value in newValues)
+                setValue(property.GetArrayElementAtIndex(i++), value);
+        }
 
-        public override void OnInspectorGUI()
+        public static void ConditionalButton<T>(GUIContent buttonContent, IEnumerable<T> targets, System.Action<IEnumerable<T>> onButtonClick)
         {
-            IAction targetAction = this.target as IAction;
-            UdonSharpBehaviour targetBehaviour = this.target as UdonSharpBehaviour;
-            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(targetBehaviour))
-                return;
-            EditorGUILayout.Space();
-            base.OnInspectorGUI(); // draws public/serializable fields
+            if (targets.Any() && GUILayout.Button(buttonContent))
+                onButtonClick(targets);
+        }
 
-            int newListenerType = EditorGUILayout.Popup(
-                new GUIContent("Activator Event", "Which event of the activator to react to."),
-                targetAction.ListenerType,
-                ListenerTypes);
-
-            if (newListenerType != targetAction.ListenerType)
-            {
-                targetAction.ListenerType = newListenerType;
-                EditorUtility.SetDirty(targetBehaviour);
-                if (PrefabUtility.IsPartOfPrefabInstance(targetBehaviour))
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetBehaviour);
-            }
+        public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> enumerable)
+        {
+            if (enumerable != null)
+                foreach (T value in enumerable)
+                    yield return value;
         }
     }
 }

@@ -5,8 +5,8 @@ using VRC.Udon;
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
-using System.Reflection;
 using System.Linq;
+using System.Collections.Generic;
 #endif
 
 namespace JanSharp
@@ -28,7 +28,6 @@ namespace JanSharp
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
 
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
     [InitializeOnLoad]
     public static class AudioLoopActionOnBuild
     {
@@ -37,52 +36,57 @@ namespace JanSharp
         private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
             AudioLoopAction audioLoopAction = (AudioLoopAction)behaviour;
-            ActivatorEditorUtil.AddActivatorToListeners(audioLoopAction.activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, audioLoopAction);
+            ActivatorEditorUtil.AddActivatorToListeners(audioLoopAction.activator, ListenerType.OnStateChanged, audioLoopAction);
             return true;
         }
     }
-    #endif
 
+    [CanEditMultipleObjects]
     [CustomEditor(typeof(AudioLoopAction))]
     public class AudioLoopActionEditor : Editor
     {
+        private static void SetAudioSourceToThis(IEnumerable<AudioLoopAction> actions)
+        {
+            foreach (var action in actions)
+            {
+                SerializedObject actionProxy = new SerializedObject(action);
+                actionProxy.FindProperty(nameof(AudioLoopAction.audioSource)).objectReferenceValue = action.GetComponent<AudioSource>();
+                actionProxy.ApplyModifiedProperties();
+            }
+        }
+
+        private static void DisablePlayOnAwake(IEnumerable<AudioLoopAction> actions)
+        {
+            SerializedObject audioSourceProxy = new SerializedObject(actions.Select(a => a.audioSource).ToArray());
+            audioSourceProxy.FindProperty("m_PlayOnAwake").boolValue = false;
+            audioSourceProxy.ApplyModifiedProperties();
+        }
+
+        private static void MakeAudioSourcesLoop(IEnumerable<AudioLoopAction> actions)
+        {
+            SerializedObject audioSourceProxy = new SerializedObject(actions.Select(a => a.audioSource).ToArray());
+            audioSourceProxy.FindProperty("Loop").boolValue = true;
+            audioSourceProxy.ApplyModifiedProperties();
+        }
+
         public override void OnInspectorGUI()
         {
-            AudioLoopAction targetAction = this.target as AudioLoopAction;
-            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(targetAction))
+            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(targets))
                 return;
             EditorGUILayout.Space();
             base.OnInspectorGUI(); // draws public/serializable fields
 
-            if (targetAction.audioSource == null
-                && targetAction.GetComponent<AudioSource>() != null
-                && GUILayout.Button(new GUIContent("Set Audio Source to this")))
-            {
-                targetAction.audioSource = targetAction.GetComponent<AudioSource>();
-                EditorUtility.SetDirty(targetAction);
-                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
-            }
+            ActionEditorUtil.ConditionalButton(new GUIContent("Set Audio Source to this"),
+                targets.Cast<AudioLoopAction>().Where(a => a.audioSource == null && a.GetComponent<AudioSource>() != null),
+                SetAudioSourceToThis);
 
-            if (targetAction.audioSource != null
-                && targetAction.audioSource.playOnAwake
-                && GUILayout.Button(new GUIContent("Disable paly on awake")))
-            {
-                targetAction.audioSource.playOnAwake = false;
-                EditorUtility.SetDirty(targetAction.audioSource);
-                if (PrefabUtility.IsPartOfPrefabInstance(targetAction.audioSource))
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction.audioSource);
-            }
+            ActionEditorUtil.ConditionalButton(new GUIContent("Disable PlayOnAwake"),
+                targets.Cast<AudioLoopAction>().Where(a => a.audioSource != null && a.audioSource.playOnAwake),
+                DisablePlayOnAwake);
 
-            if (targetAction.audioSource != null
-                && !targetAction.audioSource.loop
-                && GUILayout.Button(new GUIContent("Make Audio Source loop")))
-            {
-                targetAction.audioSource.loop = true;
-                EditorUtility.SetDirty(targetAction.audioSource);
-                if (PrefabUtility.IsPartOfPrefabInstance(targetAction.audioSource))
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction.audioSource);
-            }
+            ActionEditorUtil.ConditionalButton(new GUIContent("Make Audio Source loop"),
+                targets.Cast<AudioLoopAction>().Where(a => a.audioSource != null && !a.audioSource.loop),
+                MakeAudioSourcesLoop);
         }
     }
     #endif

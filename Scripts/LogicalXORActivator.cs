@@ -48,7 +48,7 @@ namespace JanSharp
         {
             LogicalXORActivator logicalXORActivator = (LogicalXORActivator)behaviour;
             foreach (var activator in logicalXORActivator.inputActivators)
-                ActivatorEditorUtil.AddActivatorToListeners(activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, logicalXORActivator);
+                ActivatorEditorUtil.AddActivatorToListeners(activator, ListenerType.OnStateChanged, logicalXORActivator);
             return true;
         }
     }

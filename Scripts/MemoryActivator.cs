@@ -115,7 +115,7 @@ namespace JanSharp
             MemoryActivator memoryActivator = (MemoryActivator)behaviour;
             ActivatorEditorUtil.AddActivatorToListeners(
                 memoryActivator.activateActivator,
-                ActivatorEditorUtil.ListenerEventType.OnActivate,
+                ListenerType.OnActivate,
                 memoryActivator,
                 nameof(MemoryActivator.OnActivateEvent)
             );
@@ -123,13 +123,13 @@ namespace JanSharp
             {
                 ActivatorEditorUtil.AddActivatorToListeners(
                     memoryActivator.resetActivator,
-                    ActivatorEditorUtil.ListenerEventType.OnActivate,
+                    ListenerType.OnActivate,
                     memoryActivator,
                     nameof(MemoryActivator.OnResetActivateEvent)
                 );
                 ActivatorEditorUtil.AddActivatorToListeners(
                     memoryActivator.resetActivator,
-                    ActivatorEditorUtil.ListenerEventType.OnDeactivate,
+                    ListenerType.OnDeactivate,
                     memoryActivator,
                     nameof(MemoryActivator.OnResetDeactivateEvent)
                 );

@@ -43,7 +43,7 @@ namespace JanSharp
         {
             LogicalORActivator logicalORActivator = (LogicalORActivator)behaviour;
             foreach (var activator in logicalORActivator.inputActivators)
-                ActivatorEditorUtil.AddActivatorToListeners(activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, logicalORActivator);
+                ActivatorEditorUtil.AddActivatorToListeners(activator, ListenerType.OnStateChanged, logicalORActivator);
             return true;
         }
     }

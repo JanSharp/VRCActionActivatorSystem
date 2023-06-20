@@ -5,32 +5,22 @@ using VRC.Udon;
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
-using System.Reflection;
 using System.Linq;
+using System.Collections.Generic;
 #endif
 
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class TriggerAnimationAction : UdonSharpBehaviour
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        , IAction
-    #endif
+    public class TriggerAnimationAction : ActionBase
     {
         public Animator animator;
         public string triggerParameterName = "trigger";
-        [SerializeField] private UdonSharpBehaviour activator;
-        [HideInInspector] public int listenerType;
 
         public void OnEvent()
         {
             animator.SetTrigger(triggerParameterName);
         }
-
-        #if UNITY_EDITOR && !COMPILER_UDONSHARP
-        UdonSharpBehaviour IAction.Activator => activator;
-        int IAction.ListenerType { get => listenerType; set => listenerType = value; }
-        #endif
     }
 
     #if UNITY_EDITOR && !COMPILER_UDONSHARP
@@ -42,23 +32,30 @@ namespace JanSharp
         private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((TriggerAnimationAction)behaviour);
     }
 
+    [CanEditMultipleObjects]
     [CustomEditor(typeof(TriggerAnimationAction))]
-    public class TriggerAnimationActionEditor : ActionEditorBase
+    public class TriggerAnimationActionEditor : Editor
     {
+        private static void SetAnimatorToThis(IEnumerable<TriggerAnimationAction> actions)
+        {
+            foreach (var action in actions)
+            {
+                SerializedObject actionProxy = new SerializedObject(action);
+                actionProxy.FindProperty(nameof(TriggerAnimationAction.animator)).objectReferenceValue = action.GetComponent<Animator>();
+                actionProxy.ApplyModifiedProperties();
+            }
+        }
+
         public override void OnInspectorGUI()
         {
-            TriggerAnimationAction targetAction = this.target as TriggerAnimationAction;
-            base.OnInspectorGUI();
+            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(targets))
+                return;
+            EditorGUILayout.Space();
+            base.OnInspectorGUI(); // draws public/serializable fields
 
-            if (targetAction.animator == null
-                && targetAction.GetComponent<Animator>() != null
-                && GUILayout.Button(new GUIContent("Set Animator to this")))
-            {
-                targetAction.animator = targetAction.GetComponent<Animator>();
-                EditorUtility.SetDirty(targetAction);
-                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
-            }
+            ActionEditorUtil.ConditionalButton(new GUIContent("Set Animator to this"),
+                targets.Cast<TriggerAnimationAction>().Where(a => a.animator == null && a.GetComponent<Animator>() != null),
+                SetAnimatorToThis);
 
             // an attempt at validating the animator's parameters. This now says it doesn't find the parameter even though it exists. Weird.
             // if (targetAction.animator != null)

@@ -5,8 +5,8 @@ using VRC.Udon;
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
-using System.Reflection;
 using System.Linq;
+using System.Collections.Generic;
 #endif
 
 namespace JanSharp
@@ -38,67 +38,78 @@ namespace JanSharp
         private static bool OnBuild(UdonSharpBehaviour behaviour)
         {
             ParticleLoopAction particleLoopAction = (ParticleLoopAction)behaviour;
-            ActivatorEditorUtil.AddActivatorToListeners(particleLoopAction.activator, ActivatorEditorUtil.ListenerEventType.OnStateChanged, particleLoopAction);
+            ActivatorEditorUtil.AddActivatorToListeners(particleLoopAction.activator, ListenerType.OnStateChanged, particleLoopAction);
             return true;
         }
     }
 
+    [CanEditMultipleObjects]
     [CustomEditor(typeof(ParticleLoopAction))]
     public class ParticleLoopActionEditor : Editor
     {
+        private static void FindParticleSystems(IEnumerable<ParticleLoopAction> actions)
+        {
+            foreach (var action in actions)
+            {
+                SerializedObject actionProxy = new SerializedObject(action);
+                ActionEditorUtil.SetArrayProperty(
+                    actionProxy.FindProperty(nameof(ParticleLoopAction.particles)),
+                    action.GetComponentsInChildren<ParticleSystem>(),
+                    (p, v) => p.objectReferenceValue = v);
+                actionProxy.ApplyModifiedProperties();
+            }
+        }
+
+        private static void RemoveNullParticles(IEnumerable<ParticleLoopAction> actions)
+        {
+            foreach (var action in actions)
+            {
+                SerializedObject actionProxy = new SerializedObject(action);
+                ActionEditorUtil.SetArrayProperty(
+                    actionProxy.FindProperty(nameof(ParticleLoopAction.particles)),
+                    action.particles.Where(p => p != null).ToArray(),
+                    (p, v) => p.objectReferenceValue = v);
+                actionProxy.ApplyModifiedProperties();
+            }
+        }
+
+        private static void DisablePlayOnAwake(IEnumerable<ParticleSystem> particleSystems)
+        {
+            SerializedObject particlesProxy = new SerializedObject(particleSystems.ToArray());
+            particlesProxy.FindProperty("playOnAwake").boolValue = false;
+            particlesProxy.ApplyModifiedProperties();
+        }
+
+        private static void MakeAllParticleSystemsLoop(IEnumerable<ParticleSystem> particleSystems)
+        {
+            SerializedObject particlesProxy = new SerializedObject(particleSystems.ToArray());
+            particlesProxy.FindProperty("looping").boolValue = true;
+            particlesProxy.ApplyModifiedProperties();
+        }
+
         public override void OnInspectorGUI()
         {
-            ParticleLoopAction targetAction = this.target as ParticleLoopAction;
-            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(targetAction))
+            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(targets))
                 return;
             EditorGUILayout.Space();
             base.OnInspectorGUI(); // draws public/serializable fields
 
             if (GUILayout.Button(new GUIContent("Find Particle Systems", "Searches on this component and its children. Overwrites anything previously set.")))
             {
-                targetAction.particles = targetAction.GetComponentsInChildren<ParticleSystem>();
-                EditorUtility.SetDirty(targetAction);
-                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
+                FindParticleSystems(targets.Cast<ParticleLoopAction>());
             }
 
-            if (targetAction.particles != null
-                && targetAction.particles.Any(p => p == null)
-                && GUILayout.Button(new GUIContent("Remove null particles")))
-            {
-                targetAction.particles = targetAction.particles.Where(p => p != null).ToArray();
-                EditorUtility.SetDirty(targetAction);
-                if (PrefabUtility.IsPartOfPrefabInstance(targetAction))
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(targetAction);
-            }
+            ActionEditorUtil.ConditionalButton(new GUIContent("Remove null particles"),
+                targets.Cast<ParticleLoopAction>().Where(a => a.particles != null && a.particles.Any(p => p == null)),
+                RemoveNullParticles);
 
-            if (targetAction.particles != null
-                && targetAction.particles.Any(p => p != null && p.main.playOnAwake)
-                && GUILayout.Button(new GUIContent("Disable PlayOnAwake")))
-            {
-                foreach (var particle in targetAction.particles.Where(p => p != null && p.main.playOnAwake))
-                {
-                    var main = particle.main;
-                    main.playOnAwake = false;
-                    EditorUtility.SetDirty(particle);
-                    if (PrefabUtility.IsPartOfPrefabInstance(particle))
-                        PrefabUtility.RecordPrefabInstancePropertyModifications(particle);
-                }
-            }
+            ActionEditorUtil.ConditionalButton(new GUIContent("Disable PlayOnAwake"),
+                targets.Cast<ParticleLoopAction>().SelectMany(a => a.particles.EmptyIfNull()).Where(p => p != null && p.main.playOnAwake),
+                DisablePlayOnAwake);
 
-            if (targetAction.particles != null
-                && targetAction.particles.Any(p => p != null && !p.main.loop)
-                && GUILayout.Button(new GUIContent("Make all Particle Systems loop")))
-            {
-                foreach (var particle in targetAction.particles.Where(p => p != null && !p.main.loop))
-                {
-                    var main = particle.main;
-                    main.loop = true;
-                    EditorUtility.SetDirty(particle);
-                    if (PrefabUtility.IsPartOfPrefabInstance(particle))
-                        PrefabUtility.RecordPrefabInstancePropertyModifications(particle);
-                }
-            }
+            ActionEditorUtil.ConditionalButton(new GUIContent("Make all Particle Systems not loop"),
+                targets.Cast<ParticleLoopAction>().SelectMany(a => a.particles.EmptyIfNull()).Where(p => p != null && p.main.loop),
+                MakeAllParticleSystemsLoop);
         }
     }
     #endif
