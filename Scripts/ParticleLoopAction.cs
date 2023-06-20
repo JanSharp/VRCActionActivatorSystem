@@ -12,10 +12,9 @@ using System.Collections.Generic;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ParticleLoopAction : UdonSharpBehaviour
+    public class ParticleLoopAction : ActionBase
     {
         public ParticleSystem[] particles;
-        public UdonSharpBehaviour activator;
 
         public void OnEvent()
         {

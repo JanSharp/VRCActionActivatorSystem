@@ -11,10 +11,9 @@ using System.Linq;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ToggleGameObjectAction : UdonSharpBehaviour
+    public class ToggleGameObjectAction : ActionBase
     {
         [SerializeField] private GameObject[] gameObjects;
-        public UdonSharpBehaviour activator;
 
         public void OnEvent()
         {

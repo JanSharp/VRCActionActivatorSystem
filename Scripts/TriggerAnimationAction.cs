@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class TriggerAnimationAction : ActionBase
+    public class TriggerAnimationAction : ConfigurableActionBase
     {
         public Animator animator;
         public string triggerParameterName = "trigger";

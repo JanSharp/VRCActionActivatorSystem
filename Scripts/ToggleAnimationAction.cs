@@ -12,11 +12,10 @@ using System.Collections.Generic;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ToggleAnimationAction : UdonSharpBehaviour
+    public class ToggleAnimationAction : ActionBase
     {
         public Animator animator;
         public string boolParameterName = "state";
-        public UdonSharpBehaviour activator;
 
         public void OnEvent()
         {

@@ -14,7 +14,7 @@ namespace JanSharp
     public class ClockActivator : ActivatorBase
     {
         [HideInInspector] public UpdateManager updateManager;
-        public UdonSharpBehaviour inputActivator;
+        public ActivatorBase inputActivator;
         [SerializeField] private float secondsBetweenTicks = 1f;
         // for UpdateManager
         private int customUpdateInternalIndex;

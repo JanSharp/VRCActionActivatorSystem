@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class AudioAction : ActionBase
+    public class AudioAction : ConfigurableActionBase
     {
         public AudioSource[] audioSources;
 

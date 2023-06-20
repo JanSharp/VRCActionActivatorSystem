@@ -13,8 +13,8 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class MemoryActivator : ActivatorBase
     {
-        public UdonSharpBehaviour activateActivator;
-        public UdonSharpBehaviour resetActivator;
+        public ActivatorBase activateActivator;
+        public ActivatorBase resetActivator;
         // to prevent spamming from causing scuff
         private int requestSerializationCount = 0;
         private bool waitingForOwnerToSendData = false;

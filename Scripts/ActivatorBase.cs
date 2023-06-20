@@ -39,4 +39,9 @@ namespace JanSharp
                 listeners[i].SendCustomEvent(listenerEventNames[i]);
         }
     }
+
+    // public interface IActivatorListener
+    // {
+    //     public void OnEvent();
+    // }
 }

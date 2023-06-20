@@ -12,10 +12,9 @@ using System.Collections.Generic;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class AudioLoopAction : UdonSharpBehaviour
+    public class AudioLoopAction : ActionBase
     {
         public AudioSource audioSource;
-        public UdonSharpBehaviour activator;
 
         public void OnEvent()
         {

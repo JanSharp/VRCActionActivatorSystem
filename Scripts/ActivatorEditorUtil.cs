@@ -9,13 +9,13 @@ namespace JanSharp
 {
     public static class ActivatorEditorUtil
     {
-        public static bool BasicActionOnBuild<T>(T action) where T : ActionBase
+        public static bool BasicActionOnBuild<T>(T action) where T : ConfigurableActionBase
         {
             AddActivatorToListeners(action.activator, action.listenerType, action);
             return true;
         }
 
-        public static void AddActivatorToListeners(UdonSharpBehaviour activator, ListenerType listenerType, UdonSharpBehaviour listener, string listenerEventName = "OnEvent")
+        public static void AddActivatorToListeners(ActivatorBase activator, ListenerType listenerType, UdonSharpBehaviour listener, string listenerEventName = "OnEvent")
         {
             if (activator == null)
             {

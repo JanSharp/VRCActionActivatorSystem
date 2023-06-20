@@ -13,7 +13,7 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class LogicalANDActivator : ActivatorBase
     {
-        public UdonSharpBehaviour[] inputActivators;
+        public ActivatorBase[] inputActivators;
 
         public void OnEvent()
         {

@@ -13,7 +13,7 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class LogicalNOTActivator : ActivatorBase
     {
-        public UdonSharpBehaviour inputActivator;
+        public ActivatorBase inputActivator;
 
         private void Start()
         {

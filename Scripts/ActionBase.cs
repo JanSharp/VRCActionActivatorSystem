@@ -9,14 +9,6 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ActionBase : UdonSharpBehaviour
     {
-        public UdonSharpBehaviour activator;
-        public ListenerType listenerType;
-    }
-
-    public enum ListenerType
-    {
-        OnActivate,
-        OnDeactivate,
-        OnStateChanged,
+        public ActivatorBase activator;
     }
 }

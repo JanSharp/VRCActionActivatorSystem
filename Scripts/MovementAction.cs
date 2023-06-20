@@ -11,7 +11,7 @@ using System.Linq;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class MovementAction : ActionBase
+    public class MovementAction : ConfigurableActionBase
     {
         [SerializeField] private ObjectPositionSync targetObject;
         [SerializeField] private Vector3 movementOnEvent;

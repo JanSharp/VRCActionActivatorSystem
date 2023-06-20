@@ -11,7 +11,7 @@ using System.Linq;
 namespace JanSharp
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class DropItemAction : ActionBase
+    public class DropItemAction : ConfigurableActionBase
     {
         [SerializeField] private VRC_Pickup pickup;
 
