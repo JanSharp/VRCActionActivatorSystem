@@ -107,7 +107,7 @@ namespace JanSharp
             {
                 Debug.LogError("ObjectPositionSync requires a GameObject that must be at the root of the scene "
                         + "with the exact name 'UpdateManager' which has the 'UpdateManager' UdonBehaviour.",
-                    UdonSharpEditorUtility.GetBackingUdonBehaviour(objectPositionSync));
+                    objectPositionSync);
                 return false;
             }
             objectPositionSync.targetPosition = objectPositionSync.transform.localPosition;

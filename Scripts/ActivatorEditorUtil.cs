@@ -1,10 +1,8 @@
 ﻿#if UNITY_EDITOR
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UdonSharp;
-using UdonSharpEditor;
 using System.Linq;
 
 namespace JanSharp
@@ -21,7 +19,7 @@ namespace JanSharp
         {
             if (activator == null)
             {
-                Debug.LogError($"Missing/null Activator for {listener.name}.", UdonSharpEditorUtility.GetBackingUdonBehaviour(listener));
+                Debug.LogError($"Missing/null Activator for {listener.name}.", listener);
                 return;
             }
             SerializedObject activatorProxy = new SerializedObject(activator);
@@ -42,7 +40,7 @@ namespace JanSharp
                     eventNamesField = activatorProxy.FindProperty(nameof(ActivatorBase.onStateChangedListenerEventNames));
                     break;
                 default:
-                    Debug.LogError($"Impossible listener type {listenerType}.", UdonSharpEditorUtility.GetBackingUdonBehaviour(listener));
+                    Debug.LogError($"Impossible listener type {listenerType}.", listener);
                     return;
             }
             Append(listenersField, p => p.objectReferenceValue = listener);
