@@ -54,9 +54,9 @@ namespace JanSharp
             setNewValue(property.GetArrayElementAtIndex(property.arraySize - 1));
         }
 
-        public static bool ActivatorOnBuildBase(UdonSharpBehaviour behaviour)
+        public static bool ActivatorOnBuildBase(ActivatorBase activator)
         {
-            SerializedObject activatorProxy = new SerializedObject(behaviour);
+            SerializedObject activatorProxy = new SerializedObject(activator);
             activatorProxy.FindProperty(nameof(ActivatorBase.onActivateListeners)).ClearArray();
             activatorProxy.FindProperty(nameof(ActivatorBase.onDeactivateListeners)).ClearArray();
             activatorProxy.FindProperty(nameof(ActivatorBase.onStateChangedListeners)).ClearArray();
