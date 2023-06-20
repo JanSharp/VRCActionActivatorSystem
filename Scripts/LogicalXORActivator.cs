@@ -44,9 +44,8 @@ namespace JanSharp
             OnBuildUtil.RegisterType<LogicalXORActivator>(SecondOnBuild, order: 1);
         }
 
-        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        private static bool SecondOnBuild(LogicalXORActivator logicalXORActivator)
         {
-            LogicalXORActivator logicalXORActivator = (LogicalXORActivator)behaviour;
             foreach (var activator in logicalXORActivator.inputActivators)
                 ActivatorEditorUtil.AddActivatorToListeners(activator, ListenerType.OnStateChanged, logicalXORActivator);
             return true;

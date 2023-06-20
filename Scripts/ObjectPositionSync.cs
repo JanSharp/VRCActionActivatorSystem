@@ -99,9 +99,8 @@ namespace JanSharp
     {
         static ObjectPositionSyncOnBuild() => JanSharp.OnBuildUtil.RegisterType<ObjectPositionSync>(OnBuild);
 
-        private static bool OnBuild(UdonSharpBehaviour behaviour)
+        private static bool OnBuild(ObjectPositionSync objectPositionSync)
         {
-            ObjectPositionSync objectPositionSync = (ObjectPositionSync)behaviour;
             objectPositionSync.updateManager = GameObject.Find("/UpdateManager")?.GetComponent<UpdateManager>();
             if (objectPositionSync.updateManager == null)
             {

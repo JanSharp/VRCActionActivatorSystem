@@ -110,9 +110,8 @@ namespace JanSharp
             OnBuildUtil.RegisterType<MemoryActivator>(SecondOnBuild, order: 1);
         }
 
-        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        private static bool SecondOnBuild(MemoryActivator memoryActivator)
         {
-            MemoryActivator memoryActivator = (MemoryActivator)behaviour;
             ActivatorEditorUtil.AddActivatorToListeners(
                 memoryActivator.activateActivator,
                 ListenerType.OnActivate,

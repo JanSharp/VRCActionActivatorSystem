@@ -27,9 +27,7 @@ namespace JanSharp
     [InitializeOnLoad]
     public static class AudioActionOnBuild
     {
-        static AudioActionOnBuild() => OnBuildUtil.RegisterType<AudioAction>(OnBuild, order: 1);
-
-        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((AudioAction)behaviour);
+        static AudioActionOnBuild() => OnBuildUtil.RegisterType<AudioAction>(ActivatorEditorUtil.BasicActionOnBuild, order: 1);
     }
 
     [CanEditMultipleObjects]

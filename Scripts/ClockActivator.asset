@@ -524,7 +524,7 @@ MonoBehaviour:
       Data: 32|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: UdonSharp.UdonSharpBehaviour, UdonSharp.Runtime
+      Data: JanSharp.ActivatorBase, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

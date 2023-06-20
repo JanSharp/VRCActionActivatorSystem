@@ -67,9 +67,8 @@ namespace JanSharp
             OnBuildUtil.RegisterType<ClockActivator>(SecondOnBuild, order: 1);
         }
 
-        private static bool FirstOnBuild(UdonSharpBehaviour behaviour)
+        private static bool FirstOnBuild(ClockActivator clockActivator)
         {
-            ClockActivator clockActivator = (ClockActivator)behaviour;
             clockActivator.updateManager = GameObject.Find("/UpdateManager")?.GetComponent<UpdateManager>();
             if (clockActivator.updateManager == null)
             {
@@ -78,12 +77,11 @@ namespace JanSharp
                     clockActivator);
                 return false;
             }
-            return ActivatorEditorUtil.ActivatorOnBuildBase(behaviour);
+            return ActivatorEditorUtil.ActivatorOnBuildBase(clockActivator);
         }
 
-        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        private static bool SecondOnBuild(ClockActivator clockActivator)
         {
-            ClockActivator clockActivator = (ClockActivator)behaviour;
             ActivatorEditorUtil.AddActivatorToListeners(clockActivator.inputActivator, ListenerType.OnStateChanged, clockActivator);
             return true;
         }

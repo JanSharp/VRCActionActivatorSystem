@@ -26,9 +26,7 @@ namespace JanSharp
     [InitializeOnLoad]
     public static class MovementActionOnBuild
     {
-        static MovementActionOnBuild() => OnBuildUtil.RegisterType<MovementAction>(OnBuild, order: 1);
-
-        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((MovementAction)behaviour);
+        static MovementActionOnBuild() => OnBuildUtil.RegisterType<MovementAction>(ActivatorEditorUtil.BasicActionOnBuild, order: 1);
     }
     #endif
 }

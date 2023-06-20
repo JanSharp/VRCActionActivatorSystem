@@ -28,9 +28,8 @@ namespace JanSharp
     {
         static ToggleGameObjectActionOnBuild() => OnBuildUtil.RegisterType<ToggleGameObjectAction>(OnBuild, order: 1);
 
-        private static bool OnBuild(UdonSharpBehaviour behaviour)
+        private static bool OnBuild(ToggleGameObjectAction toggleGameObjectAction)
         {
-            ToggleGameObjectAction toggleGameObjectAction = (ToggleGameObjectAction)behaviour;
             ActivatorEditorUtil.AddActivatorToListeners(toggleGameObjectAction.activator, ListenerType.OnStateChanged, toggleGameObjectAction);
             return true;
         }

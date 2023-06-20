@@ -26,9 +26,7 @@ namespace JanSharp
     [InitializeOnLoad]
     public static class DropItemActionOnBuild
     {
-        static DropItemActionOnBuild() => OnBuildUtil.RegisterType<DropItemAction>(OnBuild, order: 1);
-
-        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((DropItemAction)behaviour);
+        static DropItemActionOnBuild() => OnBuildUtil.RegisterType<DropItemAction>(ActivatorEditorUtil.BasicActionOnBuild, order: 1);
     }
     #endif
 }

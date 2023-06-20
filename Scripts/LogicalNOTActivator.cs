@@ -36,9 +36,8 @@ namespace JanSharp
             OnBuildUtil.RegisterType<LogicalNOTActivator>(SecondOnBuild, order: 1);
         }
 
-        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        private static bool SecondOnBuild(LogicalNOTActivator logicalNOTActivator)
         {
-            LogicalNOTActivator logicalNOTActivator = (LogicalNOTActivator)behaviour;
             ActivatorEditorUtil.AddActivatorToListeners(logicalNOTActivator.inputActivator, ListenerType.OnStateChanged, logicalNOTActivator);
             return true;
         }

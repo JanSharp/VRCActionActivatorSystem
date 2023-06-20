@@ -27,9 +27,7 @@ namespace JanSharp
     [InitializeOnLoad]
     public static class TriggerAnimationActionOnBuild
     {
-        static TriggerAnimationActionOnBuild() => OnBuildUtil.RegisterType<TriggerAnimationAction>(OnBuild, order: 1);
-
-        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((TriggerAnimationAction)behaviour);
+        static TriggerAnimationActionOnBuild() => OnBuildUtil.RegisterType<TriggerAnimationAction>(ActivatorEditorUtil.BasicActionOnBuild, order: 1);
     }
 
     [CanEditMultipleObjects]

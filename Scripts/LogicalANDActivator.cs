@@ -39,9 +39,8 @@ namespace JanSharp
             OnBuildUtil.RegisterType<LogicalANDActivator>(SecondOnBuild, order: 1);
         }
 
-        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        private static bool SecondOnBuild(LogicalANDActivator logicalANDActivator)
         {
-            LogicalANDActivator logicalANDActivator = (LogicalANDActivator)behaviour;
             foreach (var activator in logicalANDActivator.inputActivators)
                 ActivatorEditorUtil.AddActivatorToListeners(activator, ListenerType.OnStateChanged, logicalANDActivator);
             return true;

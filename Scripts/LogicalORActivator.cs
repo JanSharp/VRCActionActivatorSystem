@@ -39,9 +39,8 @@ namespace JanSharp
             OnBuildUtil.RegisterType<LogicalORActivator>(SecondOnBuild, order: 1);
         }
 
-        private static bool SecondOnBuild(UdonSharpBehaviour behaviour)
+        private static bool SecondOnBuild(LogicalORActivator logicalORActivator)
         {
-            LogicalORActivator logicalORActivator = (LogicalORActivator)behaviour;
             foreach (var activator in logicalORActivator.inputActivators)
                 ActivatorEditorUtil.AddActivatorToListeners(activator, ListenerType.OnStateChanged, logicalORActivator);
             return true;

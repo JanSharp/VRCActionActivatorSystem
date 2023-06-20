@@ -30,9 +30,8 @@ namespace JanSharp
     {
         static ToggleAnimationActionOnBuild() => OnBuildUtil.RegisterType<ToggleAnimationAction>(OnBuild, order: 1);
 
-        private static bool OnBuild(UdonSharpBehaviour behaviour)
+        private static bool OnBuild(ToggleAnimationAction toggleAnimationAction)
         {
-            ToggleAnimationAction toggleAnimationAction = (ToggleAnimationAction)behaviour;
             ActivatorEditorUtil.AddActivatorToListeners(toggleAnimationAction.activator, ListenerType.OnStateChanged, toggleAnimationAction);
             return true;
         }

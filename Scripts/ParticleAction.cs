@@ -27,9 +27,7 @@ namespace JanSharp
     [InitializeOnLoad]
     public static class ParticleActionOnBuild
     {
-        static ParticleActionOnBuild() => OnBuildUtil.RegisterType<ParticleAction>(OnBuild, order: 1);
-
-        private static bool OnBuild(UdonSharpBehaviour behaviour) => ActivatorEditorUtil.BasicActionOnBuild((ParticleAction)behaviour);
+        static ParticleActionOnBuild() => OnBuildUtil.RegisterType<ParticleAction>(ActivatorEditorUtil.BasicActionOnBuild, order: 1);
     }
 
     [CanEditMultipleObjects]

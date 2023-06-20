@@ -34,9 +34,8 @@ namespace JanSharp
     {
         static ParticleLoopActionOnBuild() => OnBuildUtil.RegisterType<ParticleLoopAction>(OnBuild, order: 1);
 
-        private static bool OnBuild(UdonSharpBehaviour behaviour)
+        private static bool OnBuild(ParticleLoopAction particleLoopAction)
         {
-            ParticleLoopAction particleLoopAction = (ParticleLoopAction)behaviour;
             ActivatorEditorUtil.AddActivatorToListeners(particleLoopAction.activator, ListenerType.OnStateChanged, particleLoopAction);
             return true;
         }

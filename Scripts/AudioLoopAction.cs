@@ -32,9 +32,8 @@ namespace JanSharp
     {
         static AudioLoopActionOnBuild() => OnBuildUtil.RegisterType<AudioLoopAction>(OnBuild, order: 1);
 
-        private static bool OnBuild(UdonSharpBehaviour behaviour)
+        private static bool OnBuild(AudioLoopAction audioLoopAction)
         {
-            AudioLoopAction audioLoopAction = (AudioLoopAction)behaviour;
             ActivatorEditorUtil.AddActivatorToListeners(audioLoopAction.activator, ListenerType.OnStateChanged, audioLoopAction);
             return true;
         }
