@@ -43,12 +43,12 @@ namespace JanSharp
                     Debug.LogError($"Impossible listener type {listenerType}.", listener);
                     return;
             }
-            Append(listenersField, p => p.objectReferenceValue = listener);
-            Append(eventNamesField, p => p.stringValue = listenerEventName);
+            AppendProperty(listenersField, p => p.objectReferenceValue = listener);
+            AppendProperty(eventNamesField, p => p.stringValue = listenerEventName);
             activatorProxy.ApplyModifiedProperties();
         }
 
-        private static void Append(SerializedProperty property, System.Action<SerializedProperty> setNewValue)
+        public static void AppendProperty(SerializedProperty property, System.Action<SerializedProperty> setNewValue)
         {
             property.InsertArrayElementAtIndex(property.arraySize);
             setNewValue(property.GetArrayElementAtIndex(property.arraySize - 1));
