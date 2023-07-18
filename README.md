@@ -71,11 +71,3 @@ Synced scripts are
 - MemoryActivator
 
 PlayerTriggerActivator and ItemTriggerActivator are synced through the position of the object entering the trigger zone. It might cause scuff but trying to work around it is like stupid difficult. And the rest is simply evaluated by every client locally.
-
-# Dependencies
-
-- `OnBuildUtil`. Since the file should not be in this folder it is not a `.cs` file in here - it is a `.txt`. Simply copy the contents of [](OnBuildUtil.txt) to `Assets/JanSharp/Common/OnBuildUtil.cs`.
-
-# Internals
-
-Due to UdonSharp (`0.20.3`) limitations activators consist of a lot of copy pasted code. I can't think of anything we can do about that, we simply can't use base classes. Not being able to use base classes or interfaces also causes almost all inter script interactions to use reflection which increases the chance of error. It's all not great but we work with what we got. At least the majority of the editor code can be deduplicated.
