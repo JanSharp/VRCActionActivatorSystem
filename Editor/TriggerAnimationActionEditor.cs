@@ -2,28 +2,13 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-#if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
 using System.Linq;
 using System.Collections.Generic;
-#endif
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class TriggerAnimationAction : ConfigurableActionBase
-    {
-        public Animator animator;
-        public string triggerParameterName = "trigger";
-
-        public void OnEvent()
-        {
-            animator.SetTrigger(triggerParameterName);
-        }
-    }
-
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
     [InitializeOnLoad]
     public static class TriggerAnimationActionOnBuild
     {
@@ -74,5 +59,4 @@ namespace JanSharp
             // }
         }
     }
-    #endif
 }

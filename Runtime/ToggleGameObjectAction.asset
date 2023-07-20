@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: ToggleGameObjectAction
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 2a35ca3e3c087d74d9ec05ee63ae7151,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 27cac32842d24e88eba4ad2824017257,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: JanSharp.ActivatorBase, Assembly-CSharp
+      Data: JanSharp.ActivatorBase, JanSharp.ActionActivatorSystem
     - Name: 
       Entry: 8
       Data: 

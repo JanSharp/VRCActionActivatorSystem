@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: ActionBase
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: b35be80b435cef0d286f8e643a253544,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 89c3b6ff58c223272b189607448bb516,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: JanSharp.ActivatorBase, Assembly-CSharp
+      Data: JanSharp.ActivatorBase, JanSharp.ActionActivatorSystem
     - Name: 
       Entry: 8
       Data: 

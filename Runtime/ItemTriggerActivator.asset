@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: ItemTriggerActivator
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 91b544060f6a1453ca59c202c3ab8a35,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: a41bf46b53133a1da8655b2f7d0e80e5,
     type: 2}
   udonAssembly: 
   assemblyError: 

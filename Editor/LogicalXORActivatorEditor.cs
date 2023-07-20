@@ -3,38 +3,11 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
-#if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
-#endif
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class LogicalXORActivator : ActivatorBase
-    {
-        public ActivatorBase[] inputActivators;
-
-        public void OnEvent()
-        {
-            bool active = false;
-            foreach (var activator in inputActivators)
-            {
-                if ((bool)activator.GetProgramVariable("state"))
-                {
-                    if (active)
-                    {
-                        State = false;
-                        return;
-                    }
-                    active = true;
-                }
-            }
-            State = active;
-        }
-    }
-
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
     [InitializeOnLoad]
     public static class LogicalXORActivatorOnBuild
     {
@@ -51,5 +24,4 @@ namespace JanSharp
             return true;
         }
     }
-    #endif
 }

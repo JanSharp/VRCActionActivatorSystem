@@ -2,11 +2,6 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-#if UNITY_EDITOR && !COMPILER_UDONSHARP
-using UnityEditor;
-using UdonSharpEditor;
-using System.Linq;
-#endif
 
 namespace JanSharp
 {
@@ -21,12 +16,4 @@ namespace JanSharp
                 pickup.Drop();
         }
     }
-
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-    [InitializeOnLoad]
-    public static class DropItemActionOnBuild
-    {
-        static DropItemActionOnBuild() => OnBuildUtil.RegisterType<DropItemAction>(ActivatorEditorUtil.BasicActionOnBuild, order: 1);
-    }
-    #endif
 }

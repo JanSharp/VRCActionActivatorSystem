@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: LogicalORActivator
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 3347c9184199e98059cc8bf527706fed,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: e8ea35e45bc0c57f99f9e4b5d3825f15,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -458,7 +458,7 @@ MonoBehaviour:
       Data: 27|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: JanSharp.ActivatorBase[], Assembly-CSharp
+      Data: JanSharp.ActivatorBase[], JanSharp.ActionActivatorSystem
     - Name: 
       Entry: 8
       Data: 

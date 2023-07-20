@@ -1,0 +1,22 @@
+{
+    "name": "JanSharp.ActionActivatorSystem.Editor",
+    "references": [
+        "JanSharp.ActionActivatorSystem",
+        "JanSharp.Common",
+        "JanSharp.Common.Editor",
+        "UdonSharp.Runtime",
+        "UdonSharp.Editor",
+        "VRC.SDK3",
+        "VRC.SDKBase",
+        "VRC.Udon"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

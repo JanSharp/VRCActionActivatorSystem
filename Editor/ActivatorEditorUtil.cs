@@ -1,5 +1,4 @@
-﻿#if UNITY_EDITOR
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UdonSharp;
@@ -93,4 +92,3 @@ namespace JanSharp
         }
     }
 }
-#endif

@@ -3,10 +3,6 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
-#if UNITY_EDITOR && !COMPILER_UDONSHARP
-using UnityEditor;
-using UdonSharpEditor;
-#endif
 
 namespace JanSharp
 {
@@ -40,12 +36,4 @@ namespace JanSharp
             PlayerCount--;
         }
     }
-
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-    [InitializeOnLoad]
-    public static class PlayerTriggerActivatorOnBuild
-    {
-        static PlayerTriggerActivatorOnBuild() => OnBuildUtil.RegisterType<PlayerTriggerActivator>(ActivatorEditorUtil.ActivatorOnBuildBase, order: 0);
-    }
-    #endif
 }

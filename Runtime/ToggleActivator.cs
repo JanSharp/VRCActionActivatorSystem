@@ -2,10 +2,6 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-#if UNITY_EDITOR && !COMPILER_UDONSHARP
-using UnityEditor;
-using UdonSharpEditor;
-#endif
 
 namespace JanSharp
 {
@@ -32,12 +28,4 @@ namespace JanSharp
             RequestSerialization();
         }
     }
-
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-    [InitializeOnLoad]
-    public static class ToggleActivatorOnBuild
-    {
-        static ToggleActivatorOnBuild() => OnBuildUtil.RegisterType<ToggleActivator>(ActivatorEditorUtil.ActivatorOnBuildBase, order: 0);
-    }
-    #endif
 }

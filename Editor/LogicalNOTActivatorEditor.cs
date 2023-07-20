@@ -3,30 +3,11 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
-#if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
-#endif
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class LogicalNOTActivator : ActivatorBase
-    {
-        public ActivatorBase inputActivator;
-
-        private void Start()
-        {
-            OnEvent();
-        }
-
-        public void OnEvent()
-        {
-            State = !(bool)inputActivator.GetProgramVariable("state");
-        }
-    }
-
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
     [InitializeOnLoad]
     public static class LogicalNOTActivatorOnBuild
     {
@@ -42,5 +23,4 @@ namespace JanSharp
             return true;
         }
     }
-    #endif
 }

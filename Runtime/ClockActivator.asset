@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: ClockActivator
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 15218b04da035280f9ed5486833a918a,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: c9737ab3f66751e6aa8b534d404b1b12,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -458,7 +458,7 @@ MonoBehaviour:
       Data: 27|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: JanSharp.UpdateManager, Assembly-CSharp
+      Data: JanSharp.UpdateManager, JanSharp.Common
     - Name: 
       Entry: 8
       Data: 
@@ -524,7 +524,7 @@ MonoBehaviour:
       Data: 32|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: JanSharp.ActivatorBase, Assembly-CSharp
+      Data: JanSharp.ActivatorBase, JanSharp.ActionActivatorSystem
     - Name: 
       Entry: 8
       Data: 

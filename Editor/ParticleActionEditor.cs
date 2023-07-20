@@ -2,28 +2,13 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-#if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
 using System.Linq;
 using System.Collections.Generic;
-#endif
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ParticleAction : ConfigurableActionBase
-    {
-        public ParticleSystem[] particles;
-
-        public void OnEvent()
-        {
-            foreach (var particle in particles)
-                particle.Play();
-        }
-    }
-
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
     [InitializeOnLoad]
     public static class ParticleActionOnBuild
     {
@@ -99,5 +84,4 @@ namespace JanSharp
                 MakeAllParticleSystemsNotLoop);
         }
     }
-    #endif
 }

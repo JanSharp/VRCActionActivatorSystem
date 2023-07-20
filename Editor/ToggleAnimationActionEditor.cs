@@ -2,29 +2,13 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-#if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
 using UdonSharpEditor;
 using System.Linq;
 using System.Collections.Generic;
-#endif
 
 namespace JanSharp
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ToggleAnimationAction : ActionBase
-    {
-        public Animator animator;
-        public string boolParameterName = "state";
-
-        public void OnEvent()
-        {
-            animator.SetBool(boolParameterName, (bool)activator.GetProgramVariable("state"));
-        }
-    }
-
-    #if UNITY_EDITOR && !COMPILER_UDONSHARP
-
     [InitializeOnLoad]
     public static class ToggleAnimationActionOnBuild
     {
@@ -81,5 +65,4 @@ namespace JanSharp
             // }
         }
     }
-    #endif
 }
