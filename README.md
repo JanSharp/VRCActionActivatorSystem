@@ -66,6 +66,7 @@ The only activator that can possibly do something right on Start is LogicalNOTAc
 
 Synced scripts are
 
+- ObjectPositionSync
 - ToggleActivator
 - ButtonActivator
 - MemoryActivator
