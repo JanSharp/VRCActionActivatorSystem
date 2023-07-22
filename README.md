@@ -14,6 +14,14 @@ With these downsides of the system in mind and you decide that this system is no
 - Do not disable scripts part of this system, it would break syncing. For toggle-able interacts use the InteractProxy from the JanSharp Common package
 - The initial state of the world is "everything is off". [Read more](#initial-state)
 
+# Samples
+
+This packages includes one sample which includes animation controller bases you could use for actions that require animations. To get the sample, in unity on the menu bar go to `Window => Package manager => In Project (top left) => Action Activator System => Samples`.
+
+Note the use of `Write Defaults` in the animation states, I recommend reading the [documentation](https://docs.unity3d.com/2019.4/Documentation/Manual/class-State.html) for it to understand what it does. The reason why the loop toggle animation controller is using it on the default state is to reset the state to default when it gets deactivated, otherwise it may freeze somewhere in the middle. However that may be desired behaviour, in which case you can uncheck the checkbox. In the case for the one time animation it should always be enabled on the default state, at least in all cases I can think of. For every other state it is disabled.
+
+Technically we **shouldn't use Write Defaults at all**, see [here](https://creators.vrchat.com/avatars/#write-defaults-on-states), although that page is specifically for avatars so I'm not even sure if it applies to worlds. Even still, the argument that it makes the animations more maintainable is very reasonable. In this case, since the sample animations are so tiny and I'm not actually providing sample animations, only the controller, I can't really provide you with "reset" animations. If you want to follow the workflow of always having Write Defaults disabled you'll have to add a reset animation that's a single frame long that "animates" the properties that get modified by the other animation in the controller to their default value, so both frame 0 and 1 in said reset animation have the same values. I'd definitely recommend doing this for bigger animation controllers. (Do note that I'm no expert with animations, but I believe what I just described does work.)
+
 # Activators
 
 All activators have 2 states: on and off.
