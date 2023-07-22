@@ -18,7 +18,7 @@
     }
   ],
   "vpmDependencies": {
-    "com.jansharp.common": ">=0.1.0",
+    "com.jansharp.common": ">=0.1.1",
     "com.vrchat.udonsharp": "^1.1.x"
   },
   "url": "https://github.com/JanSharp/VRCActionActivatorSystem/releases/download/v1.0.0/com.jansharp.action-activator-system.zip",
