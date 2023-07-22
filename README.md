@@ -9,6 +9,10 @@ Due to the nature of how the system works - each activator and action being an i
 
 With these downsides of the system in mind and you decide that this system is not what you're looking for, I'll point you to [CyanTrigger](https://github.com/CyanLaser/CyanTrigger) which is a more generic system. I've never used it personally so I cannot judge it, but purely going by its description it sounds more powerful. The issue with scalability may be a bit lessened, however since it is also working inside of the editor it will also never scale as well as code in text form. Something to keep in mind when making big and complex systems.
 
+# Installing
+
+Head to my [VCC Listing](https://jansharp.github.io/vrc/vcclisting.xhtml) and follow the instructions there.
+
 # Important
 
 - Do not disable scripts part of this system, it would break syncing. For toggle-able interacts use the InteractProxy from the JanSharp Common package
