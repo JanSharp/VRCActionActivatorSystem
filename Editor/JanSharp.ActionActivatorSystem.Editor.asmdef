@@ -10,7 +10,9 @@
         "VRC.SDKBase",
         "VRC.Udon"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
