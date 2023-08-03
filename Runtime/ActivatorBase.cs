@@ -7,7 +7,7 @@ namespace JanSharp
 {
     [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ActivatorBase : UdonSharpBehaviour
+    public abstract class ActivatorBase : UdonSharpBehaviour
     {
         [HideInInspector] public UdonSharpBehaviour[] onActivateListeners;
         [HideInInspector] public UdonSharpBehaviour[] onDeactivateListeners;

@@ -7,7 +7,7 @@ namespace JanSharp
 {
     [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ActionBase : UdonSharpBehaviour
+    public abstract class ActionBase : UdonSharpBehaviour
     {
         public ActivatorBase activator;
     }

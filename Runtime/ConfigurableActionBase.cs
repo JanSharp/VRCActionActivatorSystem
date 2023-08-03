@@ -7,7 +7,7 @@ namespace JanSharp
 {
     [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class ConfigurableActionBase : ActionBase
+    public abstract class ConfigurableActionBase : ActionBase
     {
         public ListenerType listenerType;
     }
