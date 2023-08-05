@@ -1,6 +1,21 @@
 
 # Changelog
 
+## [1.0.2] - 2023-08-05
+
+### Changed
+
+- Change LICENSE.txt to LICENSE.md so Unity sees it in the package manager window ([`c73fbeb`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/c73fbebddecb9e3d5a8594199c409b01e3f74b72))
+- Change all 3 base classes to abstract classes ([`f85f631`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/f85f6317b30b364bd0056b5dbc77c91e3cfec498))
+
+### Added
+
+- Add vpm dependency on `com.vrchat.worlds` for clarity ([`c3f0e32`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/c3f0e321f01a233760a83675bb975e3a2b910798))
+
+### Fixed
+
+- Fix build error on publish ([`2ead493`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/2ead4930c1f908f472de5a1667bfd9e853fdfe97))
+
 ## [1.0.1] - 2023-07-23
 
 ### Added
@@ -41,5 +56,6 @@ _First version of this package that is in the VCC listing._
 - Add Action/Activator editor util ([`fcbee07`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/fcbee07a9655952463c22b858d62b1728852db08), [`5cfefae`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/5cfefaedbb0720bfae24ceeaac5bd27c0bb02e64), [`b08281b`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/b08281b9d942b2ddbc55c192a2b78a21b9a5474b), [`8b15d4f`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/8b15d4fd6aaafc648523c065ef5a083cfc8eb918), [`98eb949`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/98eb9490a5765779f0e6005f9c9f281bb93424ba), [`6d05996`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/6d05996929d96e02e1aa0cdc365cdfc313157350))
 - Add dependency on JanSharp Common for editor utils and InteractProxy ([`40e3a87`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/40e3a87b0eeb4403beea6575ac6c42480b285bcd), [`3142101`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/31421012683da8967cb47709b011f29dda45ce5c), [`7cf77f8`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/7cf77f8b40e0b3f5bf29ee03fc18c2f508b20045))
 
+[1.0.2]: https://github.com/JanSharp/VRCActionActivatorSystem/releases/tag/v1.0.2
 [1.0.1]: https://github.com/JanSharp/VRCActionActivatorSystem/releases/tag/v1.0.1
 [1.0.0]: https://github.com/JanSharp/VRCActionActivatorSystem/releases/tag/v1.0.0
