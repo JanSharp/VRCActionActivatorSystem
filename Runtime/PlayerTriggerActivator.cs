@@ -9,6 +9,9 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class PlayerTriggerActivator : ActivatorBase
     {
+        [Tooltip("Only react to the local player?")]
+        [SerializeField] private bool localOnly;
+
         private int playerCount;
         private int PlayerCount
         {
@@ -28,11 +31,15 @@ namespace JanSharp
 
         public override void OnPlayerTriggerEnter(VRCPlayerApi player)
         {
+            if (localOnly && !player.isLocal)
+                return;
             PlayerCount++;
         }
 
         public override void OnPlayerTriggerExit(VRCPlayerApi player)
         {
+            if (localOnly && !player.isLocal)
+                return;
             PlayerCount--;
         }
     }
