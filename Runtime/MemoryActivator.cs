@@ -37,7 +37,7 @@ namespace JanSharp
                 // could affect the stored state differently on different clients. So to increase
                 // the chance of everyone having the same state regardless of order of events
                 // we're syncing the state based on the owner's state just a bit delayed
-                if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+                if (Networking.IsOwner(this.gameObject))
                 {
                     requestSerializationCount++;
                     SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), 1f);

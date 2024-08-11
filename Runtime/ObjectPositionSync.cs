@@ -29,7 +29,7 @@ namespace JanSharp
                 updateManager.Register(this);
                 lerpStartPosition = this.transform.localPosition;
                 lerpStartTime = Time.time;
-                if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+                if (Networking.IsOwner(this.gameObject))
                 {
                     requestSerializationCount++;
                     SendCustomEventDelayedSeconds(nameof(RequestSerializationDelayed), 2f);
