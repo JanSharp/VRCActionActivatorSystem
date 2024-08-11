@@ -29,6 +29,7 @@ namespace JanSharp
 
                 if (value == syncedState)
                     return;
+                syncedState = value;
 
                 // syncing the state of this even though the state should already be
                 // evaluated by every other client based on inputs.
