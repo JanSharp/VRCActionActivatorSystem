@@ -85,7 +85,7 @@ namespace JanSharp
                 targets.Cast<ParticleLoopAction>().SelectMany(a => a.particles.EmptyIfNull()).Where(p => p != null && p.main.playOnAwake),
                 DisablePlayOnAwake);
 
-            ActionEditorUtil.ConditionalButton(new GUIContent("Make all Particle Systems not loop"),
+            ActionEditorUtil.ConditionalButton(new GUIContent("Make all Particle Systems loop"),
                 targets.Cast<ParticleLoopAction>().SelectMany(a => a.particles.EmptyIfNull()).Where(p => p != null && p.main.loop),
                 MakeAllParticleSystemsLoop);
         }
