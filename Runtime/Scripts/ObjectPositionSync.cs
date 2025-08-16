@@ -10,7 +10,7 @@ namespace JanSharp
     {
         public float lerpDuration = 0.5f;
 
-        [HideInInspector] public UpdateManager updateManager;
+        [HideInInspector][SingletonReference] public UpdateManager updateManager;
         // for UpdateManager
         private int customUpdateInternalIndex;
 

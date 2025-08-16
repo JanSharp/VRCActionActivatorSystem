@@ -9,7 +9,7 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ClockActivator : ActivatorBase
     {
-        [HideInInspector] public UpdateManager updateManager;
+        [HideInInspector][SingletonReference] public UpdateManager updateManager;
         public ActivatorBase inputActivator;
         [SerializeField] private float secondsBetweenTicks = 1f;
         // for UpdateManager
