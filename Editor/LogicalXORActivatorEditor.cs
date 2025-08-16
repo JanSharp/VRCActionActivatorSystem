@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System.Linq;
+using UdonSharpEditor;
+using UnityEditor;
 
 namespace JanSharp
 {
@@ -16,6 +18,21 @@ namespace JanSharp
             foreach (var activator in logicalXORActivator.inputActivators)
                 ActivatorEditorUtil.AddActivatorToListeners(activator, ListenerType.OnStateChanged, logicalXORActivator);
             return true;
+        }
+    }
+
+    [CanEditMultipleObjects]
+    [CustomEditor(typeof(LogicalXORActivator))]
+    public class LogicalXORActivatorEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(target))
+                return;
+            serializedObject.Update();
+            DrawPropertiesExcluding(serializedObject, "m_Script");
+            serializedObject.ApplyModifiedProperties();
+            ActivatorEditorUtil.OnActivatorInspectorGUI(targets.Cast<LogicalXORActivator>().ToList());
         }
     }
 }

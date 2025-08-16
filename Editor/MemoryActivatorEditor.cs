@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System.Linq;
+using UdonSharpEditor;
+using UnityEditor;
 
 namespace JanSharp
 {
@@ -35,6 +37,21 @@ namespace JanSharp
                 );
             }
             return true;
+        }
+    }
+
+    [CanEditMultipleObjects]
+    [CustomEditor(typeof(MemoryActivator))]
+    public class MemoryActivatorEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(target))
+                return;
+            serializedObject.Update();
+            DrawPropertiesExcluding(serializedObject, "m_Script");
+            serializedObject.ApplyModifiedProperties();
+            ActivatorEditorUtil.OnActivatorInspectorGUI(targets.Cast<MemoryActivator>().ToList());
         }
     }
 }
