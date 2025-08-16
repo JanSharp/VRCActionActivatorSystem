@@ -1,11 +1,8 @@
-﻿using UdonSharp;
-using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
-using UnityEditor;
-using UdonSharpEditor;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
+using UdonSharpEditor;
+using UnityEditor;
+using UnityEngine;
 
 namespace JanSharp
 {
