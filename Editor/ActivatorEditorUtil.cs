@@ -66,6 +66,8 @@ namespace JanSharp
             return true;
         }
 
+        private static UdonSharpBehaviour[] EmptyListeners = new UdonSharpBehaviour[0];
+
         public static void OnActivatorInspectorGUI<T>(List<T> targets)
             where T : ActivatorBase
         {
@@ -87,17 +89,17 @@ namespace JanSharp
                         EditorGUILayout.ObjectField("Activator", target, typeof(T), allowSceneObjects: true);
                     using (new GUILayout.VerticalScope(EditorStyles.helpBox))
                     {
-                        int listenerCount = target.onActivateListeners.Length
-                            + target.onDeactivateListeners.Length
-                            + target.onStateChangedListeners.Length;
+                        int listenerCount = target.onActivateListeners?.Length ?? 0
+                            + target.onDeactivateListeners?.Length ?? 0
+                            + target.onStateChangedListeners?.Length ?? 0;
                         GUILayout.Label($"Listeners: ({listenerCount})", EditorStyles.boldLabel);
                         using (new EditorGUI.DisabledGroupScope(disabled: true))
                         {
-                            foreach (var listener in target.onActivateListeners)
+                            foreach (var listener in target.onActivateListeners ?? EmptyListeners)
                                 EditorGUILayout.ObjectField("On Activate", listener, typeof(UdonSharpBehaviour), allowSceneObjects: true);
-                            foreach (var listener in target.onDeactivateListeners)
+                            foreach (var listener in target.onDeactivateListeners ?? EmptyListeners)
                                 EditorGUILayout.ObjectField("On Deactivate", listener, typeof(UdonSharpBehaviour), allowSceneObjects: true);
-                            foreach (var listener in target.onStateChangedListeners)
+                            foreach (var listener in target.onStateChangedListeners ?? EmptyListeners)
                                 EditorGUILayout.ObjectField("On State Changed", listener, typeof(UdonSharpBehaviour), allowSceneObjects: true);
                         }
                     }
