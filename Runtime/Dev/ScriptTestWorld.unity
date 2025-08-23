@@ -10451,8 +10451,8 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1189407747}
   onStateChangedListeners:
-  - {fileID: 338230297}
   - {fileID: 368416670}
+  - {fileID: 338230297}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -11135,19 +11135,19 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 338488217}
   onActivateListeners:
+  - {fileID: 293753644}
+  - {fileID: 533460966}
   - {fileID: 112891029}
   - {fileID: 519803816}
   - {fileID: 1582841392}
-  - {fileID: 293753644}
-  - {fileID: 533460966}
   onDeactivateListeners:
   - {fileID: 112891029}
   onStateChangedListeners: []
   onActivateListenerEventNames:
+  - OnEvent
+  - OnEvent
   - OnResetActivateEvent
   - OnActivateEvent
-  - OnEvent
-  - OnEvent
   - OnEvent
   onDeactivateListenerEventNames:
   - OnResetDeactivateEvent
@@ -11241,8 +11241,8 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1766796069}
   onStateChangedListeners:
-  - {fileID: 1159453981}
   - {fileID: 473932734}
+  - {fileID: 1159453981}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -30923,8 +30923,8 @@ MonoBehaviour:
   - {fileID: 1117342997}
   onStateChangedListeners:
   - {fileID: 110793727}
-  - {fileID: 1535157609}
   - {fileID: 428278922}
+  - {fileID: 1535157609}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -81430,8 +81430,8 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1866887279}
   onStateChangedListeners:
-  - {fileID: 1780750315}
   - {fileID: 1074239544}
+  - {fileID: 1780750315}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -97569,8 +97569,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1267871891}
   onActivateListeners:
-  - {fileID: 1582841390}
   - {fileID: 722846275}
+  - {fileID: 1582841390}
   onDeactivateListeners: []
   onStateChangedListeners: []
   onActivateListenerEventNames:
@@ -118192,8 +118192,8 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 1549095245}
   onActivateListeners:
   - {fileID: 1211859961}
-  - {fileID: 1582841391}
   - {fileID: 2028362983}
+  - {fileID: 1582841391}
   onDeactivateListeners:
   - {fileID: 1514395891}
   onStateChangedListeners:
@@ -123548,25 +123548,25 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1659564318}
   onActivateListeners:
-  - {fileID: 1034012555}
   - {fileID: 1663986381}
-  onDeactivateListeners:
   - {fileID: 1034012555}
+  onDeactivateListeners:
   - {fileID: 363678373}
+  - {fileID: 1034012555}
   onStateChangedListeners:
-  - {fileID: 376992552}
   - {fileID: 1461525919}
-  - {fileID: 341725671}
   - {fileID: 1324403179}
-  - {fileID: 1267871893}
+  - {fileID: 341725671}
   - {fileID: 477734051}
+  - {fileID: 376992552}
+  - {fileID: 1267871893}
   - {fileID: 1312060715}
   onActivateListenerEventNames:
+  - OnEvent
   - OnResetActivateEvent
-  - OnEvent
   onDeactivateListenerEventNames:
-  - OnResetDeactivateEvent
   - OnEvent
+  - OnResetDeactivateEvent
   onStateChangedListenerEventNames:
   - OnEvent
   - OnEvent
@@ -123576,6 +123576,8 @@ MonoBehaviour:
   - OnEvent
   - OnEvent
   state: 0
+  onByDefault: 0
+  syncedState: 0
 --- !u!1 &1663986376
 GameObject:
   m_ObjectHideFlags: 0
@@ -144105,18 +144107,18 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1996263733}
   onActivateListeners:
-  - {fileID: 1034012555}
   - {fileID: 1952875810}
+  - {fileID: 1034012555}
   onDeactivateListeners:
   - {fileID: 697004215}
   onStateChangedListeners:
-  - {fileID: 376992552}
-  - {fileID: 341725671}
   - {fileID: 1324403179}
+  - {fileID: 341725671}
   - {fileID: 1316655780}
+  - {fileID: 376992552}
   onActivateListenerEventNames:
-  - OnActivateEvent
   - OnEvent
+  - OnActivateEvent
   onDeactivateListenerEventNames:
   - OnEvent
   onStateChangedListenerEventNames:

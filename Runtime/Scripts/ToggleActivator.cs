@@ -1,4 +1,5 @@
 ﻿using UdonSharp;
+using UnityEngine;
 using VRC.SDKBase;
 
 namespace JanSharp
@@ -6,9 +7,14 @@ namespace JanSharp
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class ToggleActivator : ActivatorBase
     {
+        [SerializeField] private bool onByDefault;
+#if UNITY_EDITOR && !COMPILER_UDONSHARP
+        public bool OnByDefault => onByDefault;
+#endif
+
         [UdonSynced]
         [FieldChangeCallback(nameof(SyncedState))]
-        private bool syncedState;
+        [HideInInspector][SerializeField] private bool syncedState;
         private bool SyncedState
         {
             get => syncedState;

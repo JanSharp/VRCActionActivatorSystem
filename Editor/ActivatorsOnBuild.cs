@@ -36,7 +36,7 @@ namespace JanSharp
             if (activator is PlayerTriggerActivator playerTrigger)
                 return new AlwaysFalseEvaluator(playerTrigger);
             if (activator is ToggleActivator toggleActivator)
-                return new AlwaysFalseEvaluator(toggleActivator);
+                return new ToggleEvaluator(toggleActivator);
             throw new System.NotImplementedException($"Missing Evaluator for the activator type '{activator.GetType().FullName}'.");
         }
 
@@ -360,5 +360,15 @@ namespace JanSharp
             bool resetState = reset?.state ?? false;
             SetEvaluatedState(activateState && !resetState);
         }
+    }
+
+    public class ToggleEvaluator : Evaluator
+    {
+        private ToggleActivator activator;
+        public override ActivatorBase Activator => activator;
+        public ToggleEvaluator(ToggleActivator activator) => this.activator = activator;
+        public override void ResolveInputs(Dictionary<ActivatorBase, Evaluator> evaluatorLut) { }
+        protected override void EvaluateCurrentState(bool forceEvenIfInputIsNotEvaluated)
+            => SetEvaluatedState(activator.OnByDefault);
     }
 }

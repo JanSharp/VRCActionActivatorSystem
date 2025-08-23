@@ -7,7 +7,17 @@ namespace JanSharp
     [InitializeOnLoad]
     public static class ToggleActivatorOnBuild
     {
-        static ToggleActivatorOnBuild() => OnBuildUtil.RegisterType<ToggleActivator>(ActivatorEditorUtil.ActivatorOnBuildBase, order: 0);
+        static ToggleActivatorOnBuild() => OnBuildUtil.RegisterType<ToggleActivator>(OnBuild, order: 0);
+
+        private static bool OnBuild(ToggleActivator toggleActivator)
+        {
+            if (!ActivatorEditorUtil.ActivatorOnBuildBase(toggleActivator))
+                return false;
+            SerializedObject so = new SerializedObject(toggleActivator);
+            so.FindProperty("syncedState").boolValue = toggleActivator.OnByDefault;
+            so.ApplyModifiedProperties();
+            return true;
+        }
     }
 
     [CanEditMultipleObjects]
