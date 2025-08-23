@@ -31,6 +31,8 @@ namespace JanSharp
                 return new LogicalXOREvaluator(logicalXOR);
             if (activator is MemoryActivator memory)
                 return new MemoryEvaluator(memory);
+            if (activator is OnStartActivator onStart)
+                return new AlwaysFalseEvaluator(onStart);
             if (activator is PlayerTriggerActivator playerTrigger)
                 return new AlwaysFalseEvaluator(playerTrigger);
             if (activator is ToggleActivator toggleActivator)

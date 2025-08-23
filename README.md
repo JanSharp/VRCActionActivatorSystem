@@ -53,6 +53,7 @@ All activators have 2 states: on and off.
 - LogicalNOTActivator (inverts the state of the referenced activator)
 - MemoryActivator (The memory activator will reference 2 activators. An enable and a reset activator. When the enable activator activates the memory activator also activates. The enable activator deactivating gets ignored so the memory activator stays on. Then when the reset activator activates the memory activator deactivates and stays inactive.)
 - ClockActivator (Emits a pulse every x seconds while the input activator is active. The input activator disabling merely pauses the clock, there is no way to reset it.)
+- OnStartActivator (Emits a pulse in `Start`. Likely hardly useful, however due to changes in the system this was previously doable using a LogicalNotActivator, which is no longer the case. So this activator only exists for legacy reasons in case any system was depending on this old behavior.)
 
 ## Activator Events
 
