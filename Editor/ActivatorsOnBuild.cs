@@ -20,7 +20,7 @@ namespace JanSharp
             if (activator is ClockActivator clock)
                 return new AlwaysFalseEvaluator(clock);
             if (activator is ItemTriggerActivator itemTrigger)
-                return new AlwaysFalseEvaluator(itemTrigger);
+                return new ItemTriggerEvaluator(itemTrigger);
             if (activator is LogicalANDActivator logicalAND)
                 return new LogicalANDEvaluator(logicalAND);
             if (activator is LogicalNOTActivator logicalNOT)
@@ -228,6 +228,16 @@ namespace JanSharp
         public override void ResolveInputs(Dictionary<ActivatorBase, Evaluator> evaluatorLut) { }
         protected override void EvaluateCurrentState(bool forceEvenIfInputIsNotEvaluated)
             => SetEvaluatedState(false);
+    }
+
+    public class ItemTriggerEvaluator : Evaluator
+    {
+        private ItemTriggerActivator activator;
+        public override ActivatorBase Activator => activator;
+        public ItemTriggerEvaluator(ItemTriggerActivator activator) => this.activator = activator;
+        public override void ResolveInputs(Dictionary<ActivatorBase, Evaluator> evaluatorLut) { }
+        protected override void EvaluateCurrentState(bool forceEvenIfInputIsNotEvaluated)
+            => SetEvaluatedState(activator.ItemCount != 0);
     }
 
     public class LogicalANDEvaluator : Evaluator

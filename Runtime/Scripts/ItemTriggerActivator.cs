@@ -7,14 +7,25 @@ namespace JanSharp
     public class ItemTriggerActivator : ActivatorBase
     {
         [SerializeField] private string containedItemName;
-        private int itemCount;
+        [Tooltip("This defines how many relevant items are already in the trigger in the default state of "
+            + "the scene.\n"
+            + "If there are multiple colliders on this game object, an item colliding with multiple of said "
+            + "colliders counts multiple times.\n"
+            + "Setting this to a value greater than the amount of items actually within the this "
+            + "Item Trigger Activator will result in it not turning off even when no items are in it.")]
+        [Min(0)]
+        [SerializeField] private int initialItemCount; // Called "initial" just to display as such in the inspector.
+#if UNITY_EDITOR && !COMPILER_UDONSHARP
+        public int ItemCount
+#else
         private int ItemCount
+#endif
         {
-            get => itemCount;
+            get => initialItemCount;
             set
             {
-                itemCount = value;
-                State = value != 0;
+                initialItemCount = System.Math.Max(0, value);
+                State = initialItemCount != 0;
             }
         }
 

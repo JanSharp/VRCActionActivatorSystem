@@ -326,7 +326,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &65151937
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -10451,8 +10451,8 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1189407747}
   onStateChangedListeners:
-  - {fileID: 368416670}
   - {fileID: 338230297}
+  - {fileID: 368416670}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -11135,19 +11135,19 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 338488217}
   onActivateListeners:
-  - {fileID: 293753644}
-  - {fileID: 533460966}
   - {fileID: 112891029}
   - {fileID: 519803816}
   - {fileID: 1582841392}
+  - {fileID: 293753644}
+  - {fileID: 533460966}
   onDeactivateListeners:
   - {fileID: 112891029}
   onStateChangedListeners: []
   onActivateListenerEventNames:
-  - OnEvent
-  - OnEvent
   - OnResetActivateEvent
   - OnActivateEvent
+  - OnEvent
+  - OnEvent
   - OnEvent
   onDeactivateListenerEventNames:
   - OnResetDeactivateEvent
@@ -11241,8 +11241,8 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1766796069}
   onStateChangedListeners:
-  - {fileID: 473932734}
   - {fileID: 1159453981}
+  - {fileID: 473932734}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -30922,9 +30922,9 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1117342997}
   onStateChangedListeners:
-  - {fileID: 428278922}
-  - {fileID: 1535157609}
   - {fileID: 110793727}
+  - {fileID: 1535157609}
+  - {fileID: 428278922}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -81430,8 +81430,8 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1866887279}
   onStateChangedListeners:
-  - {fileID: 1074239544}
   - {fileID: 1780750315}
+  - {fileID: 1074239544}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -91319,7 +91319,7 @@ PrefabInstance:
     - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
         type: 3}
       propertyPath: NetworkIDs.Array.size
-      value: 64
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
         type: 3}
@@ -91640,6 +91640,11 @@ PrefabInstance:
         type: 3}
       propertyPath: NetworkIDs.Array.data[63].ID
       value: 73
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
+        type: 3}
+      propertyPath: NetworkIDs.Array.data[64].ID
+      value: 74
       objectReference: {fileID: 0}
     - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
         type: 3}
@@ -91978,6 +91983,11 @@ PrefabInstance:
       objectReference: {fileID: 944870837}
     - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
         type: 3}
+      propertyPath: NetworkIDs.Array.data[64].gameObject
+      value: 
+      objectReference: {fileID: 1171234228}
+    - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
+        type: 3}
       propertyPath: NetworkIDs.Array.data[58].SerializedTypeNames.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -92008,6 +92018,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
         type: 3}
+      propertyPath: NetworkIDs.Array.data[64].SerializedTypeNames.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
+        type: 3}
       propertyPath: NetworkIDs.Array.data[58].SerializedTypeNames.Array.data[0]
       value: VRC.Udon.UdonBehaviour
       objectReference: {fileID: 0}
@@ -92035,6 +92050,16 @@ PrefabInstance:
         type: 3}
       propertyPath: NetworkIDs.Array.data[63].SerializedTypeNames.Array.data[0]
       value: VRC.Udon.UdonBehaviour
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
+        type: 3}
+      propertyPath: NetworkIDs.Array.data[64].SerializedTypeNames.Array.data[0]
+      value: VRC.SDK3.Components.VRCPickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759095419728963412, guid: 8894fa7e4588a5c4fab98453e558847d,
+        type: 3}
+      propertyPath: NetworkIDs.Array.data[64].SerializedTypeNames.Array.data[1]
+      value: VRC.SDK3.Components.VRCObjectSync
       objectReference: {fileID: 0}
     - target: {fileID: 8464459589408506562, guid: 8894fa7e4588a5c4fab98453e558847d,
         type: 3}
@@ -92303,6 +92328,187 @@ MonoBehaviour:
   - {fileID: 1819398229}
   - {fileID: 972009981}
   currentStateInTheScene: 0
+--- !u!1 &1171234228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1171234229}
+  - component: {fileID: 1171234235}
+  - component: {fileID: 1171234234}
+  - component: {fileID: 1171234233}
+  - component: {fileID: 1171234232}
+  - component: {fileID: 1171234231}
+  - component: {fileID: 1171234230}
+  m_Layer: 13
+  m_Name: SimpleItem (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1171234229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171234228}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.383, y: 0.263, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1549095249}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1171234230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171234228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1783056023, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowCollisionOwnershipTransfer: 0
+  ForceKinematicOnRemote: 0
+--- !u!114 &1171234231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171234228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1804438810, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MomentumTransferMethod: 0
+  DisallowTheft: 0
+  ExactGun: {fileID: 0}
+  ExactGrip: {fileID: 0}
+  allowManipulationWhenEquipped: 0
+  orientation: 0
+  AutoHold: 0
+  InteractionText: 
+  UseText: Use
+  useEventBroadcastType: 0
+  UseDownEventName: 
+  UseUpEventName: 
+  pickupDropEventBroadcastType: 0
+  PickupEventName: 
+  DropEventName: 
+  ThrowVelocityBoostMinSpeed: 1
+  ThrowVelocityBoostScale: 1
+  currentlyHeldBy: {fileID: 0}
+  pickupable: 1
+  proximity: 2
+--- !u!54 &1171234232
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171234228}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1171234233
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171234228}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1171234234
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171234228}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1171234235
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171234228}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1189407746
 GameObject:
   m_ObjectHideFlags: 0
@@ -97233,7 +97439,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1211859960
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -97280,7 +97486,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 1211859960}
   activator: {fileID: 1549095250}
   listenerType: 0
-  pickup: {fileID: 709759932}
+  pickup: {fileID: 792298295}
 --- !u!1 &1267871890
 GameObject:
   m_ObjectHideFlags: 0
@@ -97363,8 +97569,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1267871891}
   onActivateListeners:
-  - {fileID: 722846275}
   - {fileID: 1582841390}
+  - {fileID: 722846275}
   onDeactivateListeners: []
   onStateChangedListeners: []
   onActivateListenerEventNames:
@@ -112749,7 +112955,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &1514395887
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -117843,7 +118049,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &1549095245
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -117959,6 +118165,7 @@ Transform:
   - {fileID: 912699672}
   - {fileID: 792298293}
   - {fileID: 1734979725}
+  - {fileID: 1171234229}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1549095250
@@ -117984,9 +118191,9 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1549095245}
   onActivateListeners:
-  - {fileID: 2028362983}
   - {fileID: 1211859961}
   - {fileID: 1582841391}
+  - {fileID: 2028362983}
   onDeactivateListeners:
   - {fileID: 1514395891}
   onStateChangedListeners:
@@ -117999,8 +118206,9 @@ MonoBehaviour:
   - OnEvent
   onStateChangedListenerEventNames:
   - OnEvent
-  state: 0
-  containedItemName: 
+  state: 1
+  containedItemName: SimpleItem
+  initialItemCount: 1
 --- !u!1 &1551383211
 GameObject:
   m_ObjectHideFlags: 0
@@ -123340,25 +123548,25 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1659564318}
   onActivateListeners:
+  - {fileID: 1034012555}
   - {fileID: 1663986381}
-  - {fileID: 1034012555}
   onDeactivateListeners:
-  - {fileID: 363678373}
   - {fileID: 1034012555}
+  - {fileID: 363678373}
   onStateChangedListeners:
-  - {fileID: 1324403179}
-  - {fileID: 477734051}
-  - {fileID: 341725671}
-  - {fileID: 1312060715}
-  - {fileID: 1461525919}
-  - {fileID: 1267871893}
   - {fileID: 376992552}
+  - {fileID: 1461525919}
+  - {fileID: 341725671}
+  - {fileID: 1324403179}
+  - {fileID: 1267871893}
+  - {fileID: 477734051}
+  - {fileID: 1312060715}
   onActivateListenerEventNames:
-  - OnEvent
   - OnResetActivateEvent
-  onDeactivateListenerEventNames:
   - OnEvent
+  onDeactivateListenerEventNames:
   - OnResetDeactivateEvent
+  - OnEvent
   onStateChangedListenerEventNames:
   - OnEvent
   - OnEvent
@@ -143897,18 +144105,18 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1996263733}
   onActivateListeners:
-  - {fileID: 1952875810}
   - {fileID: 1034012555}
+  - {fileID: 1952875810}
   onDeactivateListeners:
   - {fileID: 697004215}
   onStateChangedListeners:
+  - {fileID: 376992552}
+  - {fileID: 341725671}
   - {fileID: 1324403179}
   - {fileID: 1316655780}
-  - {fileID: 341725671}
-  - {fileID: 376992552}
   onActivateListenerEventNames:
-  - OnEvent
   - OnActivateEvent
+  - OnEvent
   onDeactivateListenerEventNames:
   - OnEvent
   onStateChangedListenerEventNames:
@@ -143940,7 +144148,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &2028362979
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
