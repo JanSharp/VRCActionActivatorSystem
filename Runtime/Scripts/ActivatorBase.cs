@@ -14,7 +14,10 @@ namespace JanSharp
         [HideInInspector] public string[] onDeactivateListenerEventNames;
         [HideInInspector] public string[] onStateChangedListenerEventNames;
 
-        private bool state;
+#if UNITY_EDITOR && !COMPILER_UDONSHARP
+        public bool EvaluatedInitialState => state;
+#endif
+        [HideInInspector][SerializeField] private bool state;
         protected bool State
         {
             get => state;

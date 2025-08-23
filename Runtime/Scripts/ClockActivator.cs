@@ -16,6 +16,8 @@ namespace JanSharp
         private float elapsedTime;
         private bool initialized;
 
+        public void Start() => OnEvent();
+
         public void OnEvent()
         {
             if ((bool)inputActivator.GetProgramVariable("state"))

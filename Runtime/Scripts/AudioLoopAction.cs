@@ -8,6 +8,8 @@ namespace JanSharp
     {
         public AudioSource audioSource;
 
+        public void Start() => OnEvent();
+
         public void OnEvent()
         {
             if ((bool)activator.GetProgramVariable("state"))

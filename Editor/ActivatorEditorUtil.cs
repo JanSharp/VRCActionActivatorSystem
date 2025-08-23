@@ -66,23 +66,29 @@ namespace JanSharp
             return true;
         }
 
-        private static UdonSharpBehaviour[] EmptyListeners = new UdonSharpBehaviour[0];
+        public static UdonSharpBehaviour[] EmptyListeners = new UdonSharpBehaviour[0];
 
         public static void OnActivatorInspectorGUI<T>(List<T> targets)
             where T : ActivatorBase
         {
             EditorGUILayout.Space();
             if (GUILayout.Button(new GUIContent(
-                $"Update Listeners List{(targets.Count == 1 ? "" : "s")}",
+                $"Update Evaluated Initial State and Listeners List{(targets.Count == 1 ? "" : "s")}",
                 "Triggers on build handlers, which is to say that pressing this button "
                     + "is purely optional and just exists for convenience")))
             {
                 OnBuildUtil.RunOnBuild(showDialogOnFailure: true, useSceneViewNotification: false, abortIfScriptsGotInstantiated: false);
             }
 
-            foreach (T target in targets)
+            using (new EditorGUI.DisabledGroupScope(disabled: true))
             {
-                EditorGUILayout.Space();
+                int truthyCount = targets.Count(t => t.EvaluatedInitialState);
+                EditorGUI.showMixedValue = truthyCount != 0 && truthyCount != targets.Count;
+                EditorGUILayout.Toggle(new GUIContent("Evaluated Initial State"), truthyCount != 0);
+                EditorGUI.showMixedValue = false;
+            }
+
+            foreach (T target in targets)
                 using (new GUILayout.VerticalScope(EditorStyles.helpBox))
                 {
                     using (new EditorGUI.DisabledGroupScope(disabled: true))
@@ -104,7 +110,6 @@ namespace JanSharp
                         }
                     }
                 }
-            }
         }
     }
 

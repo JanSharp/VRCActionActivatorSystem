@@ -2,4 +2,12 @@
 - [x] MemoryActivator late joiner syncing does not work, at least in the specific case of a player who just created the instance and is still alone activates the memory cell, then a player joins
 - [ ] Add inverted option to toggle activator
 - [ ] Add inverted option to toggle actions (not sure which ones, maybe all)
-- [ ] Evaluate all initial states at build time
+- [x] Evaluate all initial states at build time
+  - [x] Update readme
+  - [x] The ClockActivator uses the update manager while active and therefore must check the initial state on Start
+  - [x] Make things like AudioLoopActions, ParticleLoopActions and ToggleAnimatorActions also check their state on start
+  - [x] How should ToggleGameObjectActions handle its default state. Probably needs a user configured bool for the "default state in the scene"
+- [ ] Determine initial itemCount for ItemTriggerActivators at build time
+- [ ] Handle null inputs and listeners everywhere, it is fine and valid, in particular with EditorOnly in mind
+- Logical AND without any inputs is now going to have a permanent truthy state rather than falsy. This matches runtime logic, however it simply never got triggered to evaluate to true, and default has always been false for everything
+- [ ] Add OnMapLoadActivator, purely in order to maintain the ability to have an activator trigger on Start, as that feature gets removed through the Logical Not and its listeners having their initial state evaluated at build time

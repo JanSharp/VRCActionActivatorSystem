@@ -10379,6 +10379,7 @@ MonoBehaviour:
   onDeactivateListenerEventNames: []
   onStateChangedListenerEventNames:
   - OnEvent
+  state: 1
   inputActivator: {fileID: 376992552}
 --- !u!1 &197201198
 GameObject:
@@ -10947,19 +10948,20 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 338488217}
   onActivateListeners:
-  - {fileID: 1582841392}
   - {fileID: 293753644}
   - {fileID: 519803816}
+  - {fileID: 1582841392}
   - {fileID: 533460966}
   onDeactivateListeners: []
   onStateChangedListeners: []
   onActivateListenerEventNames:
   - OnEvent
-  - OnEvent
   - OnActivateEvent
+  - OnEvent
   - OnEvent
   onDeactivateListenerEventNames: []
   onStateChangedListenerEventNames: []
+  state: 0
 --- !u!1 &341725668
 GameObject:
   m_ObjectHideFlags: 0
@@ -11048,8 +11050,8 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1766796069}
   onStateChangedListeners:
-  - {fileID: 473932734}
   - {fileID: 1159453981}
+  - {fileID: 473932734}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -11057,6 +11059,7 @@ MonoBehaviour:
   onStateChangedListenerEventNames:
   - OnEvent
   - OnEvent
+  state: 0
   inputActivators:
   - {fileID: 1659564323}
   - {fileID: 1996263738}
@@ -25833,9 +25836,9 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1117342997}
   onStateChangedListeners:
-  - {fileID: 428278922}
-  - {fileID: 110793727}
   - {fileID: 1535157609}
+  - {fileID: 110793727}
+  - {fileID: 428278922}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -25844,6 +25847,7 @@ MonoBehaviour:
   - OnEvent
   - OnEvent
   - OnEvent
+  state: 0
   inputActivators:
   - {fileID: 1659564323}
   - {fileID: 1996263738}
@@ -45589,6 +45593,7 @@ MonoBehaviour:
   - OnEvent
   onDeactivateListenerEventNames: []
   onStateChangedListenerEventNames: []
+  state: 0
   localOnly: 0
 --- !u!1 &507645231
 GameObject:
@@ -50580,8 +50585,10 @@ MonoBehaviour:
   - OnEvent
   onStateChangedListenerEventNames:
   - OnEvent
+  state: 0
   activateActivator: {fileID: 338488218}
   resetActivator: {fileID: 0}
+  syncedState: 0
 --- !u!1 &533460961
 GameObject:
   m_ObjectHideFlags: 0
@@ -76248,8 +76255,8 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 1866887279}
   onStateChangedListeners:
-  - {fileID: 1074239544}
   - {fileID: 1780750315}
+  - {fileID: 1074239544}
   onActivateListenerEventNames:
   - OnEvent
   onDeactivateListenerEventNames:
@@ -76257,8 +76264,10 @@ MonoBehaviour:
   onStateChangedListenerEventNames:
   - OnEvent
   - OnEvent
+  state: 0
   activateActivator: {fileID: 1996263738}
   resetActivator: {fileID: 1659564323}
+  syncedState: 0
 --- !u!1 &1074239539
 GameObject:
   m_ObjectHideFlags: 0
@@ -86948,7 +86957,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1159453980
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -86998,6 +87007,7 @@ MonoBehaviour:
   - {fileID: 105390019}
   - {fileID: 1819398229}
   - {fileID: 972009981}
+  currentStateInTheScene: 0
 --- !u!1 &1211859958
 GameObject:
   m_ObjectHideFlags: 0
@@ -87172,6 +87182,7 @@ MonoBehaviour:
   - OnEvent
   onDeactivateListenerEventNames: []
   onStateChangedListenerEventNames: []
+  state: 0
   updateManager: {fileID: 1627663751}
   inputActivator: {fileID: 1659564323}
   secondsBetweenTicks: 1
@@ -92733,6 +92744,7 @@ MonoBehaviour:
   - OnEvent
   onStateChangedListenerEventNames:
   - OnEvent
+  state: 0
   inputActivators:
   - {fileID: 1659564323}
   - {fileID: 1996263738}
@@ -107797,6 +107809,7 @@ MonoBehaviour:
   - OnEvent
   onStateChangedListenerEventNames:
   - OnEvent
+  state: 0
   containedItemName: 
 --- !u!1 &1551383211
 GameObject:
@@ -113143,13 +113156,13 @@ MonoBehaviour:
   - {fileID: 1034012555}
   - {fileID: 363678373}
   onStateChangedListeners:
-  - {fileID: 1267871893}
+  - {fileID: 1324403179}
   - {fileID: 1461525919}
+  - {fileID: 341725671}
+  - {fileID: 1312060715}
+  - {fileID: 1267871893}
   - {fileID: 477734051}
   - {fileID: 376992552}
-  - {fileID: 1312060715}
-  - {fileID: 341725671}
-  - {fileID: 1324403179}
   onActivateListenerEventNames:
   - OnResetActivateEvent
   - OnEvent
@@ -113164,6 +113177,7 @@ MonoBehaviour:
   - OnEvent
   - OnEvent
   - OnEvent
+  state: 0
 --- !u!1 &1663986376
 GameObject:
   m_ObjectHideFlags: 0
@@ -123323,6 +123337,7 @@ MonoBehaviour:
   activator: {fileID: 1034012555}
   gameObjects:
   - {fileID: 876994354}
+  currentStateInTheScene: 0
 --- !u!1 &1811863932
 GameObject:
   m_ObjectHideFlags: 0
@@ -133697,10 +133712,10 @@ MonoBehaviour:
   onDeactivateListeners:
   - {fileID: 697004215}
   onStateChangedListeners:
+  - {fileID: 1324403179}
+  - {fileID: 341725671}
   - {fileID: 1316655780}
   - {fileID: 376992552}
-  - {fileID: 341725671}
-  - {fileID: 1324403179}
   onActivateListenerEventNames:
   - OnActivateEvent
   - OnEvent
@@ -133711,6 +133726,7 @@ MonoBehaviour:
   - OnEvent
   - OnEvent
   - OnEvent
+  state: 0
   localOnly: 0
 --- !u!1 &2028362978
 GameObject:

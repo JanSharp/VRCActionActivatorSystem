@@ -1,4 +1,5 @@
 ﻿using UdonSharp;
+using UnityEngine;
 using VRC.SDKBase;
 
 namespace JanSharp
@@ -13,6 +14,8 @@ namespace JanSharp
         private bool waitingForOwnerToSendData = false;
         private const float LateJoinerSyncDelay = 10f;
 
+        [HideInInspector]
+        [SerializeField]
         [UdonSynced]
         [FieldChangeCallback(nameof(SyncedState))]
         private bool syncedState;

@@ -24,7 +24,7 @@ This project uses [custom git filters](.gitattributes) to reduce the amount of n
 # Important
 
 - Do not disable scripts part of this system, it would break syncing. For toggle-able interacts use the InteractProxy from the JanSharp Common package
-- The initial state of the world is "everything is off". [Read more](#initial-state)
+- The initial state of the world is evaluated at build time and applied/enforced on Start. [Read more](#initial-state)
 
 # Samples
 
@@ -93,9 +93,9 @@ Stateful actions reflect the state of a referenced activator, which means they c
 
 # Initial state
 
-The initial state of the map should always be "everything is off". The system will then evaluate states on Start.
+The initial state of the map - activators and actions contained with in it - is evaluated at build time (upon entering play mode or building/publshing the world).
 
-The only activator that can possibly do something right on Start is LogicalNOTActivator. Those all run Start and initialize their state which subsequently triggers any activators and actions listening to their events.
+[Stateful actions](#stateful-actions) are going to apply this evaluated initial state on Start if the objects they are managing don't already match said state.
 
 # Syncing
 
