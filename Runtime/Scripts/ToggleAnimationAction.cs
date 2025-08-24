@@ -16,7 +16,10 @@ namespace JanSharp
 
         public void OnEvent()
         {
-            animator.SetBool(boolParameterName, invertActivator != (bool)activator.GetProgramVariable("state"));
+            if (animator == null)
+                return;
+            bool state = activator != null && (bool)activator.GetProgramVariable("state");
+            animator.SetBool(boolParameterName, invertActivator != state);
         }
     }
 }

@@ -36,7 +36,11 @@ namespace JanSharp
         private void Send(UdonSharpBehaviour[] listeners, string[] listenerEventNames)
         {
             for (int i = 0; i < listeners.Length; i++)
-                listeners[i].SendCustomEvent(listenerEventNames[i]);
+            {
+                UdonSharpBehaviour listener = listeners[i];
+                if (listener != null)
+                    listener.SendCustomEvent(listenerEventNames[i]);
+            }
         }
     }
 }

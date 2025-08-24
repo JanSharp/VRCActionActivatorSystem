@@ -14,7 +14,7 @@ namespace JanSharp
 
         public void OnEvent()
         {
-            State = !(bool)inputActivator.GetProgramVariable("state");
+            State = inputActivator == null || !(bool)inputActivator.GetProgramVariable("state");
         }
     }
 }

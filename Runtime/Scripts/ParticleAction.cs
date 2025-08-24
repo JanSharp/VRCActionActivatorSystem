@@ -11,7 +11,8 @@ namespace JanSharp
         public void OnEvent()
         {
             foreach (var particle in particles)
-                particle.Play();
+                if (particle != null)
+                    particle.Play();
         }
     }
 }

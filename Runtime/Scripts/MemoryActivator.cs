@@ -58,7 +58,7 @@ namespace JanSharp
 
         public void OnResetDeactivateEvent()
         {
-            if ((bool)activateActivator.GetProgramVariable("state"))
+            if (activateActivator != null && (bool)activateActivator.GetProgramVariable("state"))
                 SyncedState = true;
         }
 

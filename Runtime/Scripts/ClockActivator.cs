@@ -20,7 +20,8 @@ namespace JanSharp
 
         public void OnEvent()
         {
-            if ((bool)inputActivator.GetProgramVariable("state"))
+            bool state = inputActivator != null && (bool)inputActivator.GetProgramVariable("state");
+            if (state)
                 updateManager.Register(this);
             else
                 updateManager.Deregister(this);

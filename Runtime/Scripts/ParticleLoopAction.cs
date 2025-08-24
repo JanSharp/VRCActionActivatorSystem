@@ -15,7 +15,8 @@ namespace JanSharp
 
         public void OnEvent()
         {
-            if (invertActivator != (bool)activator.GetProgramVariable("state"))
+            bool state = activator != null && (bool)activator.GetProgramVariable("state");
+            if (invertActivator != state)
                 foreach (var particle in particles)
                     particle.Play();
             else

@@ -17,14 +17,16 @@ namespace JanSharp
 
         public void Start()
         {
-            if (currentStateInTheScene != (bool)activator.GetProgramVariable("state"))
+            bool state = activator != null && (bool)activator.GetProgramVariable("state");
+            if (currentStateInTheScene != state)
                 OnEvent();
         }
 
         public void OnEvent()
         {
-            foreach (var obj in gameObjects)
-                obj.SetActive(!obj.activeSelf);
+            foreach (var go in gameObjects)
+                if (go != null)
+                    go.SetActive(!go.activeSelf);
         }
     }
 }

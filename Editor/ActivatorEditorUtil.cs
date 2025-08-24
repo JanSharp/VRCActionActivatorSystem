@@ -16,9 +16,19 @@ namespace JanSharp
 
         public static void AddActivatorToListeners(ActivatorBase activator, ListenerType listenerType, UdonSharpBehaviour listener, string listenerEventName = "OnEvent")
         {
+            // Even though these errors do not prevent entering play mode or building, they are still logged
+            // as errors instead of warnings because the vast majority of the time this is something
+            // unintended or a mistake by the user, and people are at least a bit less likely to miss errors
+            // vs warnings. And I still want the user to have the option to ignore these errors if it is only
+            // something temporary they are experimenting with.
             if (activator == null)
             {
-                Debug.LogError($"Missing/null Activator for {listener.name}.", listener);
+                Debug.LogError($"Missing/null Activator for '{listener.name}'.", listener);
+                return;
+            }
+            if (EditorUtil.IsEditorOnly(activator))
+            {
+                Debug.LogError($"Editor Only Activator (treated as null) for '{listener.name}'.", listener);
                 return;
             }
             SerializedObject activatorProxy = new SerializedObject(activator);

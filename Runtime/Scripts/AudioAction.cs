@@ -11,7 +11,8 @@ namespace JanSharp
         public void OnEvent()
         {
             foreach (var audioSource in audioSources)
-                audioSource.Play();
+                if (audioSource != null)
+                    audioSource.Play();
         }
     }
 }

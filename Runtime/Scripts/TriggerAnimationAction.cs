@@ -11,7 +11,8 @@ namespace JanSharp
 
         public void OnEvent()
         {
-            animator.SetTrigger(triggerParameterName);
+            if (animator != null)
+                animator.SetTrigger(triggerParameterName);
         }
     }
 }

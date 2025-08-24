@@ -11,7 +11,7 @@ namespace JanSharp
 
         public void OnEvent()
         {
-            if (pickup.IsHeld && pickup.currentPlayer.isLocal)
+            if (pickup != null && pickup.IsHeld && pickup.currentPlayer.isLocal)
                 pickup.Drop();
         }
     }

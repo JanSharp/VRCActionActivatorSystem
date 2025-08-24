@@ -11,7 +11,8 @@ namespace JanSharp
 
         public void OnEvent()
         {
-            targetObject.TargetPosition += movementOnEvent;
+            if (targetObject != null)
+                targetObject.TargetPosition += movementOnEvent;
         }
     }
 }

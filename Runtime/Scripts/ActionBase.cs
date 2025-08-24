@@ -1,5 +1,4 @@
 ﻿using UdonSharp;
-using UnityEngine;
 
 namespace JanSharp
 {

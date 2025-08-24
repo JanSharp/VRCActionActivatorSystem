@@ -15,7 +15,10 @@ namespace JanSharp
 
         public void OnEvent()
         {
-            if (invertActivator != (bool)activator.GetProgramVariable("state"))
+            if (audioSource == null)
+                return;
+            bool state = activator != null && (bool)activator.GetProgramVariable("state");
+            if (invertActivator != state)
                 audioSource.Play();
             else
                 audioSource.Stop();
