@@ -1,6 +1,29 @@
 
 # Changelog
 
+## [1.1.0] - 2025-08-24
+
+_If a system relied on the LogicalNOTActivator performing a state change in Start, change it to use the new OnStartActivator instead._
+
+### Changed
+
+- **Breaking:** Evaluate all initial states at build time and apply that on Start for all stateful actions ([`fe69f62`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/fe69f62221b6d7f2558668171a4cb956ce386a55))
+- **Breaking:** Change LogicalNOTActivator to no longer perform a state change in Start ([`fe69f62`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/fe69f62221b6d7f2558668171a4cb956ce386a55))
+- **Breaking:** Change LogicalANDActivator without any inputs to be permanently on instead of off ([`fe69f62`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/fe69f62221b6d7f2558668171a4cb956ce386a55))
+- Handle references to null and editor only objects ([`2761efc`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/2761efc56eda1855c8e33e88b91c23742a90ed81))
+
+### Added
+
+- Add Invert Activator option to AudioLoopAction, ParticleLoopAction, ToggleAnimationAction and ClockActivator ([`4830ddd`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/4830dddc5385f9bf92641a88cb490cf08570ccf1), [`0f16a8a`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/0f16a8a95f890f9f5137c5a5aa12cc7214420148))
+- Add Current State In The Scene option to the ToggleGameObjectAction ([`fe69f62`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/fe69f62221b6d7f2558668171a4cb956ce386a55))
+- Add On By Default option to ToggleActivator and MemoryActivator ([`f1b40a8`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/f1b40a83b0237e7d57b318d33a843bbdb9bf0477), [`3e63633`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/3e636339cf46a76bde8808b4ecf5d92939a8a520))
+- Enable defining initial item count for ItemTrigger ([`c6efe6c`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/c6efe6cf9b2c08500901ae23da0e1c9cca46586d))
+- Add OnStartActivator to preserve legacy behavior ([`15f2e02`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/15f2e0204626a2771a2b8a081100c87945bd544e))
+
+### Removed
+
+- Remove link to CyanTrigger from readme as it is deprecated ([`3fdc6c6`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/3fdc6c627dcd48ac23802a6668d515cbcc1fe023))
+
 ## [1.0.7] - 2025-08-22
 
 ### Fixed
@@ -98,6 +121,7 @@ _First version of this package that is in the VCC listing._
 - Add Action/Activator editor util ([`fcbee07`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/fcbee07a9655952463c22b858d62b1728852db08), [`5cfefae`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/5cfefaedbb0720bfae24ceeaac5bd27c0bb02e64), [`b08281b`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/b08281b9d942b2ddbc55c192a2b78a21b9a5474b), [`8b15d4f`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/8b15d4fd6aaafc648523c065ef5a083cfc8eb918), [`98eb949`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/98eb9490a5765779f0e6005f9c9f281bb93424ba), [`6d05996`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/6d05996929d96e02e1aa0cdc365cdfc313157350))
 - Add dependency on JanSharp Common for editor utils and InteractProxy ([`40e3a87`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/40e3a87b0eeb4403beea6575ac6c42480b285bcd), [`3142101`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/31421012683da8967cb47709b011f29dda45ce5c), [`7cf77f8`](https://github.com/JanSharp/VRCActionActivatorSystem/commit/7cf77f8b40e0b3f5bf29ee03fc18c2f508b20045))
 
+[1.1.0]: https://github.com/JanSharp/VRCActionActivatorSystem/releases/tag/v1.1.0
 [1.0.7]: https://github.com/JanSharp/VRCActionActivatorSystem/releases/tag/v1.0.7
 [1.0.6]: https://github.com/JanSharp/VRCActionActivatorSystem/releases/tag/v1.0.6
 [1.0.5]: https://github.com/JanSharp/VRCActionActivatorSystem/releases/tag/v1.0.5
