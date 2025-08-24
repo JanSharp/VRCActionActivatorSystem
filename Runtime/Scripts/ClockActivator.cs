@@ -8,6 +8,9 @@ namespace JanSharp
     {
         [HideInInspector][SingletonReference] public UpdateManager updateManager;
         public ActivatorBase inputActivator;
+        [Tooltip("Inverts the state of the given Activator. Equivalent to having a Logical NOT Activator "
+            + "inserted between the given Activator and this Clock Activator.")]
+        [SerializeField] private bool invertActivator;
         [SerializeField] private float secondsBetweenTicks = 1f;
         // for UpdateManager
         private int customUpdateInternalIndex;
@@ -21,7 +24,7 @@ namespace JanSharp
         public void OnEvent()
         {
             bool state = inputActivator != null && (bool)inputActivator.GetProgramVariable("state");
-            if (state)
+            if (invertActivator != state)
                 updateManager.Register(this);
             else
                 updateManager.Deregister(this);
