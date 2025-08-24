@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace JanSharp
 {
-    [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public abstract class ActivatorBase : UdonSharpBehaviour
     {
