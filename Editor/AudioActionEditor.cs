@@ -63,7 +63,7 @@ namespace JanSharp
             EditorGUILayout.Space();
             base.OnInspectorGUI(); // draws public/serializable fields
 
-            if (GUILayout.Button(new GUIContent("Find Audio Sources", "Searches on this component and its children. Overwrites anything previously set.")))
+            if (GUILayout.Button(new GUIContent("Find Audio Sources", "Searches on this game object and its children. Overwrites anything previously set.")))
             {
                 FindAudioSources(targets.Cast<AudioAction>());
             }
