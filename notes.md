@@ -12,5 +12,5 @@
 - Logical AND without any inputs is now going to have a permanent truthy state rather than falsy. This matches runtime logic, however it simply never got triggered to evaluate to true, and default has always been false for everything
 - [x] Add OnStartActivator, purely in order to maintain the ability to have an activator trigger on Start, as that feature gets removed through the Logical Not and its listeners having their initial state evaluated at build time
 - [ ] Add invert activator to ClockActivator
-- [ ] Remove cyan trigger from the readme
+- [x] Remove cyan trigger from the readme
 - [ ] Add on by default option to MemoryActivator

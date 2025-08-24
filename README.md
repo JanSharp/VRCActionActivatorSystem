@@ -3,11 +3,9 @@
 
 Create interactive worlds using activators and actions in the unity editor. Activators are things triggered usually by some user action, they can then chain into logical activators and ultimately activators can trigger actions.
 
-Since the system was created within 3 days with a specific goal in mind - creating a dungeon with traps and basic puzzles - the system is fairly limited, however whatever you do with it you at the very least don't have to think about syncing, it should _just work_ (so long as you don't disable scripts part of this system). There is technically the option for you to create your own activators and actions, however there are several things to consider when doing so and I've currently not taken the time to document said things.
+Since the original system was created within 3 days with a specific goal in mind - creating a dungeon with traps and basic puzzles - the system is fairly limited, however whatever you do with it you at the very least don't have to think about syncing, it should _just work_ (so long as you don't disable scripts part of this system). There is technically the option for you to create your own activators and actions, however there are several things to consider when doing so and I've currently not taken the time to document said things.
 
 Due to the nature of how the system works - each activator and action being an individual component - it likely does not scale well. You can attempt to give the game objects somewhat descriptive names, but at the end of the day it requires a lot of clicking around in the hierarchy to understand what some logic setup might be doing.
-
-With these downsides of the system in mind and you decide that this system is not what you're looking for, I'll point you to [CyanTrigger](https://github.com/CyanLaser/CyanTrigger) which is a more generic system. I've never used it personally so I cannot judge it, but purely going by its description it sounds more powerful. The issue with scalability may be a bit lessened, however since it is also working inside of the editor it will also never scale as well as code in text form. Something to keep in mind when making big and complex systems.
 
 ## About Local Only
 
