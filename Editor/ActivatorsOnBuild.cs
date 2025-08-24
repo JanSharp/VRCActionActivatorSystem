@@ -356,7 +356,7 @@ namespace JanSharp
             {
                 return;
             }
-            bool activateState = activate?.state ?? false;
+            bool activateState = activator.OnByDefault || (activate?.state ?? false);
             bool resetState = reset?.state ?? false;
             SetEvaluatedState(activateState && !resetState);
         }

@@ -9,6 +9,14 @@ namespace JanSharp
     {
         public ActivatorBase activateActivator;
         public ActivatorBase resetActivator;
+        [Tooltip("Should this Memory Activator be active in the world's initial state?\n"
+            + "If the Reset Activator has an Evaluated Initial State of on, this Memory Activator will be "
+            + "off regardless of this option here.\n"
+            + "When On By Default is true, the Activate Activator being null will not generate an error.")]
+        [SerializeField] private bool onByDefault;
+#if UNITY_EDITOR && !COMPILER_UDONSHARP
+        public bool OnByDefault => onByDefault;
+#endif
         // to prevent spamming from causing scuff
         private int requestSerializationCount = 0;
         private bool waitingForOwnerToSendData = false;

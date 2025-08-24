@@ -13,4 +13,4 @@
 - [x] Add OnStartActivator, purely in order to maintain the ability to have an activator trigger on Start, as that feature gets removed through the Logical Not and its listeners having their initial state evaluated at build time
 - [x] Add invert activator to ClockActivator
 - [x] Remove cyan trigger from the readme
-- [ ] Add on by default option to MemoryActivator
+- [x] Add on by default option to MemoryActivator

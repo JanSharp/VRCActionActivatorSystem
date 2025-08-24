@@ -9,18 +9,32 @@ namespace JanSharp
     {
         static MemoryActivatorOnBuild()
         {
-            OnBuildUtil.RegisterType<MemoryActivator>(ActivatorEditorUtil.ActivatorOnBuildBase, order: 0);
+            OnBuildUtil.RegisterType<MemoryActivator>(FirstOnBuild, order: 0);
             OnBuildUtil.RegisterType<MemoryActivator>(SecondOnBuild, order: 1);
+        }
+
+        private static bool FirstOnBuild(MemoryActivator memoryActivator)
+        {
+            if (!ActivatorEditorUtil.ActivatorOnBuildBase(memoryActivator))
+                return false;
+            SerializedObject so = new SerializedObject(memoryActivator);
+            so.FindProperty("syncedState").boolValue = memoryActivator.OnByDefault;
+            so.ApplyModifiedProperties();
+            return true;
         }
 
         private static bool SecondOnBuild(MemoryActivator memoryActivator)
         {
-            ActivatorEditorUtil.AddActivatorToListeners(
-                memoryActivator.activateActivator,
-                ListenerType.OnActivate,
-                memoryActivator,
-                nameof(MemoryActivator.OnActivateEvent)
-            );
+            if (memoryActivator.activateActivator != null
+                || !memoryActivator.OnByDefault) // Make it generate an error when not on by default.
+            {
+                ActivatorEditorUtil.AddActivatorToListeners(
+                    memoryActivator.activateActivator,
+                    ListenerType.OnActivate,
+                    memoryActivator,
+                    nameof(MemoryActivator.OnActivateEvent)
+                );
+            }
             if (memoryActivator.resetActivator != null)
             {
                 ActivatorEditorUtil.AddActivatorToListeners(
