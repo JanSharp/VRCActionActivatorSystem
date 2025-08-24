@@ -1,7 +1,7 @@
 
 - [x] MemoryActivator late joiner syncing does not work, at least in the specific case of a player who just created the instance and is still alone activates the memory cell, then a player joins
 - [x] Add inverted option to toggle activator
-- [ ] Add inverted option to toggle actions (not sure which ones, maybe all)
+- [x] Add inverted option to toggle actions (not sure which ones, maybe all)
 - [x] Evaluate all initial states at build time
   - [x] Update readme
   - [x] The ClockActivator uses the update manager while active and therefore must check the initial state on Start

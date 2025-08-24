@@ -10693,6 +10693,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 225566059}
   activator: {fileID: 110793727}
+  invertActivator: 0
   animator: {fileID: 225566057}
   boolParameterName: state
 --- !u!1 &293753639
@@ -10936,9 +10937,9 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 338230298}
   activator: {fileID: 112891029}
+  currentStateInTheScene: 0
   gameObjects:
   - {fileID: 2098680497}
-  currentStateInTheScene: 0
 --- !u!114 &338230298
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -92323,11 +92324,11 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1159453980}
   activator: {fileID: 341725671}
+  currentStateInTheScene: 0
   gameObjects:
   - {fileID: 105390019}
   - {fileID: 1819398229}
   - {fileID: 972009981}
-  currentStateInTheScene: 0
 --- !u!1 &1171234228
 GameObject:
   m_ObjectHideFlags: 0
@@ -98148,6 +98149,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1312060714}
   activator: {fileID: 1659564323}
+  invertActivator: 0
   animator: {fileID: 1312060712}
   boolParameterName: state
 --- !u!1 &1316655775
@@ -112931,6 +112933,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1461525917}
   activator: {fileID: 1659564323}
+  invertActivator: 0
   particles:
   - {fileID: 1461525915}
 --- !u!1 &1514395886
@@ -118025,6 +118028,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1535157607}
   activator: {fileID: 376992552}
+  invertActivator: 0
   audioSource: {fileID: 1535157606}
 --- !u!1 &1549095244
 GameObject:
@@ -133735,9 +133739,9 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1780750314}
   activator: {fileID: 1034012555}
+  currentStateInTheScene: 0
   gameObjects:
   - {fileID: 876994354}
-  currentStateInTheScene: 0
 --- !u!1 &1811863932
 GameObject:
   m_ObjectHideFlags: 0
