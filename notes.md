@@ -14,3 +14,4 @@
 - [x] Add invert activator to ClockActivator
 - [x] Remove cyan trigger from the readme
 - [x] Add on by default option to MemoryActivator
+- [ ] Either add a feature to register Evaluators for custom activators, or remove the mention of being able to make custom activators and actions from the readme
