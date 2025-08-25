@@ -125,6 +125,8 @@ namespace JanSharp
 
     public static class ActionEditorUtil
     {
+        // TODO: These have been moved into the EditorUtil in the common package and really should not be duplicated here anymore.
+
         public static void SetArrayProperty<T>(SerializedProperty property, ICollection<T> newValues, System.Action<SerializedProperty, T> setValue)
         {
             property.ClearArray();
